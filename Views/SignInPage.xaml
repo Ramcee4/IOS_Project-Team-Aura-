@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.SignInPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid>
+
+        <VerticalStackLayout
+            Padding="30,60,30,30"
+            Spacing="0"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="370">
+
+            <!-- Logo -->
+            <Border
+                HeightRequest="92"
+                WidthRequest="92"
+                HorizontalOptions="Center"
+                StrokeThickness="0"
+                BackgroundColor="Transparent"
+                StrokeShape="RoundRectangle 46">
+
+                <Image
+                    Source="logo_icon.png"
+                    Aspect="AspectFill" />
+            </Border>
+
+            <!-- Title -->
+            <Label
+                Text="Period Tracker"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,22,0,0"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="#EA5B73" />
+
+            <!-- Subtitle -->
+            <Label
+                Text="Welcome back"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,10,0,0"
+                FontSize="14"
+                TextColor="#6F6A6C" />
+
+            <!-- Form -->
+            <VerticalStackLayout
+                Margin="0,38,0,0"
+                Spacing="0">
+
+                <Label
+                    Text="Email"
+                    Margin="0,0,0,8"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#1F1F1F" />
+
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
+
+                    <Entry
+                        x:Name="EmailEntry"
+                        Placeholder="Enter your email"
+                        PlaceholderColor="#8F8A93"
+                        TextColor="#222222"
+                        Keyboard="Email"
+                        BackgroundColor="Transparent"
+                        Margin="14,0" />
+                </Border>
+
+                <Label
+                    Text="Password"
+                    Margin="0,16,0,8"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#1F1F1F" />
+
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
+
+                    <Entry
+                        x:Name="PasswordEntry"
+                        Placeholder="Enter your password"
+                        PlaceholderColor="#8F8A93"
+                        TextColor="#222222"
+                        IsPassword="True"
+                        BackgroundColor="Transparent"
+                        Margin="14,0" />
+                </Border>
+
+                <Button
+                    Text="Sign In"
+                    Clicked="OnSignInClicked"
+                    Margin="0,18,0,0"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#E85B73"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+
+                <Button
+                    Text="Sign Up"
+                    Clicked="OnSignUpClicked"
+                    Margin="0,14,0,0"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#E85B73"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>
