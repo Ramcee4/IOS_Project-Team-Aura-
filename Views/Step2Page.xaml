@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Team_Aura_Period_Tracker_.Step2Page"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid>
+        <VerticalStackLayout
+            Padding="28,40,28,28"
+            Spacing="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Fill"
+            WidthRequest="390">
+
+            <BoxView HeightRequest="110" Opacity="0" />
+
+            <Border
+                HeightRequest="86"
+                WidthRequest="86"
+                HorizontalOptions="Center"
+                StrokeThickness="0"
+                BackgroundColor="Transparent"
+                StrokeShape="RoundRectangle 43">
+
+                <Image
+                    Source="logo_icon.png"
+                    Aspect="AspectFill" />
+            </Border>
+
+           
+
+            <Label
+                Text="Period Tracker"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,8,0,0"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#EA5B73" />
+
+            <VerticalStackLayout Margin="0,12,0,0" Spacing="6">
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="4">
+
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                </HorizontalStackLayout>
+
+                <Label
+                    Text="Step 2 of 6"
+                    HorizontalOptions="Center"
+                    FontSize="12"
+                    TextColor="#8F8A93" />
+            </VerticalStackLayout>
+
+            <Border
+                Margin="0,18,0,0"
+                Padding="18,24,18,20"
+                BackgroundColor="#F8F8F8"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="What brings you&#10;here?"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="#111111"
+                        LineBreakMode="WordWrap" />
+
+                    <Button
+                        x:Name="GeneralCycleButton"
+                        Text="General cycle tracking"
+                        Clicked="OnOptionClicked"
+                        BackgroundColor="#F8F8F8"
+                        TextColor="#222222"
+                        BorderColor="#111111"
+                        BorderWidth="1"
+                        CornerRadius="22"
+                        HeightRequest="46"
+                        FontSize="14" />
+
+                    <Button
+                        x:Name="FertilityButton"
+                        Text="Fertility awareness"
+                        Clicked="OnOptionClicked"
+                        BackgroundColor="#F8F8F8"
+                        TextColor="#222222"
+                        BorderColor="#111111"
+                        BorderWidth="1"
+                        CornerRadius="22"
+                        HeightRequest="46"
+                        FontSize="14" />
+
+                    <Button
+                        x:Name="HealthButton"
+                        Text="Health monitoring"
+                        Clicked="OnOptionClicked"
+                        BackgroundColor="#F8F8F8"
+                        TextColor="#222222"
+                        BorderColor="#111111"
+                        BorderWidth="1"
+                        CornerRadius="22"
+                        HeightRequest="46"
+                        FontSize="14" />
+
+                    <Button
+                        x:Name="ConditionButton"
+                        Text="Managing a condition"
+                        Clicked="OnOptionClicked"
+                        BackgroundColor="#F8F8F8"
+                        TextColor="#222222"
+                        BorderColor="#111111"
+                        BorderWidth="1"
+                        CornerRadius="22"
+                        HeightRequest="46"
+                        FontSize="14" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid
+                Margin="0,18,0,0"
+                ColumnDefinitions="*,30,*">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Back"
+                    Clicked="OnBackClicked"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#C24E63"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+
+                <Button
+                    Grid.Column="2"
+                    Text="Next"
+                    Clicked="OnNextClicked"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#E85B73"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+
+            </Grid>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

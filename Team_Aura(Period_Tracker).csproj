@@ -64,19 +64,55 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\SignUpPage.xaml.cs">
-	    <DependentUpon>SignUpPage.xaml</DependentUpon>
+	  <Compile Update="Views\FivePageStep.xaml.cs">
+	    <DependentUpon>FivePageStep.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\SignInPage.xaml.cs">
-	    <DependentUpon>SignInPage.xaml</DependentUpon>
+	  <Compile Update="Views\SixPageStep.xaml.cs">
+	    <DependentUpon>SixPageStep.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Step4Page.xaml.cs">
+	    <DependentUpon>Step4Page.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Step3_1Page.xaml.cs">
+	    <DependentUpon>Step3_1Page.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Step3Page.xaml.cs">
+	    <DependentUpon>Step3Page.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Step2Page.xaml.cs">
+	    <DependentUpon>Step2Page.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Step1Page.xaml.cs">
+	    <DependentUpon>Step1Page.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Up.xaml.cs">
+	    <DependentUpon>Up.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\SignUpPage.xaml">
+	  <MauiXaml Update="Views\FivePageStep.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\SignInPage.xaml">
+	  <MauiXaml Update="Views\SixPageStep.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Step4Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Step3_1Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Step3Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Step2Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Step1Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Up.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

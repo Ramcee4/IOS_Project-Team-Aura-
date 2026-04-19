@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Team_Aura_Period_Tracker_.Step1Page"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid>
+        <VerticalStackLayout
+            Padding="28,40,28,28"
+            Spacing="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Fill"
+            WidthRequest="390">
+
+            <BoxView HeightRequest="110" Opacity="0" />
+
+            <Border
+                HeightRequest="86"
+                WidthRequest="86"
+                HorizontalOptions="Center"
+                StrokeThickness="0"
+                BackgroundColor="Transparent"
+                StrokeShape="RoundRectangle 43">
+
+                <Image
+                    Source="logo_icon.png"
+                    Aspect="AspectFill" />
+            </Border>
+
+            
+
+            <Label
+                Text="Period Tracker"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,8,0,0"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#EA5B73" />
+
+            <VerticalStackLayout Margin="0,12,0,0" Spacing="6">
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="4">
+
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                </HorizontalStackLayout>
+
+                <Label
+                    Text="Step 1 of 6"
+                    HorizontalOptions="Center"
+                    FontSize="12"
+                    TextColor="#8F8A93" />
+            </VerticalStackLayout>
+
+            <Border
+                Margin="0,18,0,0"
+                Padding="28,28,28,24"
+                BackgroundColor="#F8F8F8"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24">
+
+                <VerticalStackLayout Spacing="18">
+
+                    <Label
+                        x:Name="WelcomeLabel"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="#222222"
+                        LineBreakMode="WordWrap" />
+
+                    <Label
+                        Text="Let’s set up your Aura profile. This will help us personalize your experience and provide accurate cycle predictions."
+                        FontSize="13"
+                        TextColor="#7A7A7A"
+                        LineHeight="1.45" />
+
+                    <Grid ColumnDefinitions="36,*" ColumnSpacing="14">
+                        <Label
+                            Text="🔒"
+                            FontSize="22"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Your data stays private and local"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#8A8A8A"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="36,*" ColumnSpacing="14">
+                        <Label
+                            Text="🤍"
+                            FontSize="22"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Inclusive design for everyone"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#8A8A8A"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="36,*" ColumnSpacing="14">
+                        <Label
+                            Text="📈"
+                            FontSize="22"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Personalized insights"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#8A8A8A"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Next"
+                Clicked="OnNextClicked"
+                Margin="0,18,0,0"
+                HeightRequest="50"
+                CornerRadius="10"
+                BackgroundColor="#E85B73"
+                TextColor="White"
+                FontSize="17"
+                FontAttributes="Bold" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

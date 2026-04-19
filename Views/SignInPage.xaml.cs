@@ -14,6 +14,6 @@ public partial class SignInPage : ContentPage
 
     private async void OnSignUpClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SignUpPage));
+        await Shell.Current.GoToAsync(nameof(Up));
     }
 }

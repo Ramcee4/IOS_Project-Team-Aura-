@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Team_Aura_Period_Tracker_.Step3_1Page"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="28,40,28,20"
+                Spacing="0"
+                HorizontalOptions="Center"
+                WidthRequest="390">
+
+                <BoxView HeightRequest="110" Opacity="0" />
+
+                <Border
+                    HeightRequest="86"
+                    WidthRequest="86"
+                    HorizontalOptions="Center"
+                    StrokeThickness="0"
+                    BackgroundColor="Transparent"
+                    StrokeShape="RoundRectangle 43">
+
+                    <Image
+                        Source="logo_icon.png"
+                        Aspect="AspectFill" />
+                </Border>
+
+               
+
+                <Label
+                    Text="Period Tracker"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Margin="0,8,0,0"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#EA5B73" />
+
+                <VerticalStackLayout Margin="0,12,0,0" Spacing="6">
+                    <HorizontalStackLayout
+                        HorizontalOptions="Center"
+                        Spacing="4">
+
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    </HorizontalStackLayout>
+
+                    <Label
+                        Text="Step 3 of 6"
+                        HorizontalOptions="Center"
+                        FontSize="12"
+                        TextColor="#8F8A93" />
+                </VerticalStackLayout>
+
+                <Border
+                    Margin="0,18,0,20"
+                    Padding="0"
+                    BackgroundColor="#F8F8F8"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24">
+
+                    <VerticalStackLayout Padding="0,0,0,24">
+
+                        <Border
+                            Margin="0,32,0,0"
+                            Padding="18,18,18,20"
+                            BackgroundColor="#F8F8F8"
+                            Stroke="#D2D2D2"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 18">
+
+                            <VerticalStackLayout Spacing="18">
+
+                                <Grid ColumnDefinitions="40,*,*,40" VerticalOptions="Center">
+                                    <Button
+                                        Grid.Column="0"
+                                        Text="‹"
+                                        Clicked="OnPreviousMonthClicked"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#222222"
+                                        FontSize="28"
+                                        Padding="0" />
+
+                                    <Picker
+                                        Grid.Column="1"
+                                        x:Name="MonthPicker"
+                                        Title="Month"
+                                        SelectedIndexChanged="OnMonthOrYearChanged"
+                                        FontSize="14"
+                                        TextColor="#222222"
+                                        BackgroundColor="#F8F8F8"
+                                        HorizontalOptions="Fill" />
+
+                                    <Picker
+                                        Grid.Column="2"
+                                        x:Name="YearPicker"
+                                        Title="Year"
+                                        SelectedIndexChanged="OnMonthOrYearChanged"
+                                        FontSize="14"
+                                        TextColor="#222222"
+                                        BackgroundColor="#F8F8F8"
+                                        HorizontalOptions="Fill" />
+
+                                    <Button
+                                        Grid.Column="3"
+                                        Text="›"
+                                        Clicked="OnNextMonthClicked"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#222222"
+                                        FontSize="28"
+                                        Padding="0" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="6">
+                                    <Label Grid.Column="0" Text="Su" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="1" Text="Mo" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="2" Text="Tu" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="3" Text="We" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="4" Text="Th" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="5" Text="Fr" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                    <Label Grid.Column="6" Text="Sa" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
+                                </Grid>
+
+                                <Grid
+                                    x:Name="CalendarGrid"
+                                    ColumnDefinitions="*,*,*,*,*,*,*"
+                                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                    ColumnSpacing="6"
+                                    RowSpacing="10" />
+
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid
+            Grid.Row="1"
+            Padding="28,10,28,20"
+            ColumnDefinitions="*,30,*"
+            BackgroundColor="#F4EDEF">
+
+            <Button
+                Grid.Column="0"
+                Text="Back"
+                Clicked="OnBackClicked"
+                HeightRequest="50"
+                CornerRadius="10"
+                BackgroundColor="#C24E63"
+                TextColor="White"
+                FontSize="17"
+                FontAttributes="Bold" />
+
+            <Button
+                Grid.Column="2"
+                Text="Next"
+                Clicked="OnNextClicked"
+                HeightRequest="50"
+                CornerRadius="10"
+                BackgroundColor="#E85B73"
+                TextColor="White"
+                FontSize="17"
+                FontAttributes="Bold" />
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
