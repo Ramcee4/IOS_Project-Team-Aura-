@@ -15,5 +15,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(FivePageStep), typeof(FivePageStep));
         Routing.RegisterRoute(nameof(SixPageStep), typeof(SixPageStep));
         Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
+        Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+        Routing.RegisterRoute(nameof(DailyLogPage), typeof(DailyLogPage));
     }
 }

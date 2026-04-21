@@ -29,6 +29,6 @@ public partial class SixPageStep : ContentPage
 
     private async void OnGetStartedClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Aura", "Setup complete!", "OK");
+        await Navigation.PushAsync(new HomePage());
     }
 }

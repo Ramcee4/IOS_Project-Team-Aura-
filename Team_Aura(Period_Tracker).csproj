@@ -71,6 +71,12 @@
 	  <Compile Update="Views\ForgotPasswordPage.xaml.cs">
 	    <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\DailyLogPage.xaml.cs">
+	    <DependentUpon>DailyLogPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\SixPageStep.xaml.cs">
 	    <DependentUpon>SixPageStep.xaml</DependentUpon>
 	  </Compile>
@@ -99,6 +105,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ForgotPasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\DailyLogPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SixPageStep.xaml">
