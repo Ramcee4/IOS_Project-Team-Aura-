@@ -29,8 +29,6 @@
                     Aspect="AspectFill" />
             </Border>
 
-           
-
             <Label
                 Text="Period Tracker"
                 HorizontalOptions="Center"
@@ -62,18 +60,18 @@
 
             <Border
                 Margin="0,18,0,0"
-                Padding="18,24,18,20"
-                BackgroundColor="#F8F8F8"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 24">
-
-                <VerticalStackLayout Spacing="14">
+ Padding="28,28,28,24"
+ BackgroundColor="#F8F8F8"
+ StrokeThickness="0"
+ StrokeShape="RoundRectangle 24">
+                
+                <VerticalStackLayout Spacing="10">  
 
                     <Label
                         Text="What brings you&#10;here?"
-                        FontSize="28"
+                        FontSize="25"
                         FontAttributes="Bold"
-                        TextColor="#111111"
+                        TextColor="#222222"
                         LineBreakMode="WordWrap" />
 
                     <Button
@@ -85,7 +83,7 @@
                         BorderColor="#111111"
                         BorderWidth="1"
                         CornerRadius="22"
-                        HeightRequest="46"
+                        HeightRequest="40"
                         FontSize="14" />
 
                     <Button
@@ -97,7 +95,7 @@
                         BorderColor="#111111"
                         BorderWidth="1"
                         CornerRadius="22"
-                        HeightRequest="46"
+                        HeightRequest="40"
                         FontSize="14" />
 
                     <Button
@@ -109,7 +107,7 @@
                         BorderColor="#111111"
                         BorderWidth="1"
                         CornerRadius="22"
-                        HeightRequest="46"
+                        HeightRequest="40"
                         FontSize="14" />
 
                     <Button
@@ -121,7 +119,7 @@
                         BorderColor="#111111"
                         BorderWidth="1"
                         CornerRadius="22"
-                        HeightRequest="46"
+                        HeightRequest="40"
                         FontSize="14" />
 
                 </VerticalStackLayout>
@@ -129,7 +127,8 @@
 
             <Grid
                 Margin="0,18,0,0"
-                ColumnDefinitions="*,30,*">
+                ColumnDefinitions="*,14,*"
+                ColumnSpacing="0">
 
                 <Button
                     Grid.Column="0"

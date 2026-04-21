@@ -68,7 +68,7 @@
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 24">
 
-                    <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="10">
 
                         <Label
                             Text="Age Range"
@@ -76,7 +76,7 @@
                             FontAttributes="Bold"
                             TextColor="#111111" />
 
-                        <BoxView HeightRequest="18" Opacity="0" />
+                        
 
                         <Button
                             x:Name="Age1"
@@ -87,7 +87,7 @@
                             BorderColor="#111111"
                             BorderWidth="1"
                             CornerRadius="22"
-                            HeightRequest="46"
+                            HeightRequest="40"
                             FontSize="14" />
 
                         <Button
@@ -99,7 +99,7 @@
                             BorderColor="#111111"
                             BorderWidth="1"
                             CornerRadius="22"
-                            HeightRequest="46"
+                            HeightRequest="40"
                             FontSize="14" />
 
                         <Button
@@ -111,7 +111,7 @@
                             BorderColor="#111111"
                             BorderWidth="1"
                             CornerRadius="22"
-                            HeightRequest="46"
+                            HeightRequest="40"
                             FontSize="14" />
 
                         <Button
@@ -123,7 +123,7 @@
                             BorderColor="#111111"
                             BorderWidth="1"
                             CornerRadius="22"
-                            HeightRequest="46"
+                            HeightRequest="40"
                             FontSize="14" />
 
                     </VerticalStackLayout>
@@ -131,11 +131,15 @@
 
             </VerticalStackLayout>
         </ScrollView>
+       
 
         <Grid
+             Margin="0,18,0,0"
+            ColumnDefinitions="*,14,*"
             Grid.Row="1"
-            Padding="28,10,28,20"
-            ColumnDefinitions="*,30,*"
+            ColumnSpacing="0"
+            Padding="28,11,28,90"
+           
             BackgroundColor="#F4EDEF">
 
             <Button

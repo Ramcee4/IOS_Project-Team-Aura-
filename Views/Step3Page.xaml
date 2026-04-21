@@ -60,17 +60,17 @@
             </VerticalStackLayout>
 
             <Border
-                Margin="0,18,0,0"
-                Padding="18,24,18,20"
-                BackgroundColor="#F8F8F8"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 24">
+                               Margin="0,18,0,0"
+Padding="28,28,28,24"
+BackgroundColor="#F8F8F8"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 24">
 
-                <VerticalStackLayout Spacing="14">
+                <VerticalStackLayout Spacing="10">
 
                     <Label
                         Text="Cycle Information"
-                        FontSize="28"
+                        FontSize="26"
                         FontAttributes="Bold"
                         TextColor="#111111"
                         LineBreakMode="WordWrap" />
@@ -84,14 +84,14 @@
 
                         <Button
                             x:Name="LastPeriodDateButton"
-                            Text="Select date"
+                            Text="Select date "
                             Clicked="OnOpenDatePickerPageClicked"
                             BackgroundColor="#F8F8F8"
                             TextColor="#222222"
                             BorderColor="#111111"
                             BorderWidth="1"
                             CornerRadius="12"
-                            HeightRequest="46" />
+                            HeightRequest="40" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="8">
@@ -114,7 +114,7 @@
                                 Keyboard="Numeric"
                                 TextColor="#222222"
                                 BackgroundColor="Transparent"
-                                HeightRequest="46" />
+                                HeightRequest="40" />
                         </Border>
                     </VerticalStackLayout>
 
@@ -137,7 +137,7 @@
                                 TitleColor="#8F8A93"
                                 TextColor="#222222"
                                 BackgroundColor="Transparent"
-                                HeightRequest="46">
+                                HeightRequest="40">
                                 <Picker.Items>
                                     <x:String>Regular</x:String>
                                     <x:String>Irregular</x:String>
@@ -150,30 +150,31 @@
             </Border>
 
             <Grid
-                Margin="0,18,0,0"
-                ColumnDefinitions="*,30,*">
+                 Margin="0,18,0,0"
+ ColumnDefinitions="*,14,*"
+ ColumnSpacing="0">
 
                 <Button
-                    Grid.Column="0"
-                    Text="Back"
-                    Clicked="OnBackClicked"
-                    HeightRequest="50"
-                    CornerRadius="10"
-                    BackgroundColor="#C24E63"
-                    TextColor="White"
-                    FontSize="17"
-                    FontAttributes="Bold" />
+                     Grid.Column="0"
+ Text="Back"
+ Clicked="OnBackClicked"
+ HeightRequest="50"
+ CornerRadius="10"
+ BackgroundColor="#C24E63"
+ TextColor="White"
+ FontSize="17"
+ FontAttributes="Bold" />
 
                 <Button
-                    Grid.Column="2"
-                    Text="Next"
-                    Clicked="OnNextClicked"
-                    HeightRequest="50"
-                    CornerRadius="10"
-                    BackgroundColor="#E85B73"
-                    TextColor="White"
-                    FontSize="17"
-                    FontAttributes="Bold" />
+                     Grid.Column="2"
+ Text="Next"
+ Clicked="OnNextClicked"
+ HeightRequest="50"
+ CornerRadius="10"
+ BackgroundColor="#E85B73"
+ TextColor="White"
+ FontSize="17"
+ FontAttributes="Bold" />
 
             </Grid>
 

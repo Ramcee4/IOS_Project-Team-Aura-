@@ -16,4 +16,8 @@ public partial class SignInPage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(Up));
     }
+    private async void OnForgotPasswordTapped(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
+    }
 }

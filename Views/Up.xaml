@@ -7,198 +7,188 @@
     BackgroundColor="#F4EDEF">
 
     <Grid>
+        <VerticalStackLayout
+            Padding="30,60,30,30"
+            Spacing="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="370">
 
-        <ScrollView>
-            <VerticalStackLayout
-                Padding="30,0"
-                Spacing="0"
+            <Border
+                HeightRequest="92"
+                WidthRequest="92"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                MinimumHeightRequest="700"
-                WidthRequest="370">
+                StrokeThickness="0"
+                BackgroundColor="Transparent"
+                StrokeShape="RoundRectangle 46">
 
-                <BoxView HeightRequest="120" Opacity="0" />
+                <Image
+                    Source="logo_icon.png"
+                    Aspect="AspectFill" />
+            </Border>
+
+            <Label
+                Text="Period Tracker"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,22,0,0"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="#EA5B73" />
+
+            <Label
+                Text="Create your account"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,10,0,0"
+                FontSize="14"
+                TextColor="#6F6A6C" />
+
+            <VerticalStackLayout
+                Margin="0,38,0,0"
+                Spacing="0">
+
+                <Label
+                    Text="Name"
+                    Margin="0,0,0,8"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#1F1F1F" />
 
                 <Border
-                    HeightRequest="92"
-                    WidthRequest="92"
-                    HorizontalOptions="Center"
                     StrokeThickness="0"
-                    BackgroundColor="Transparent"
-                    StrokeShape="RoundRectangle 46">
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
 
-                    <Image
-                        Source="logo_icon.png"
-                        Aspect="AspectFill" />
+                    <Entry
+                        x:Name="NameEntry"
+                        Placeholder="Enter your name"
+                        PlaceholderColor="#8F8A93"
+                        TextColor="#222222"
+                        BackgroundColor="Transparent"
+                        Margin="14,0" />
                 </Border>
 
                 <Label
-                    Text="Period Tracker"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Margin="0,22,0,0"
-                    FontSize="25"
+                    Text="Email"
+                    Margin="0,16,0,8"
+                    FontSize="14"
                     FontAttributes="Bold"
-                    TextColor="#EA5B73" />
+                    TextColor="#1F1F1F" />
+
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
+
+                    <Entry
+                        x:Name="EmailEntry"
+                        Placeholder="Enter your email"
+                        PlaceholderColor="#8F8A93"
+                        TextColor="#222222"
+                        Keyboard="Email"
+                        BackgroundColor="Transparent"
+                        Margin="14,0" />
+                </Border>
 
                 <Label
-                    Text="Create your account"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Margin="0,10,0,0"
+                    Text="Password"
+                    Margin="0,16,0,8"
                     FontSize="14"
-                    TextColor="#6F6A6C" />
+                    FontAttributes="Bold"
+                    TextColor="#1F1F1F" />
 
-                <VerticalStackLayout
-                    Margin="0,38,0,0"
-                    Spacing="0">
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
 
-                    <Label
-                        Text="Name"
-                        Margin="0,0,0,8"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#1F1F1F" />
-
-                    <Border
-                        StrokeThickness="0"
-                        BackgroundColor="#F1F1F4"
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="48">
+                    <Grid ColumnDefinitions="*,Auto">
 
                         <Entry
-                            x:Name="NameEntry"
-                            Placeholder="Enter your name"
+                            x:Name="PasswordEntry"
+                            Placeholder="Enter your password"
                             PlaceholderColor="#8F8A93"
                             TextColor="#222222"
+                            IsPassword="True"
                             BackgroundColor="Transparent"
                             Margin="14,0" />
-                    </Border>
 
-                    <Label
-                        Text="Email"
-                        Margin="0,16,0,8"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#1F1F1F" />
+                        <ImageButton
+                            x:Name="PasswordEye"
+                            Source="eye_closed.png"
+                            Clicked="OnPasswordEyeClicked"
+                            BackgroundColor="Transparent"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            Margin="0,0,14,0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center" />
 
-                    <Border
-                        StrokeThickness="0"
-                        BackgroundColor="#F1F1F4"
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="48">
+                    </Grid>
+                </Border>
+
+                <Label
+                    Text="Confirm Password"
+                    Margin="0,16,0,8"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#1F1F1F" />
+
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#F1F1F4"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="48">
+
+                    <Grid ColumnDefinitions="*,Auto">
 
                         <Entry
-                            x:Name="EmailEntry"
-                            Placeholder="Enter your email"
+                            x:Name="ConfirmPasswordEntry"
+                            Placeholder="Confirm your password"
                             PlaceholderColor="#8F8A93"
                             TextColor="#222222"
-                            Keyboard="Email"
+                            IsPassword="True"
                             BackgroundColor="Transparent"
                             Margin="14,0" />
-                    </Border>
 
-                    <Label
-                        Text="Password"
-                        Margin="0,16,0,8"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#1F1F1F" />
+                        <ImageButton
+                            x:Name="ConfirmPasswordEye"
+                            Source="eye_closed.png"
+                            Clicked="OnConfirmPasswordEyeClicked"
+                            BackgroundColor="Transparent"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            Margin="0,0,14,0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center" />
 
-                    <Border
-                        StrokeThickness="0"
-                        BackgroundColor="#F1F1F4"
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="48">
+                    </Grid>
+                </Border>
 
-                        <Grid ColumnDefinitions="*,Auto">
+                <Button
+                    Text="Sign Up"
+                    Clicked="OnSignUpClicked"
+                    Margin="0,20,0,0"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#E85B73"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
 
-                            <Entry
-                                x:Name="PasswordEntry"
-                                Placeholder="Enter your password"
-                                PlaceholderColor="#8F8A93"
-                                TextColor="#222222"
-                                IsPassword="True"
-                                BackgroundColor="Transparent"
-                                Margin="14,0" />
-
-                            <ImageButton
-                                x:Name="PasswordEye"
-                                Source="eye_closed.png"
-                                Clicked="OnPasswordEyeClicked"
-                                BackgroundColor="Transparent"
-                                WidthRequest="24"
-                                HeightRequest="24"
-                                Margin="0,0,14,0"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center" />
-
-                        </Grid>
-                    </Border>
-
-                    <Label
-                        Text="Confirm Password"
-                        Margin="0,16,0,8"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#1F1F1F" />
-
-                    <Border
-                        StrokeThickness="0"
-                        BackgroundColor="#F1F1F4"
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="48">
-
-                        <Grid ColumnDefinitions="*,Auto">
-
-                            <Entry
-                                x:Name="ConfirmPasswordEntry"
-                                Placeholder="Confirm your password"
-                                PlaceholderColor="#8F8A93"
-                                TextColor="#222222"
-                                IsPassword="True"
-                                BackgroundColor="Transparent"
-                                Margin="14,0" />
-
-                            <ImageButton
-                                x:Name="ConfirmPasswordEye"
-                                Source="eye_closed.png"
-                                Clicked="OnConfirmPasswordEyeClicked"
-                                BackgroundColor="Transparent"
-                                WidthRequest="24"
-                                HeightRequest="24"
-                                Margin="0,0,14,0"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center" />
-
-                        </Grid>
-                    </Border>
-
-                    <Button
-                        Text="Sign Up"
-                        Clicked="OnSignUpClicked"
-                        Margin="0,20,0,0"
-                        HeightRequest="50"
-                        CornerRadius="10"
-                        BackgroundColor="#E85B73"
-                        TextColor="White"
-                        FontSize="17"
-                        FontAttributes="Bold" />
-
-                    <Button
-                        Text="Already have an account? Sign In"
-                        Clicked="OnSignInClicked"
-                        Margin="0,12,0,0"
-                        BackgroundColor="Transparent"
-                        TextColor="#E85B73"
-                        FontAttributes="Bold" />
-
-                </VerticalStackLayout>
-
-                <BoxView HeightRequest="40" Opacity="0" />
+                <Button
+                    Text="Already have an account? Sign In"
+                    Clicked="OnSignInClicked"
+                    Margin="0,12,0,0"
+                    BackgroundColor="Transparent"
+                    TextColor="#E85B73"
+                    FontAttributes="Bold" />
 
             </VerticalStackLayout>
-        </ScrollView>
-
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

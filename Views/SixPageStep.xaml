@@ -61,13 +61,13 @@
                 </VerticalStackLayout>
 
                 <Border
-                    Margin="0,18,0,20"
-                    Padding="22,24,22,24"
-                    BackgroundColor="#F8F8F8"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 24">
-
-                    <VerticalStackLayout Spacing="18">
+                     Margin="0,18,0,20"
+ Padding="19,15,22,24"
+ BackgroundColor="#F8F8F8"
+ StrokeThickness="0"
+ StrokeShape="RoundRectangle 24">
+                    
+                    <VerticalStackLayout Spacing="10">
 
                         <Label
                             Text="You're All Set!"
@@ -82,11 +82,11 @@
                             LineHeight="1.35" />
 
                         <Border
-                            Padding="16,14"
+                            Padding="16,12"
                             BackgroundColor="#F8F8F8"
                             Stroke="#B8B8B8"
                             StrokeThickness="1"
-                            StrokeShape="RoundRectangle 14">
+                            StrokeShape="RoundRectangle 10">
 
                             <VerticalStackLayout Spacing="10">
 
@@ -121,10 +121,13 @@
         </ScrollView>
 
         <Grid
-            Grid.Row="1"
-            Padding="28,10,28,20"
-            ColumnDefinitions="*,30,*"
-            BackgroundColor="#F4EDEF">
+             Margin="0,18,0,0"
+ColumnDefinitions="*,14,*"
+Grid.Row="1"
+ColumnSpacing="0"
+Padding="28,11,28,75"
+           
+BackgroundColor="#F4EDEF">
 
             <Button
                 Grid.Column="0"

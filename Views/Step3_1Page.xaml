@@ -8,148 +8,176 @@
 
     <Grid RowDefinitions="*,Auto">
 
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout
-                Padding="28,40,28,20"
-                Spacing="0"
+        <VerticalStackLayout
+            Grid.Row="0"
+            Padding="28,40,28,20"
+            Spacing="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Fill"
+            WidthRequest="390">
+
+            <BoxView HeightRequest="110" Opacity="0" />
+
+            <Border
+                HeightRequest="86"
+                WidthRequest="86"
                 HorizontalOptions="Center"
-                WidthRequest="390">
+                StrokeThickness="0"
+                BackgroundColor="Transparent"
+                StrokeShape="RoundRectangle 43">
 
-                <BoxView HeightRequest="110" Opacity="0" />
+                <Image
+                    Source="logo_icon.png"
+                    Aspect="AspectFill" />
+            </Border>
 
-                <Border
-                    HeightRequest="86"
-                    WidthRequest="86"
+            <Label
+                Text="Period Tracker"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,8,0,0"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#EA5B73" />
+
+            <VerticalStackLayout
+                Margin="0,8,0,0"
+                Spacing="6">
+
+                <HorizontalStackLayout
                     HorizontalOptions="Center"
-                    StrokeThickness="0"
-                    BackgroundColor="Transparent"
-                    StrokeShape="RoundRectangle 43">
+                    Spacing="4">
 
-                    <Image
-                        Source="logo_icon.png"
-                        Aspect="AspectFill" />
-                </Border>
-
-               
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                    <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
+                </HorizontalStackLayout>
 
                 <Label
-                    Text="Period Tracker"
+                    Text="Step 3 of 6"
                     HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Margin="0,8,0,0"
-                    FontSize="28"
-                    FontAttributes="Bold"
-                    TextColor="#EA5B73" />
-
-                <VerticalStackLayout Margin="0,12,0,0" Spacing="6">
-                    <HorizontalStackLayout
-                        HorizontalOptions="Center"
-                        Spacing="4">
-
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
-                        <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
-                    </HorizontalStackLayout>
-
-                    <Label
-                        Text="Step 3 of 6"
-                        HorizontalOptions="Center"
-                        FontSize="12"
-                        TextColor="#8F8A93" />
-                </VerticalStackLayout>
-
-                <Border
-                    Margin="0,18,0,20"
-                    Padding="0"
-                    BackgroundColor="#F8F8F8"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 24">
-
-                    <VerticalStackLayout Padding="0,0,0,24">
-
-                        <Border
-                            Margin="0,32,0,0"
-                            Padding="18,18,18,20"
-                            BackgroundColor="#F8F8F8"
-                            Stroke="#D2D2D2"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 18">
-
-                            <VerticalStackLayout Spacing="18">
-
-                                <Grid ColumnDefinitions="40,*,*,40" VerticalOptions="Center">
-                                    <Button
-                                        Grid.Column="0"
-                                        Text="‹"
-                                        Clicked="OnPreviousMonthClicked"
-                                        BackgroundColor="Transparent"
-                                        TextColor="#222222"
-                                        FontSize="28"
-                                        Padding="0" />
-
-                                    <Picker
-                                        Grid.Column="1"
-                                        x:Name="MonthPicker"
-                                        Title="Month"
-                                        SelectedIndexChanged="OnMonthOrYearChanged"
-                                        FontSize="14"
-                                        TextColor="#222222"
-                                        BackgroundColor="#F8F8F8"
-                                        HorizontalOptions="Fill" />
-
-                                    <Picker
-                                        Grid.Column="2"
-                                        x:Name="YearPicker"
-                                        Title="Year"
-                                        SelectedIndexChanged="OnMonthOrYearChanged"
-                                        FontSize="14"
-                                        TextColor="#222222"
-                                        BackgroundColor="#F8F8F8"
-                                        HorizontalOptions="Fill" />
-
-                                    <Button
-                                        Grid.Column="3"
-                                        Text="›"
-                                        Clicked="OnNextMonthClicked"
-                                        BackgroundColor="Transparent"
-                                        TextColor="#222222"
-                                        FontSize="28"
-                                        Padding="0" />
-                                </Grid>
-
-                                <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="6">
-                                    <Label Grid.Column="0" Text="Su" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="1" Text="Mo" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="2" Text="Tu" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="3" Text="We" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="4" Text="Th" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="5" Text="Fr" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                    <Label Grid.Column="6" Text="Sa" HorizontalTextAlignment="Center" FontSize="13" TextColor="#8A8A8A" />
-                                </Grid>
-
-                                <Grid
-                                    x:Name="CalendarGrid"
-                                    ColumnDefinitions="*,*,*,*,*,*,*"
-                                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                                    ColumnSpacing="6"
-                                    RowSpacing="10" />
-
-                            </VerticalStackLayout>
-                        </Border>
-
-                    </VerticalStackLayout>
-                </Border>
-
+                    FontSize="12"
+                    TextColor="#8F8A93" />
             </VerticalStackLayout>
-        </ScrollView>
+
+            <!-- Outer Card -->
+            <Border
+                Margin="0,18,0,0"
+                Padding="18,18,18,18"
+                BackgroundColor="#F8F8F8"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24"
+                HeightRequest="375">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <!-- Inner Calendar Card -->
+                    <Border
+                        Padding="14,14,14,16"
+                        BackgroundColor="#F8F8F8"
+                        Stroke="#D8D8D8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 18">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <!-- Header -->
+                            <Grid
+                                ColumnDefinitions="28,1.2*,1*,28"
+                                ColumnSpacing="10"
+                                VerticalOptions="Center">
+
+                                <Button
+                                    Grid.Column="0"
+                                    Text="‹"
+                                    Clicked="OnPreviousMonthClicked"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#222222"
+                                    FontSize="24"
+                                    Padding="0"
+                                    HeightRequest="28"
+                                    WidthRequest="28" />
+
+                                <Picker
+                                    Grid.Column="1"
+                                    x:Name="MonthPicker"
+                                    SelectedIndexChanged="OnMonthOrYearChanged"
+                                    FontSize="14"
+                                    TextColor="#2B2B2B"
+                                    TitleColor="#2B2B2B"
+                                    BackgroundColor="#F8F8F8"
+                                    HeightRequest="38"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Center" />
+
+                                <Picker
+                                    Grid.Column="2"
+                                    x:Name="YearPicker"
+                                    SelectedIndexChanged="OnMonthOrYearChanged"
+                                    FontSize="14"
+                                    TextColor="#2B2B2B"
+                                    TitleColor="#2B2B2B"
+                                    BackgroundColor="#F8F8F8"
+                                    HeightRequest="38"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Center" />
+
+                                <Button
+                                    Grid.Column="3"
+                                    Text="›"
+                                    Clicked="OnNextMonthClicked"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#222222"
+                                    FontSize="24"
+                                    Padding="0"
+                                    HeightRequest="28"
+                                    WidthRequest="28" />
+                            </Grid>
+
+                            <!-- Week Labels -->
+                            <Grid
+                                ColumnDefinitions="*,*,*,*,*,*,*"
+                                ColumnSpacing="4">
+
+                                <Label Grid.Column="0" Text="Su" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="1" Text="Mo" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="2" Text="Tu" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="3" Text="We" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="4" Text="Th" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="5" Text="Fr" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                                <Label Grid.Column="6" Text="Sa" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
+                            </Grid>
+
+                            <!-- Dates -->
+                            <Grid
+                                x:Name="CalendarGrid"
+                                ColumnDefinitions="*,*,*,*,*,*,*"
+                                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                ColumnSpacing="4"
+                                RowSpacing="10"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Start" />
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+
+        <!-- Bottom Buttons -->
+
 
         <Grid
+            Margin="0,18,0,0"
             Grid.Row="1"
+            ColumnDefinitions="*,14,*"
             Padding="28,10,28,20"
-            ColumnDefinitions="*,30,*"
+            ColumnSpacing="0"
             BackgroundColor="#F4EDEF">
 
             <Button
@@ -165,7 +193,7 @@
 
             <Button
                 Grid.Column="2"
-                Text="Next"
+                Text="save"
                 Clicked="OnNextClicked"
                 HeightRequest="50"
                 CornerRadius="10"
