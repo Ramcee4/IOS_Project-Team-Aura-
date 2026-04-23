@@ -62,12 +62,12 @@ public partial class HomePage : ContentPage
 
     private async void OnInsightNavTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Insight", "Open insight page.", "OK");
+        await Navigation.PushAsync(new InsightPage());
     }
 
     private async void OnLearnNavTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Learn", "Open learn page.", "OK");
+        await Navigation.PushAsync(new LearnPage());
     }
 
     private async void OnSettingsTapped(object sender, EventArgs e)

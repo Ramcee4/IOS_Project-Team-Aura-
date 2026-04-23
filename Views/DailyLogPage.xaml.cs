@@ -99,7 +99,7 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnHomeTapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new HomePage());
+      await Navigation.PushAsync(new HomePage());
     }
 
     private async void OnDailyTapped(object sender, TappedEventArgs e)
@@ -109,12 +109,12 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnInsightTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Insight", "Open insight page.", "OK");
+        await Navigation.PushAsync(new InsightPage());
     }
 
     private async void OnLearnTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Learn", "Open learn page.", "OK");
+        await Navigation.PushAsync(new LearnPage());
     }
 
     private async void OnSettingsTapped(object sender, TappedEventArgs e)

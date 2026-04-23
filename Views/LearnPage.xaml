@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.LearnPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="24,50,24,20"
+                Spacing="18">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+
+                    <ImageButton
+                        Grid.Column="0"
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        Margin="0,20,0,0"
+                        BackgroundColor="Transparent"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start" />
+
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="0">
+                        <Label
+                            Text="Health Journal"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73" />
+
+                        <Label
+                            Text="Track your health pattern"
+                            Margin="0,4,0,0"
+                            FontSize="14"
+                            TextColor="#6F6A6C" />
+                    </VerticalStackLayout>
+
+                    <Label
+                        Grid.Column="2"
+                        Text="+"
+                        FontSize="30"
+                        TextColor="#222222"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAddTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </Grid>
+
+                <VerticalStackLayout
+                    x:Name="EntriesContainer"
+                    Spacing="18" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <Border
+            Grid.Row="1"
+            BackgroundColor="White"
+            StrokeThickness="0"
+            Padding="18,12,18,10">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="24,24,0,0" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*,*,*,*,*">
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="4"
+                    HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="home_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Home" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="4"
+                    HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDailyTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Daily" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="2"
+                    Spacing="4"
+                    HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnInsightTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="insight_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Insight" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="3"
+                    Spacing="4"
+                    HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLearnTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="learn_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Learn" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="4"
+                    Spacing="4"
+                    HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Settings" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

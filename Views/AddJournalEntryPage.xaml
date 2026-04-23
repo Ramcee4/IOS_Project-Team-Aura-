@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.AddJournalEntryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="24,50,24,20"
+                Spacing="18">
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+
+                    <Label
+                        Text="‹"
+                        FontSize="28"
+                        TextColor="#333333"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="0">
+                        <Label
+                            Text="Health Journal"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73" />
+
+                        <Label
+                            Text="Track your health pattern"
+                            Margin="0,4,0,0"
+                            FontSize="14"
+                            TextColor="#6F6A6C" />
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <Border
+                    Padding="20,18,20,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 18">
+
+                    <VerticalStackLayout Spacing="16">
+
+                        <Label
+                            Text="New Entry"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#333333" />
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Title" FontSize="12" TextColor="#8A8A8A" />
+                            <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 14" BackgroundColor="#F8F8F8" Padding="12,0">
+                                <Entry
+                                    x:Name="TitleEntry"
+                                    Placeholder="e.g. day 5 of Cycle"
+                                    PlaceholderColor="#8A8A8A"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#333333" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,16,*">
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Mood" FontSize="12" TextColor="#8A8A8A" />
+                                <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 14" BackgroundColor="#F8F8F8" Padding="12,0">
+                                    <Entry
+                                        x:Name="MoodEntry"
+                                        Placeholder="tired"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#333333" />
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                <Label
+                                    x:Name="EnergyLabel"
+                                    Text="Energy (5/10)"
+                                    FontSize="12"
+                                    TextColor="#8A8A8A" />
+                                <Slider
+                                    x:Name="EnergySlider"
+                                    Minimum="0"
+                                    Maximum="10"
+                                    Value="5"
+                                    ValueChanged="OnEnergyValueChanged"
+                                    MinimumTrackColor="#6C52A7"
+                                    MaximumTrackColor="#D8CCE8"
+                                    ThumbColor="#6C52A7" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,16,*">
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Sleep hours" FontSize="12" TextColor="#8A8A8A" />
+                                <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 14" BackgroundColor="#F8F8F8" Padding="12,0">
+                                    <Entry
+                                        x:Name="SleepEntry"
+                                        Placeholder="7"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#333333"
+                                        Keyboard="Numeric" />
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                <Label Text="Exercise" FontSize="12" TextColor="#8A8A8A" />
+                                <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 14" BackgroundColor="#F8F8F8" Padding="12,0">
+                                    <Entry
+                                        x:Name="ExerciseEntry"
+                                        Placeholder="e.g. 30 min"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#333333" />
+                                </Border>
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Medication/ Supplements" FontSize="12" TextColor="#8A8A8A" />
+                            <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 14" BackgroundColor="#F8F8F8" Padding="12,0">
+                                <Entry
+                                    x:Name="MedicationEntry"
+                                    Placeholder="e.g Vitamin D"
+                                    PlaceholderColor="#8A8A8A"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#333333" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Notes" FontSize="12" TextColor="#8A8A8A" />
+                            <Border Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 18" BackgroundColor="#F8F8F8" Padding="12">
+                                <Editor
+                                    x:Name="NotesEditor"
+                                    Placeholder="Add any Additional notes...."
+                                    PlaceholderColor="#8A8A8A"
+                                    AutoSize="TextChanges"
+                                    HeightRequest="110"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#333333" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,20,*" Margin="0,8,0,0">
+
+                            <Button
+                                Grid.Column="0"
+                                Text="Cancel"
+                                Clicked="OnCancelClicked"
+                                HeightRequest="50"
+                                CornerRadius="10"
+                                BackgroundColor="#D95B74"
+                                TextColor="White"
+                                FontSize="17"
+                                FontAttributes="Bold" />
+
+                            <Button
+                                Grid.Column="2"
+                                Text="Save"
+                                Clicked="OnSaveClicked"
+                                HeightRequest="50"
+                                CornerRadius="10"
+                                BackgroundColor="#E85B73"
+                                TextColor="White"
+                                FontSize="17"
+                                FontAttributes="Bold" />
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border
+            Grid.Row="1"
+            BackgroundColor="White"
+            StrokeThickness="0"
+            Padding="18,12,18,10">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="24,24,0,0" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*,*,*,*,*">
+
+                <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="home_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Home" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDailyTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Daily" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnInsightTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="insight_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Insight" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="3" Spacing="4" HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLearnTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="learn_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Learn" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="4" Spacing="4" HorizontalOptions="Center">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
+                    <Label Text="Settings" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>
