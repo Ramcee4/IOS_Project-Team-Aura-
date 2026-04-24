@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -44,6 +45,10 @@ public partial class Up : ContentPage
             return;
         }
 
+        Preferences.Set("UserName", name);
+        Preferences.Set("UserEmail", email);
+        Preferences.Set("UserPassword", password);
+
         await DisplayAlert("Success", "Account created successfully.", "OK");
 
         await Shell.Current.GoToAsync(nameof(Step1Page));
@@ -51,6 +56,6 @@ public partial class Up : ContentPage
 
     private async void OnSignInClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new SignInPage());
+        await Shell.Current.GoToAsync(nameof(SignInPage));
     }
 }

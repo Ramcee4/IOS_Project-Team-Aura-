@@ -77,11 +77,14 @@
 	  <Compile Update="Views\DailyLogPage.xaml.cs">
 	    <DependentUpon>DailyLogPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\LearnPage.xaml.cs">
-	    <DependentUpon>LearnPage.xaml</DependentUpon>
+	  <Compile Update="Views\JournalPage.xaml.cs">
+	    <DependentUpon>JournalPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\AddJournalEntryPage.xaml.cs">
 	    <DependentUpon>AddJournalEntryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LearnPage.xaml.cs">
+	    <DependentUpon>LearnPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\SixPageStep.xaml.cs">
 	    <DependentUpon>SixPageStep.xaml</DependentUpon>
@@ -122,10 +125,13 @@
 	  <MauiXaml Update="Views\InsightPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LearnPage.xaml">
+	  <MauiXaml Update="Views\JournalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AddJournalEntryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LearnPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SixPageStep.xaml">

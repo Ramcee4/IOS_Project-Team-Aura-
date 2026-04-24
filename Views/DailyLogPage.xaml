@@ -56,9 +56,7 @@
                             FontAttributes="Bold"
                             TextColor="#111111" />
 
-                        <Grid
-                            ColumnDefinitions="*,18,*"
-                            RowDefinitions="Auto,12,Auto">
+                        <Grid ColumnDefinitions="*,18,*" RowDefinitions="Auto,12,Auto">
 
                             <Button
                                 Grid.Row="0"
@@ -115,6 +113,7 @@
                                 CornerRadius="18"
                                 HeightRequest="40"
                                 FontSize="14" />
+
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -139,7 +138,6 @@
                             <Border
                                 Grid.Column="0"
                                 x:Name="Mood1Border"
-                                Padding="0"
                                 BackgroundColor="#F8F8F8"
                                 Stroke="#2B2B2B"
                                 StrokeThickness="1"
@@ -150,17 +148,12 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnMood1Tapped" />
                                 </Border.GestureRecognizers>
-                                <Label
-                                    Text="😢"
-                                    FontSize="22"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center" />
+                                <Label Text="😢" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
 
                             <Border
                                 Grid.Column="2"
                                 x:Name="Mood2Border"
-                                Padding="0"
                                 BackgroundColor="#F8F8F8"
                                 Stroke="#2B2B2B"
                                 StrokeThickness="1"
@@ -171,17 +164,12 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnMood2Tapped" />
                                 </Border.GestureRecognizers>
-                                <Label
-                                    Text="😐"
-                                    FontSize="22"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center" />
+                                <Label Text="😐" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
 
                             <Border
                                 Grid.Column="4"
                                 x:Name="Mood3Border"
-                                Padding="0"
                                 BackgroundColor="#F8F8F8"
                                 Stroke="#2B2B2B"
                                 StrokeThickness="1"
@@ -192,17 +180,12 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnMood3Tapped" />
                                 </Border.GestureRecognizers>
-                                <Label
-                                    Text="🙂"
-                                    FontSize="22"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center" />
+                                <Label Text="🙂" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
 
                             <Border
                                 Grid.Column="6"
                                 x:Name="Mood4Border"
-                                Padding="0"
                                 BackgroundColor="#F8F8F8"
                                 Stroke="#2B2B2B"
                                 StrokeThickness="1"
@@ -213,11 +196,7 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnMood4Tapped" />
                                 </Border.GestureRecognizers>
-                                <Label
-                                    Text="😋"
-                                    FontSize="22"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center" />
+                                <Label Text="😋" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
 
                         </Grid>
@@ -240,12 +219,7 @@
                             TextColor="#111111" />
 
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                            <Label
-                                Grid.Column="0"
-                                Text="Low"
-                                FontSize="14"
-                                TextColor="#444444"
-                                VerticalOptions="Center" />
+                            <Label Grid.Column="0" Text="Low" FontSize="14" TextColor="#444444" VerticalOptions="Center" />
 
                             <Slider
                                 Grid.Column="1"
@@ -257,12 +231,7 @@
                                 MaximumTrackColor="#D8CCE8"
                                 ThumbColor="#6C52A7" />
 
-                            <Label
-                                Grid.Column="2"
-                                Text="High"
-                                FontSize="14"
-                                TextColor="#444444"
-                                VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="High" FontSize="14" TextColor="#444444" VerticalOptions="Center" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -293,21 +262,64 @@
                             <Button x:Name="BloatingButton" Text="Bloating" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
                             <Button x:Name="CravingButton" Text="Craving" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
                             <Button x:Name="HeatButton" Text="Heat" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="NauseaButton" Text="Nausea" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="RestlessButton" Text="Restless" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="OilyButton" Text="Oily" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="FatigueButton" Text="Fatigue" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="SorenessButton" Text="Soreness" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="RushButton" Text="Rush" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="AnxietyButton" Text="Anxiety" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="IrritateButton" Text="Irritate" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
+                            <Button x:Name="SickButton" Text="Sick" Clicked="OnSymptomClicked" BackgroundColor="#F8F8F8" TextColor="#333333" BorderColor="#222222" BorderWidth="1" CornerRadius="18" HeightRequest="38" Margin="0,0,10,10" Padding="14,0" />
 
                         </FlexLayout>
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Notes -->
+                <Border
+                    Padding="18,18,18,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#2B2B2B"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14">
+
+                    <VerticalStackLayout Spacing="14">
+                        <Label
+                            Text="Notes"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#111111" />
+
+                        <Border
+                            BackgroundColor="#F8F8F8"
+                            Stroke="#2B2B2B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            HeightRequest="62">
+
+                            <Editor
+                                x:Name="NotesEditor"
+                                Placeholder="Add any additional notes about your day."
+                                PlaceholderColor="#777777"
+                                TextColor="#333333"
+                                BackgroundColor="Transparent"
+                                AutoSize="TextChanges"
+                                Margin="10,4"
+                                FontSize="14" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
                 <Button
-                    Text="Save Daily Log"
+                    Text="+ Save Entry"
                     Clicked="OnSaveClicked"
                     Margin="0,4,0,0"
                     HeightRequest="50"
                     CornerRadius="10"
                     BackgroundColor="#E85B73"
-                    TextColor="White"
-                    FontSize="17"
-                    FontAttributes="Bold" />
+                    TextColor="#111111"
+                    FontSize="15" />
 
             </VerticalStackLayout>
         </ScrollView>
@@ -325,10 +337,7 @@
 
             <Grid ColumnDefinitions="*,*,*,*,*">
 
-                <VerticalStackLayout
-                    Grid.Column="0"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnHomeTapped" />
                     </VerticalStackLayout.GestureRecognizers>
@@ -336,10 +345,7 @@
                     <Label Text="Home" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="1"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnDailyTapped" />
                     </VerticalStackLayout.GestureRecognizers>
@@ -347,10 +353,7 @@
                     <Label Text="Daily" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="2"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnInsightTapped" />
                     </VerticalStackLayout.GestureRecognizers>
@@ -358,10 +361,7 @@
                     <Label Text="Insight" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="3"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="3" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLearnTapped" />
                     </VerticalStackLayout.GestureRecognizers>
@@ -369,10 +369,7 @@
                     <Label Text="Learn" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="4"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="4" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnSettingsTapped" />
                     </VerticalStackLayout.GestureRecognizers>

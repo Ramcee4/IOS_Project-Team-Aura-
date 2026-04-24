@@ -6,6 +6,7 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
+        Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage)); 
         Routing.RegisterRoute(nameof(Up), typeof(Up));
         Routing.RegisterRoute(nameof(Step1Page), typeof(Step1Page));
         Routing.RegisterRoute(nameof(Step2Page), typeof(Step2Page));
@@ -18,7 +19,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
         Routing.RegisterRoute(nameof(DailyLogPage), typeof(DailyLogPage));
         Routing.RegisterRoute(nameof(InsightPage), typeof(InsightPage));
-        Routing.RegisterRoute(nameof(LearnPage), typeof(LearnPage));
+        Routing.RegisterRoute(nameof(JournalPage), typeof(JournalPage));
         Routing.RegisterRoute(nameof(AddJournalEntryPage), typeof(AddJournalEntryPage));
+        Routing.RegisterRoute(nameof(LearnPage), typeof(LearnPage));
     }
 }

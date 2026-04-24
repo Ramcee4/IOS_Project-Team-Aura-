@@ -10,12 +10,12 @@ public partial class AddJournalEntryPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnEnergyValueChanged(object sender, ValueChangedEventArgs e)
+    private void OnEnergyChanged(object sender, ValueChangedEventArgs e)
     {
         EnergyLabel.Text = $"Energy ({Math.Round(e.NewValue)}/10)";
     }
 
-    private async void OnBackTapped(object sender, TappedEventArgs e)
+    private async void OnBackClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
     }
@@ -27,46 +27,22 @@ public partial class AddJournalEntryPage : ContentPage
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
-        var entry = new JournalEntry
-        {
-            Title = string.IsNullOrWhiteSpace(TitleEntry.Text) ? "New Entry" : TitleEntry.Text.Trim(),
-            DateText = DateTime.Now.ToString("yyyy-MM-dd"),
-            Mood = string.IsNullOrWhiteSpace(MoodEntry.Text) ? "Not set" : MoodEntry.Text.Trim(),
-            Energy = $"{Math.Round(EnergySlider.Value)}/10",
-            Sleep = string.IsNullOrWhiteSpace(SleepEntry.Text) ? "Not set" : $"{SleepEntry.Text.Trim()} hrs",
-            Exercise = string.IsNullOrWhiteSpace(ExerciseEntry.Text) ? "Not set" : ExerciseEntry.Text.Trim(),
-            Medication = string.IsNullOrWhiteSpace(MedicationEntry.Text) ? "None" : MedicationEntry.Text.Trim(),
-            Notes = string.IsNullOrWhiteSpace(NotesEditor.Text) ? "No notes added." : NotesEditor.Text.Trim()
-        };
+        string title = TitleEntry.Text?.Trim() ?? "";
+        string mood = MoodEntry.Text?.Trim() ?? "";
+        string sleep = SleepEntry.Text?.Trim() ?? "";
+        string exercise = ExerciseEntry.Text?.Trim() ?? "";
+        string medication = MedicationEntry.Text?.Trim() ?? "";
+        string notes = NotesEditor.Text?.Trim() ?? "";
+        string energy = $"{Math.Round(EnergySlider.Value)}/10";
 
-        JournalEntryStore.Entries.Insert(0, entry);
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            await DisplayAlert("Error", "Please enter a title.", "OK");
+            return;
+        }
 
         await DisplayAlert("Saved", "Journal entry saved.", "OK");
+
         await Navigation.PopAsync();
-    }
-
-    private async void OnHomeTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new HomePage());
-    }
-
-    private async void OnDailyTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new DailyLogPage());
-    }
-
-    private async void OnInsightTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new InsightPage());
-    }
-
-    private async void OnLearnTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new LearnPage());
-    }
-
-    private async void OnSettingsTapped(object sender, TappedEventArgs e)
-    {
-        await DisplayAlert("Settings", "Open settings page.", "OK");
     }
 }

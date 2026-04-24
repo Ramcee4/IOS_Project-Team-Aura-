@@ -56,15 +56,32 @@ public partial class DailyLogPage : ContentPage
     private void SelectMood(Border border)
     {
         ResetMoodBorders();
+
         border.BackgroundColor = Color.FromArgb("#FBE3E8");
         border.Stroke = Color.FromArgb("#E85B73");
+
         _selectedMoodBorder = border;
     }
 
-    private void OnMood1Tapped(object sender, TappedEventArgs e) => SelectMood(Mood1Border);
-    private void OnMood2Tapped(object sender, TappedEventArgs e) => SelectMood(Mood2Border);
-    private void OnMood3Tapped(object sender, TappedEventArgs e) => SelectMood(Mood3Border);
-    private void OnMood4Tapped(object sender, TappedEventArgs e) => SelectMood(Mood4Border);
+    private void OnMood1Tapped(object sender, TappedEventArgs e)
+    {
+        SelectMood(Mood1Border);
+    }
+
+    private void OnMood2Tapped(object sender, TappedEventArgs e)
+    {
+        SelectMood(Mood2Border);
+    }
+
+    private void OnMood3Tapped(object sender, TappedEventArgs e)
+    {
+        SelectMood(Mood3Border);
+    }
+
+    private void OnMood4Tapped(object sender, TappedEventArgs e)
+    {
+        SelectMood(Mood4Border);
+    }
 
     private void OnSymptomClicked(object sender, EventArgs e)
     {
@@ -74,6 +91,7 @@ public partial class DailyLogPage : ContentPage
         if (_selectedSymptoms.Contains(button))
         {
             _selectedSymptoms.Remove(button);
+
             button.BackgroundColor = Color.FromArgb("#F8F8F8");
             button.TextColor = Color.FromArgb("#333333");
             button.BorderColor = Color.FromArgb("#222222");
@@ -81,6 +99,7 @@ public partial class DailyLogPage : ContentPage
         else
         {
             _selectedSymptoms.Add(button);
+
             button.BackgroundColor = Color.FromArgb("#FBE3E8");
             button.TextColor = Color.FromArgb("#E85B73");
             button.BorderColor = Color.FromArgb("#E85B73");
@@ -89,6 +108,8 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
+        string notes = NotesEditor.Text?.Trim() ?? "";
+
         await DisplayAlert("Saved", "Your daily log has been saved.", "OK");
     }
 
@@ -99,7 +120,7 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnHomeTapped(object sender, TappedEventArgs e)
     {
-      await Navigation.PushAsync(new HomePage());
+        await Navigation.PushAsync(new HomePage());
     }
 
     private async void OnDailyTapped(object sender, TappedEventArgs e)

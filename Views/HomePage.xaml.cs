@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -8,6 +9,9 @@ public partial class HomePage : ContentPage
     public HomePage()
     {
         InitializeComponent();
+
+        string userName = Preferences.Get("UserName", "User");
+        UserNameLabel.Text = $"{userName}!";
     }
 
     private async void OnBellClicked(object sender, EventArgs e)
@@ -37,7 +41,7 @@ public partial class HomePage : ContentPage
 
     private async void OnJournalTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Journal", "Open journal page.", "OK");
+        await Navigation.PushAsync(new JournalPage());
     }
 
     private async void OnLearnTapped(object sender, EventArgs e)
@@ -52,7 +56,7 @@ public partial class HomePage : ContentPage
 
     private async void OnHomeTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Home", "You are already on the Home page.", "OK");
+        await Navigation.PushAsync(new HomePage());
     }
 
     private async void OnDailyTapped(object sender, EventArgs e)
