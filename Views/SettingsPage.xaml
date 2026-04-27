@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="24,50,24,20" Spacing="18">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <ImageButton
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        Margin="0,20,0,0"
+                        BackgroundColor="Transparent"
+                        WidthRequest="20"
+                        HeightRequest="20" />
+
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label
+                            Text="Settings"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73" />
+
+                        <Label
+                            Text="Manage your preferences"
+                            Margin="0,0,0,0"
+                            FontSize="14"
+                            TextColor="#6F6A6C" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Profile -->
+                <Border
+                    Padding="18,14"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileTapped" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Image Source="profile_icon.png" WidthRequest="26" HeightRequest="26" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Profile"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            TextColor="#333333"
+                            VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="" FontSize="26" TextColor="#666666" />
+                    </Grid>
+                </Border>
+
+                <!-- Privacy -->
+                <Border
+                    Padding="18,14"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPrivacyTapped" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Image Source="privacy_icon.png" WidthRequest="28" HeightRequest="28" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Privacy Vault"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            TextColor="#333333" />
+                        <Label Grid.Column="2" Text="" FontSize="26" TextColor="#666666" />
+                    </Grid>
+                </Border>
+
+                <!-- Reports -->
+                <Border
+                    Padding="18,14"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnReportsTapped" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Image Source="reports_icon.png" WidthRequest="28" HeightRequest="28" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Reports and History"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            TextColor="#333333" />
+                        <Label Grid.Column="2" Text="" FontSize="26" TextColor="#666666" />
+                    </Grid>
+                </Border>
+
+                <!-- Notifications -->
+                <Border
+                    Padding="16,14"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNotificationsTapped" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Border
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            BackgroundColor="#D5F2EC"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 24">
+                            <Image Source="notification_icon.png" WidthRequest="24" HeightRequest="24" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Notifications"  FontSize="15" FontAttributes="Bold" TextColor="#333333" />
+                            <Label Text="Manage your reminders" FontSize="13" TextColor="#8A8A8A" />
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2" Text="›" FontSize="28" TextColor="#666666" />
+                    </Grid>
+                </Border>
+
+                <!-- About -->
+                <Border
+                    Padding="18,16"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="About Aura Period Tracker" TextColor="#333333" FontSize="15" FontAttributes="Bold" />
+                        <Label
+                            Text="Track your menstrual cycle, predict periods, ovulation, and fertile windows with ease."
+                            FontSize="13"
+                            TextColor="#8A8A8A" />
+                        <Label Text="Version 1.0.0" FontSize="12" TextColor="#C0B8BB" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Logout -->
+                <Border
+                    Padding="18,16"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLogoutTapped" />
+                    </Border.GestureRecognizers>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="↪" FontSize="18" TextColor="#E85B73" />
+                        <Label Text="Logout" FontSize="15" FontAttributes="Bold" TextColor="#E85B73" />
+                    </HorizontalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

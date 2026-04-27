@@ -76,6 +76,6 @@ public partial class HomePage : ContentPage
 
     private async void OnSettingsTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Settings", "Open settings page.", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

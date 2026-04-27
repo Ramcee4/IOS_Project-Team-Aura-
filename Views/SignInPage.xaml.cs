@@ -6,11 +6,26 @@ namespace Team_Aura_Period_Tracker_;
 
 public partial class SignInPage : ContentPage
 {
+    private bool isPasswordVisible = false;
+
     public SignInPage()
     {
         InitializeComponent();
     }
 
+    // ?? Toggle Password Visibility
+    private void OnTogglePasswordClicked(object sender, EventArgs e)
+    {
+        isPasswordVisible = !isPasswordVisible;
+
+        PasswordEntry.IsPassword = !isPasswordVisible;
+
+        TogglePasswordBtn.Source = isPasswordVisible
+            ? "eye_open.png"
+            : "eye_closed.png";
+    }
+
+    // ?? SIGN IN
     private async void OnSignInClicked(object sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim() ?? "";
@@ -36,11 +51,13 @@ public partial class SignInPage : ContentPage
         }
     }
 
+    // ?? SIGN UP
     private async void OnSignUpClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(Up));
     }
 
+    // ?? FORGOT PASSWORD
     private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));

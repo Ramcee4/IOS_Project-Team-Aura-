@@ -24,16 +24,13 @@
                 BackgroundColor="Transparent"
                 StrokeShape="RoundRectangle 46">
 
-                <Image
-                    Source="logo_icon.png"
-                    Aspect="AspectFill" />
+                <Image Source="logo_icon.png" Aspect="AspectFill" />
             </Border>
 
             <!-- Title -->
             <Label
                 Text="Period Tracker"
                 HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
                 Margin="0,22,0,0"
                 FontSize="25"
                 FontAttributes="Bold"
@@ -43,15 +40,12 @@
             <Label
                 Text="Welcome back"
                 HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
                 Margin="0,10,0,0"
                 FontSize="14"
                 TextColor="#6F6A6C" />
 
             <!-- Form -->
-            <VerticalStackLayout
-                Margin="0,38,0,0"
-                Spacing="0">
+            <VerticalStackLayout Margin="0,38,0,0" Spacing="0">
 
                 <!-- Email -->
                 <Label
@@ -62,8 +56,8 @@
                     TextColor="#1F1F1F" />
 
                 <Border
-                    StrokeThickness="0"
                     BackgroundColor="#F1F1F4"
+                    StrokeThickness="0"
                     StrokeShape="RoundRectangle 10"
                     HeightRequest="48">
 
@@ -86,19 +80,35 @@
                     TextColor="#1F1F1F" />
 
                 <Border
-                    StrokeThickness="0"
                     BackgroundColor="#F1F1F4"
+                    StrokeThickness="0"
                     StrokeShape="RoundRectangle 10"
                     HeightRequest="48">
 
-                    <Entry
-                        x:Name="PasswordEntry"
-                        Placeholder="Enter your password"
-                        PlaceholderColor="#8F8A93"
-                        TextColor="#222222"
-                        IsPassword="True"
-                        BackgroundColor="Transparent"
-                        Margin="14,0" />
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Placeholder="Enter your password"
+                            PlaceholderColor="#8F8A93"
+                            TextColor="#222222"
+                            IsPassword="True"
+                            BackgroundColor="Transparent"
+                            Margin="14,0" />
+
+                        <ImageButton
+                            x:Name="TogglePasswordBtn"
+                            Grid.Column="1"
+                            Source="eye_closed.png"
+                            Clicked="OnTogglePasswordClicked"
+                            BackgroundColor="Transparent"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            Margin="0,0,12,0"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+
                 </Border>
 
                 <!-- Forgot Password -->
@@ -107,8 +117,7 @@
                     Margin="0,6,0,0"
                     FontSize="13"
                     TextColor="#E85B73"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center">
+                    HorizontalOptions="Center">
 
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>

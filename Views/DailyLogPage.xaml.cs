@@ -140,6 +140,6 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnSettingsTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Settings", "Open settings page.", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

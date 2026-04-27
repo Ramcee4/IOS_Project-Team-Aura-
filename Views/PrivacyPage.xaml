@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.PrivacyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,50,24,24" Spacing="28">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <ImageButton
+                    Source="back_icon.png"
+                    Clicked="OnBackClicked"
+                    Margin="0,14,0,0"
+                    BackgroundColor="Transparent"
+                    WidthRequest="20"
+                    HeightRequest="20" />
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label
+                        Text="Privacy Vault"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="#E85B73" />
+
+                    <Label
+                        Text="Control your data and security settings"
+                        Margin="0,6,0,0"
+                        FontSize="14"
+                        TextColor="#6F6A6C" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Protected Card -->
+            <Border
+                Padding="22"
+                BackgroundColor="#F8F8F8"
+                Stroke="#DDD6D8"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <VerticalStackLayout Spacing="16">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="shield_icon.png" WidthRequest="34" HeightRequest="34" />
+                        <Label
+                            Text="Your Data is Protected"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="#111111"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Label
+                        Text="All your health data is encrypted and stored locally on your device. We never sell or share your information without explicit consent."
+                        Margin="48,0,0,0"
+                        FontSize="15"
+                        TextColor="#8A8A8A"
+                        LineHeight="1.25" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- App Lock -->
+            <Border
+                Padding="22"
+                BackgroundColor="#F8F8F8"
+                Stroke="#DDD6D8"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Image Source="lock_icon.png" WidthRequest="36" HeightRequest="36" />
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="0">
+                        <Label
+                            Text="App Lock"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="#111111" />
+                        <Label
+                            Text="Require&#10;Authentication to&#10;open the app"
+                            FontSize="15"
+                            TextColor="#8A8A8A" />
+                    </VerticalStackLayout>
+
+                    <Button
+                        Grid.Column="2"
+                        Text="Enable"
+                        Clicked="OnEnableAppLockClicked"
+                        WidthRequest="115"
+                        HeightRequest="34"
+                        CornerRadius="17"
+                        BackgroundColor="#F8F8F8"
+                        BorderColor="#222222"
+                        BorderWidth="1"
+                        TextColor="#E85B73"
+                        FontSize="13"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Data Storage -->
+            <Border
+                Padding="22"
+                BackgroundColor="#F8F8F8"
+                Stroke="#DDD6D8"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <VerticalStackLayout Spacing="14">
+                    <Label
+                        Text="Data Storage"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#111111" />
+
+                    <Border
+                        BackgroundColor="#D7D2D2"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="10,8">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Local Storage" FontSize="14" TextColor="#111111" />
+                            <Label Grid.Column="1" Text="Active" FontSize="14" FontAttributes="Bold" TextColor="#111111" />
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        BackgroundColor="#D7D2D2"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="10,8">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Cloud Backup" FontSize="14" TextColor="#111111" />
+                            <Label Grid.Column="1" Text="Disabled" FontSize="14" FontAttributes="Bold" TextColor="#111111" />
+                        </Grid>
+                    </Border>
+
+                    <Label
+                        Text="Your data is stored locally on this device. Cloud backup is optional and requires your explicit consent."
+                        FontSize="13"
+                        TextColor="#6F6A6C"
+                        LineHeight="1.35" />
+                </VerticalStackLayout>
+            </Border>
+
+           
+            <!-- Commitments -->
+            <Border
+                Padding="22"
+                BackgroundColor="#F8F8F8"
+                Stroke="#DDD6D8"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        Text="Privacy Commitments"
+                        FontSize="19"
+                        FontAttributes="Bold"
+                        TextColor="#111111" />
+
+                    <Label Text="✓  No Data Selling: We never sell your personal health information" FontSize="13" TextColor="#333333" />
+                    <Label Text="✓  Transparent Analytics: Only anonymized usage data is collected" FontSize="13" TextColor="#333333" />
+                    <Label Text="✓  Right to be Forgotten: Delete all your data anytime" FontSize="13" TextColor="#333333" />
+                    <Label Text="✓  End-to-End Encryption: Your data is encrypted in transit and at rest" FontSize="13" TextColor="#333333" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Danger Zone -->
+            <Border
+                Padding="22"
+                BackgroundColor="#FDEBEC"
+                Stroke="#FF9999"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <VerticalStackLayout Spacing="26">
+                    <Label
+                        Text="Danger Zone"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="Red"
+                        HorizontalOptions="Center" />
+
+                    <Label
+                        Text="Permanently delete all your data.&#10;This action cannot be undone."
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#5A4A4A" />
+
+                    <Button
+                        Text="Delete All Data"
+                        Clicked="OnDeleteAllDataClicked"
+                        BackgroundColor="#F5B9C1"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="44" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

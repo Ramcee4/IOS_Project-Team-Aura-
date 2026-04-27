@@ -71,11 +71,11 @@ public partial class LearnPage : ContentPage
 
     private async void OnLearnTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Learn", "You are already here.", "OK");
+        await Navigation.PushAsync(new LearnPage());
     }
 
     private async void OnSettingsTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Settings", "Open settings page.", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }

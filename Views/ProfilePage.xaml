@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="24,50,24,20"
+                Spacing="18">
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <ImageButton
+                        Grid.Column="0"
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        Margin="0,14,0,0"
+                        BackgroundColor="Transparent"
+                        WidthRequest="20"
+                        HeightRequest="20" />
+
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label
+                            Text="Profile"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73" />
+
+                        <Label
+                            Text="Manage your personal information"
+                            Margin="0,0,0,0"
+                            FontSize="14"
+                            TextColor="#6F6A6C" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Border
+                    Margin="0,22,0,0"
+                    Padding="28,28,28,32"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 18">
+
+                    <VerticalStackLayout Spacing="18">
+
+                        <!-- Profile Icon -->
+                        <Border
+                            WidthRequest="90"
+                            HeightRequest="90"
+                            StrokeThickness="0"
+                            BackgroundColor="#F1F1F4"
+                            StrokeShape="RoundRectangle 45"
+                            HorizontalOptions="Center">
+
+                            <Image
+                                Source="profile_icon.png"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+                        </Border>
+
+                        <!-- Name -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="Name"
+                                FontSize="14"
+                                TextColor="#111111" />
+
+                            <Border
+                                BackgroundColor="#F1F1F4"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 8"
+                                HeightRequest="48">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry
+                                        x:Name="NameEntry"
+                                        Text="Jessel Bustamante"
+                                        TextColor="#222222"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        Margin="12,0" />
+
+                                    <Image
+                                        Grid.Column="1"
+                                        Source="edit_icon.png"
+                                        WidthRequest="22"
+                                        HeightRequest="22"
+                                        Margin="0,0,12,0"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Email -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="Email"
+                                FontSize="14"
+                                TextColor="#111111" />
+
+                            <Border
+                                BackgroundColor="#F1F1F4"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 8"
+                                HeightRequest="48">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry
+                                        x:Name="EmailEntry"
+                                        Text="jes..........z.gmail.com"
+                                        Keyboard="Email"
+                                        TextColor="#222222"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        Margin="12,0" />
+
+                                    <Image
+                                        Grid.Column="1"
+                                        Source="edit_icon.png"
+                                        WidthRequest="22"
+                                        HeightRequest="22"
+                                        Margin="0,0,12,0"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Password -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="Password"
+                                FontSize="14"
+                                TextColor="#111111" />
+
+                            <Border
+                                BackgroundColor="#F1F1F4"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 8"
+                                HeightRequest="48">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry
+                                        x:Name="PasswordEntry"
+                                        Text="**********"
+                                        IsPassword="True"
+                                        TextColor="#222222"
+                                        PlaceholderColor="#8A8A8A"
+                                        BackgroundColor="Transparent"
+                                        Margin="12,0" />
+
+                                    <Image
+                                        Grid.Column="1"
+                                        Source="edit_icon.png"
+                                        WidthRequest="22"
+                                        HeightRequest="22"
+                                        Margin="0,0,12,0"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid
+            Grid.Row="1"
+            Padding="40,12,40,28"
+            ColumnDefinitions="*,20,*"
+            BackgroundColor="#F4EDEF">
+
+            <Button
+                Grid.Column="0"
+                Text="Cancel"
+                Clicked="OnCancelClicked"
+                HeightRequest="50"
+                CornerRadius="8"
+                BackgroundColor="#C24E63"
+                TextColor="White"
+                FontSize="15" />
+
+            <Button
+                Grid.Column="2"
+                Text="Save"
+                Clicked="OnSaveClicked"
+                HeightRequest="50"
+                CornerRadius="8"
+                BackgroundColor="#E85B73"
+                TextColor="White"
+                FontSize="15" />
+
+        </Grid>
+
+    </Grid>
+</ContentPage>

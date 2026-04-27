@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Team_Aura_Period_Tracker_.SettingsNotificationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F4EDEF">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,50,24,24" Spacing="22">
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <ImageButton
+                    Source="back_icon.png"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="Transparent"
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Margin="0,14,0,0" />
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label
+                        Text="Notifications &amp;&#10;Reminders"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="#E85B73" />
+
+                    <Label
+                        Text="Manage your notification preferences"
+                        Margin="0,0,0,0"
+                        FontSize="15"
+                        TextColor="#6F6A6C" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border
+                Padding="22"
+                BackgroundColor="#F8F8F8"
+                Stroke="#DDD6D8"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16">
+
+                <VerticalStackLayout Spacing="24">
+
+                    <!-- Period Reminder -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#E85B73" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Period Reminder" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Get notified 2 days&#10;before your expected&#10;period" FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="PeriodSwitch"
+                                Grid.Column="2"
+                                IsToggled="True"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Ovulation Reminder -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#A7D8AE" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Ovulation Reminder" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Get notified on your&#10;predicted ovulation&#10;day" FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="OvulationSwitch"
+                                Grid.Column="2"
+                                IsToggled="True"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Fertile Window -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#76C9C2" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Fertile Window Alert" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Get notified when your&#10;fertile window begins" FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="FertileSwitch"
+                                Grid.Column="2"
+                                IsToggled="False"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Daily Symptom -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#FFC16E" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Daily Symptom Logging" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Daily reminder to log&#10;your symptoms (8:00&#10;PM)" FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="DailySymptomSwitch"
+                                Grid.Column="2"
+                                IsToggled="True"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Medication -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#E85B73" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Medication Reminder" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Get reminded to take&#10;your meds on time." FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="MedicationSwitch"
+                                Grid.Column="2"
+                                IsToggled="True"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Exercise -->
+                    <Border Padding="14" BackgroundColor="#F8F8F8" Stroke="#222222" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border WidthRequest="38" HeightRequest="38" BackgroundColor="#A7D8AE" StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                <Image Source="notification_icon.png" WidthRequest="22" HeightRequest="22" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Exercise Reminder" FontSize="16" FontAttributes="Bold" TextColor="#333333" />
+                                <Label Text="Get notified to stay&#10;active daily" FontSize="14" TextColor="#6F6A6C" />
+                            </VerticalStackLayout>
+
+                            <Switch
+                                x:Name="ExerciseSwitch"
+                                Grid.Column="2"
+                                IsToggled="False"
+                                OnColor="#07071A"
+                                ThumbColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Note -->
+                    <Border
+                        Padding="14"
+                        BackgroundColor="#F8F8F8"
+                        Stroke="#222222"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 8">
+
+                        <Label
+                            Text="💡 Note: Make sure to enable notifications in your browser settings to receive these reminders."
+                            FontSize="14"
+                            TextColor="#6F6A6C"
+                            LineHeight="1.35" />
+                    </Border>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
