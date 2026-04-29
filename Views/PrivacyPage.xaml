@@ -28,7 +28,7 @@
 
                     <Label
                         Text="Control your data and security settings"
-                        Margin="0,6,0,0"
+                        Margin="0,0,0,0"
                         FontSize="14"
                         TextColor="#6F6A6C" />
                 </VerticalStackLayout>
