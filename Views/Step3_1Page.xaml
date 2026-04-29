@@ -204,5 +204,52 @@
 
         </Grid>
 
+        <!-- CUSTOM ALERT OVERLAY -->
+        <Grid
+    x:Name="CustomAlertOverlay"
+    IsVisible="False"
+    BackgroundColor="#80000000"
+    Padding="30">
+
+            <Border
+        BackgroundColor="White"
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 22"
+        Padding="24"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        WidthRequest="310">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                x:Name="CustomAlertTitle"
+                Text="Required"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="#E85B73"
+                HorizontalTextAlignment="Center" />
+
+                    <Label
+                x:Name="CustomAlertMessage"
+                Text="Message here"
+                FontSize="15"
+                TextColor="#4A4A4A"
+                HorizontalTextAlignment="Center" />
+
+                    <Button
+                Text="OK"
+                Clicked="OnCustomAlertOkClicked"
+                Margin="0,8,0,0"
+                HeightRequest="46"
+                CornerRadius="12"
+                BackgroundColor="#E85B73"
+                TextColor="White"
+                FontAttributes="Bold" />
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
     </Grid>
 </ContentPage>

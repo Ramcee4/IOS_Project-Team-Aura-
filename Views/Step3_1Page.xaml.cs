@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Storage;
 using System;
 
 namespace Team_Aura_Period_Tracker_
@@ -64,7 +65,6 @@ namespace Team_Aura_Period_Tracker_
             int row = 0;
             int col = 0;
 
-            // Previous month trailing dates
             for (int i = 0; i < startDay; i++)
             {
                 int day = daysInPreviousMonth - startDay + i + 1;
@@ -73,7 +73,6 @@ namespace Team_Aura_Period_Tracker_
                 col++;
             }
 
-            // Current month dates
             for (int day = 1; day <= daysInMonth; day++)
             {
                 DateTime date = new DateTime(_currentYear, _currentMonth, day);
@@ -87,7 +86,6 @@ namespace Team_Aura_Period_Tracker_
                 }
             }
 
-            // Next month leading dates
             DateTime nextMonth = firstDayOfMonth.AddMonths(1);
             int nextMonthDay = 1;
 
@@ -169,6 +167,7 @@ namespace Team_Aura_Period_Tracker_
                 _selectedStartDate = date;
                 UpdateCalendar();
             };
+
             border.GestureRecognizers.Add(tap);
 
             CalendarGrid.Add(border, col, row);
@@ -223,14 +222,40 @@ namespace Team_Aura_Period_Tracker_
             UpdateCalendar();
         }
 
+        private async void ShowCustomAlert(string title, string message)
+        {
+            CustomAlertTitle.Text = title;
+            CustomAlertMessage.Text = message;
+            CustomAlertOverlay.Opacity = 0;
+            CustomAlertOverlay.IsVisible = true;
+
+            await CustomAlertOverlay.FadeTo(1, 150);
+        }
+
+        private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+        {
+            await CustomAlertOverlay.FadeTo(0, 150);
+            CustomAlertOverlay.IsVisible = false;
+        }
+
         private async void OnBackClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync("..");
         }
 
         private async void OnNextClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(Step3Page));
+            if (!_selectedStartDate.HasValue)
+            {
+                ShowCustomAlert("Required", "Please select your last period date.");
+                return;
+            }
+
+            string selectedDate = _selectedStartDate.Value.ToString("yyyy-MM-dd");
+
+            Preferences.Set("LastDateOfPeriod", selectedDate);
+
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

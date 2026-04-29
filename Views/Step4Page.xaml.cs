@@ -1,15 +1,19 @@
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
 public partial class Step4Page : ContentPage
 {
-    private List<Button> _buttons;
+    private readonly List<Button> _buttons;
+    private readonly DatabaseService _databaseService;
     private Button? _selected;
 
     public Step4Page()
     {
         InitializeComponent();
+
+        _databaseService = new DatabaseService();
 
         _buttons = new List<Button>
         {
@@ -48,18 +52,47 @@ public partial class Step4Page : ContentPage
         button.TextColor = Color.FromArgb("#222222");
     }
 
+    private async void ShowCustomAlert(string title, string message)
+    {
+        CustomAlertTitle.Text = title;
+        CustomAlertMessage.Text = message;
+        CustomAlertOverlay.Opacity = 0;
+        CustomAlertOverlay.IsVisible = true;
+
+        await CustomAlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+    {
+        await CustomAlertOverlay.FadeTo(0, 150);
+        CustomAlertOverlay.IsVisible = false;
+    }
+
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        await Shell.Current.GoToAsync("..");
     }
 
     private async void OnNextClicked(object sender, EventArgs e)
     {
         if (_selected == null)
         {
-            await DisplayAlert("Required", "Please select an age range.", "OK");
+            ShowCustomAlert("Required", "Please select an age range.");
             return;
         }
+
+        int userId = Preferences.Get("UserId", 0);
+        string username = Preferences.Get("UserName", "");
+
+        if (userId == 0 || string.IsNullOrWhiteSpace(username))
+        {
+            ShowCustomAlert("Error", "No signed up user found.");
+            return;
+        }
+
+        string ageRange = _selected.Text;
+
+        await _databaseService.SaveUserAgeRangeAsync(userId, username, ageRange);
 
         await Shell.Current.GoToAsync(nameof(FivePageStep));
     }

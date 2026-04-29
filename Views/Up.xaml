@@ -7,6 +7,8 @@
     BackgroundColor="#F4EDEF">
 
     <Grid>
+
+        <!-- YOUR ORIGINAL DESIGN -->
         <VerticalStackLayout
             Padding="30,60,30,30"
             Spacing="0"
@@ -48,19 +50,9 @@
                 Margin="0,38,0,0"
                 Spacing="0">
 
-                <Label
-                    Text="Name"
-                    Margin="0,0,0,8"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#1F1F1F" />
+                <Label Text="Name" Margin="0,0,0,8" FontSize="14" FontAttributes="Bold" TextColor="#1F1F1F" />
 
-                <Border
-                    StrokeThickness="0"
-                    BackgroundColor="#F1F1F4"
-                    StrokeShape="RoundRectangle 10"
-                    HeightRequest="48">
-
+                <Border StrokeThickness="0" BackgroundColor="#F1F1F4" StrokeShape="RoundRectangle 10" HeightRequest="48">
                     <Entry
                         x:Name="NameEntry"
                         Placeholder="Enter your name"
@@ -70,19 +62,9 @@
                         Margin="14,0" />
                 </Border>
 
-                <Label
-                    Text="Email"
-                    Margin="0,16,0,8"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#1F1F1F" />
+                <Label Text="Email" Margin="0,16,0,8" FontSize="14" FontAttributes="Bold" TextColor="#1F1F1F" />
 
-                <Border
-                    StrokeThickness="0"
-                    BackgroundColor="#F1F1F4"
-                    StrokeShape="RoundRectangle 10"
-                    HeightRequest="48">
-
+                <Border StrokeThickness="0" BackgroundColor="#F1F1F4" StrokeShape="RoundRectangle 10" HeightRequest="48">
                     <Entry
                         x:Name="EmailEntry"
                         Placeholder="Enter your email"
@@ -93,21 +75,10 @@
                         Margin="14,0" />
                 </Border>
 
-                <Label
-                    Text="Password"
-                    Margin="0,16,0,8"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#1F1F1F" />
+                <Label Text="Password" Margin="0,16,0,8" FontSize="14" FontAttributes="Bold" TextColor="#1F1F1F" />
 
-                <Border
-                    StrokeThickness="0"
-                    BackgroundColor="#F1F1F4"
-                    StrokeShape="RoundRectangle 10"
-                    HeightRequest="48">
-
+                <Border StrokeThickness="0" BackgroundColor="#F1F1F4" StrokeShape="RoundRectangle 10" HeightRequest="48">
                     <Grid ColumnDefinitions="*,Auto">
-
                         <Entry
                             x:Name="PasswordEntry"
                             Placeholder="Enter your password"
@@ -127,25 +98,13 @@
                             Margin="0,0,14,0"
                             HorizontalOptions="End"
                             VerticalOptions="Center" />
-
                     </Grid>
                 </Border>
 
-                <Label
-                    Text="Confirm Password"
-                    Margin="0,16,0,8"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#1F1F1F" />
+                <Label Text="Confirm Password" Margin="0,16,0,8" FontSize="14" FontAttributes="Bold" TextColor="#1F1F1F" />
 
-                <Border
-                    StrokeThickness="0"
-                    BackgroundColor="#F1F1F4"
-                    StrokeShape="RoundRectangle 10"
-                    HeightRequest="48">
-
+                <Border StrokeThickness="0" BackgroundColor="#F1F1F4" StrokeShape="RoundRectangle 10" HeightRequest="48">
                     <Grid ColumnDefinitions="*,Auto">
-
                         <Entry
                             x:Name="ConfirmPasswordEntry"
                             Placeholder="Confirm your password"
@@ -165,7 +124,6 @@
                             Margin="0,0,14,0"
                             HorizontalOptions="End"
                             VerticalOptions="Center" />
-
                     </Grid>
                 </Border>
 
@@ -187,8 +145,55 @@
                     BackgroundColor="Transparent"
                     TextColor="#E85B73"
                     FontAttributes="Bold" />
-
             </VerticalStackLayout>
         </VerticalStackLayout>
+
+        <!-- CUSTOM ALERT -->
+        <Grid
+            x:Name="CustomAlertOverlay"
+            IsVisible="False"
+            BackgroundColor="#80000000"
+            Padding="30">
+
+            <Border
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 22"
+                Padding="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="310">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        x:Name="CustomAlertTitle"
+                        Text="Error"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#E85B73"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        x:Name="CustomAlertMessage"
+                        Text="Message here"
+                        FontSize="15"
+                        TextColor="#4A4A4A"
+                        HorizontalTextAlignment="Center" />
+
+                    <Button
+                        Text="OK"
+                        Clicked="OnCustomAlertOkClicked"
+                        Margin="0,8,0,0"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        BackgroundColor="#E85B73"
+                        TextColor="White"
+                        FontAttributes="Bold" />
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
     </Grid>
 </ContentPage>

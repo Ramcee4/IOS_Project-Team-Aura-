@@ -120,30 +120,38 @@ StrokeShape="RoundRectangle 24">
 
                     <VerticalStackLayout Spacing="8">
                         <Label
-                            Text="Cycle Type"
-                            FontSize="14"
-                            FontAttributes="Bold"
-                            TextColor="#222222" />
+        Text="Cycle Type"
+        FontSize="14"
+        FontAttributes="Bold"
+        TextColor="#222222" />
 
-                        <Border
-                            BackgroundColor="#F8F8F8"
-                            Stroke="#111111"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 12"
-                            Padding="12,0">
-                            <Picker
-                                x:Name="CycleTypePicker"
-                                Title="Select cycle type"
-                                TitleColor="#8F8A93"
-                                TextColor="#222222"
-                                BackgroundColor="Transparent"
-                                HeightRequest="40">
-                                <Picker.Items>
-                                    <x:String>Regular</x:String>
-                                    <x:String>Irregular</x:String>
-                                </Picker.Items>
-                            </Picker>
-                        </Border>
+                        <Grid ColumnDefinitions="*,10,*">
+
+                            <Button
+            x:Name="RegularButton"
+            Grid.Column="0"
+            Text="Regular"
+            Clicked="OnCycleTypeClicked"
+            BackgroundColor="#F8F8F8"
+            TextColor="#222222"
+            BorderColor="#111111"
+            BorderWidth="1"
+            CornerRadius="12"
+            HeightRequest="42" />
+
+                            <Button
+            x:Name="IrregularButton"
+            Grid.Column="2"
+            Text="Irregular"
+            Clicked="OnCycleTypeClicked"
+            BackgroundColor="#F8F8F8"
+            TextColor="#222222"
+            BorderColor="#111111"
+            BorderWidth="1"
+            CornerRadius="12"
+            HeightRequest="42" />
+
+                        </Grid>
                     </VerticalStackLayout>
 
                 </VerticalStackLayout>
@@ -177,7 +185,56 @@ StrokeShape="RoundRectangle 24">
  FontAttributes="Bold" />
 
             </Grid>
+            
+            
+            
+            
+            <!-- CUSTOM ALERT OVERLAY -->
+            <Grid
+    x:Name="CustomAlertOverlay"
+    IsVisible="False"
+    BackgroundColor="#80000000"
+    Padding="30">
 
+                <Border
+        BackgroundColor="White"
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 22"
+        Padding="24"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        WidthRequest="310">
+
+                    <VerticalStackLayout Spacing="14">
+
+                        <Label
+                x:Name="CustomAlertTitle"
+                Text="Required"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="#E85B73"
+                HorizontalTextAlignment="Center" />
+
+                        <Label
+                x:Name="CustomAlertMessage"
+                Text="Message here"
+                FontSize="15"
+                TextColor="#4A4A4A"
+                HorizontalTextAlignment="Center" />
+
+                        <Button
+                Text="OK"
+                Clicked="OnCustomAlertOkClicked"
+                Margin="0,8,0,0"
+                HeightRequest="46"
+                CornerRadius="12"
+                BackgroundColor="#E85B73"
+                TextColor="White"
+                FontAttributes="Bold" />
+
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

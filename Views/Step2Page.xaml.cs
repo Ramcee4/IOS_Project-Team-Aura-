@@ -1,14 +1,17 @@
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
 public partial class Step2Page : ContentPage
 {
     private readonly HashSet<Button> _selectedButtons = new();
+    private readonly DatabaseService _databaseService;
 
     public Step2Page()
     {
         InitializeComponent();
+        _databaseService = new DatabaseService();
     }
 
     private void OnOptionClicked(object sender, EventArgs e)
@@ -42,18 +45,51 @@ public partial class Step2Page : ContentPage
         button.TextColor = Color.FromArgb("#222222");
     }
 
+    private async void ShowCustomAlert(string title, string message)
+    {
+        CustomAlertTitle.Text = title;
+        CustomAlertMessage.Text = message;
+        CustomAlertOverlay.Opacity = 0;
+        CustomAlertOverlay.IsVisible = true;
+
+        await CustomAlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+    {
+        await CustomAlertOverlay.FadeTo(0, 150);
+        CustomAlertOverlay.IsVisible = false;
+    }
+
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        await Shell.Current.GoToAsync("..");
     }
 
     private async void OnNextClicked(object sender, EventArgs e)
     {
         if (_selectedButtons.Count == 0)
         {
-            await DisplayAlert("Required", "Please select at least one option.", "OK");
+            ShowCustomAlert("Required", "Please select at least one option.");
             return;
         }
+
+        int userId = Preferences.Get("UserId", 0);
+        string username = Preferences.Get("UserName", "");
+
+        if (userId == 0 || string.IsNullOrWhiteSpace(username))
+        {
+            ShowCustomAlert("Error", "No signed up user found.");
+            return;
+        }
+
+        string selectedOptions = string.Join(", ", _selectedButtons.Select(button => button.Text));
+
+        await _databaseService.SaveUserPreferencesAsync(
+            userId,
+            username,
+            selectedOptions
+        );
 
         await Shell.Current.GoToAsync(nameof(Step3Page));
     }

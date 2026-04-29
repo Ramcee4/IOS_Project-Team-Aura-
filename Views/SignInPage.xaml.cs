@@ -6,14 +6,15 @@ namespace Team_Aura_Period_Tracker_;
 
 public partial class SignInPage : ContentPage
 {
+    private readonly DatabaseService _databaseService;
     private bool isPasswordVisible = false;
 
     public SignInPage()
     {
         InitializeComponent();
+        _databaseService = new DatabaseService();
     }
 
-    // ?? Toggle Password Visibility
     private void OnTogglePasswordClicked(object sender, EventArgs e)
     {
         isPasswordVisible = !isPasswordVisible;
@@ -25,39 +26,57 @@ public partial class SignInPage : ContentPage
             : "eye_closed.png";
     }
 
-    // ?? SIGN IN
+    private async void ShowCustomAlert(string title, string message)
+    {
+        CustomAlertTitle.Text = title;
+        CustomAlertMessage.Text = message;
+        CustomAlertOverlay.Opacity = 0;
+        CustomAlertOverlay.IsVisible = true;
+
+        await CustomAlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+    {
+        await CustomAlertOverlay.FadeTo(0, 150);
+        CustomAlertOverlay.IsVisible = false;
+    }
+
     private async void OnSignInClicked(object sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim() ?? "";
         string password = PasswordEntry.Text ?? "";
 
-        string savedEmail = Preferences.Get("UserEmail", "");
-        string savedPassword = Preferences.Get("UserPassword", "");
-
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
-            await DisplayAlert("Error", "Please enter your email and password.", "OK");
+            ShowCustomAlert("Error", "Please enter your email and password.");
             return;
         }
 
-        if (email == savedEmail && password == savedPassword)
+        var user = await _databaseService.GetUserByEmailAsync(email);
+
+        if (user == null || user.Password != password)
         {
-            await DisplayAlert("Success", "Sign in successful.", "OK");
-            await Shell.Current.GoToAsync(nameof(HomePage));
+            ShowCustomAlert("Error", "Invalid email or password.");
+            return;
         }
-        else
-        {
-            await DisplayAlert("Error", "Invalid email or password.", "OK");
-        }
+
+        Preferences.Set("UserName", user.Name);
+        Preferences.Set("UserEmail", user.Email);
+        Preferences.Set("UserPassword", user.Password);
+
+        ShowCustomAlert("Success", "Sign in successful.");
+
+        await Task.Delay(1000);
+
+        await Shell.Current.GoToAsync(nameof(HomePage));
     }
 
-    // ?? SIGN UP
     private async void OnSignUpClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(Up));
     }
 
-    // ?? FORGOT PASSWORD
     private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
