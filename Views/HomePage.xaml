@@ -42,87 +42,112 @@
                 </Grid>
 
                 <!-- Stats -->
-                <Grid
-                    Margin="0,28,0,0"
-                    ColumnDefinitions="*,12,*">
+                <Grid Margin="0,28,0,0" ColumnDefinitions="*,12,*">
 
                     <Border
-                        Grid.Column="0"
-                        Padding="16,14"
-                        BackgroundColor="#F8F8F8"
-                        Stroke="#DDD6D8"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 16">
+        Grid.Column="0"
+        Padding="16,14"
+        BackgroundColor="#F8F8F8"
+        Stroke="#DDD6D8"
+        StrokeThickness="1"
+        StrokeShape="RoundRectangle 16">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnCycleLengthTapped" />
                         </Border.GestureRecognizers>
 
-                        <VerticalStackLayout Spacing="6">
+                        <VerticalStackLayout Spacing="8">
+
                             <HorizontalStackLayout Spacing="8">
-                                <BoxView
-                                    WidthRequest="8"
-                                    HeightRequest="8"
-                                    CornerRadius="4"
-                                    Color="#95C79A"
-                                    VerticalOptions="Center" />
+                                <Border
+                    WidthRequest="28"
+                    HeightRequest="28"
+                    BackgroundColor="#E7F5EA"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14">
+
+                                    <Label
+                        Text="↻"
+                        FontSize="17"
+                        TextColor="#5CA66A"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                                </Border>
+
                                 <Label
-                                    Text="Cycle Length"
-                                    FontSize="13"
-                                    TextColor="#8A8A8A" />
+                    Text="Cycle Length"
+                    FontSize="13"
+                    TextColor="#8A8A8A"
+                    VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
                             <Label
-                                Text="28"
-                                FontSize="20"
-                                FontAttributes="Bold"
-                                TextColor="#333333" />
+                x:Name="CycleLengthValueLabel"
+                Text="28"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#333333" />
 
                             <Label
-                                Text="days average"
-                                FontSize="12"
-                                TextColor="#6F6A6C" />
+                x:Name="CycleLengthSubtitleLabel"
+                Text="days average"
+                FontSize="12"
+                TextColor="#6F6A6C" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border
-                        Grid.Column="2"
-                        Padding="16,14"
-                        BackgroundColor="#F8F8F8"
-                        Stroke="#DDD6D8"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 16">
+        Grid.Column="2"
+        Padding="16,14"
+        BackgroundColor="#F8F8F8"
+        Stroke="#DDD6D8"
+        StrokeThickness="1"
+        StrokeShape="RoundRectangle 16">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnPeriodDaysTapped" />
                         </Border.GestureRecognizers>
 
-                        <VerticalStackLayout Spacing="6">
+                        <VerticalStackLayout Spacing="8">
+
                             <HorizontalStackLayout Spacing="8">
-                                <BoxView
-                                    WidthRequest="8"
-                                    HeightRequest="8"
-                                    CornerRadius="4"
-                                    Color="#F2BC66"
-                                    VerticalOptions="Center" />
+                                <Border
+                    WidthRequest="28"
+                    HeightRequest="28"
+                    BackgroundColor="#FFF1D8"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14">
+
+                                    <Label
+                        Text="●"
+                        FontSize="16"
+                        TextColor="#F2A83B"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                                </Border>
+
                                 <Label
-                                    Text="Period Days"
-                                    FontSize="13"
-                                    TextColor="#8A8A8A" />
+                    Text="Period Days"
+                    FontSize="13"
+                    TextColor="#8A8A8A"
+                    VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
                             <Label
-                                Text="5"
-                                FontSize="20"
-                                FontAttributes="Bold"
-                                TextColor="#333333" />
+                x:Name="PeriodDaysValueLabel"
+                Text="5"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#333333" />
 
                             <Label
-                                Text="days average"
-                                FontSize="12"
-                                TextColor="#6F6A6C" />
+                x:Name="PeriodDaysSubtitleLabel"
+                Text="days average"
+                FontSize="12"
+                TextColor="#6F6A6C" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
-
                 <!-- Quick Actions -->
                 <Label
                     Text="Quick Actions"

@@ -7,13 +7,22 @@ public partial class Step1Page : ContentPage
     public Step1Page()
     {
         InitializeComponent();
+    }
 
-        string storedName = Preferences.Get("userName", "");
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        string storedName = Preferences.Get("UserName", "");
 
         if (string.IsNullOrWhiteSpace(storedName))
+        {
             WelcomeLabel.Text = "Welcome!";
+        }
         else
+        {
             WelcomeLabel.Text = $"Welcome, {storedName}!";
+        }
     }
 
     private async void OnNextClicked(object sender, EventArgs e)

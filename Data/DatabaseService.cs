@@ -65,6 +65,7 @@ public class DatabaseService
         string username,
         string lastDateOfPeriod,
         int cycleLengthDays,
+        int periodDays,
         string cycleType)
     {
         var existingCycleInfo = await _database.Table<UserCycleInfo>()
@@ -76,6 +77,7 @@ public class DatabaseService
             existingCycleInfo.Username = username;
             existingCycleInfo.LastDateOfPeriod = lastDateOfPeriod;
             existingCycleInfo.CycleLengthDays = cycleLengthDays;
+            existingCycleInfo.PeriodDays = periodDays;
             existingCycleInfo.CycleType = cycleType;
 
             await _database.UpdateAsync(existingCycleInfo);
@@ -88,6 +90,7 @@ public class DatabaseService
                 Username = username,
                 LastDateOfPeriod = lastDateOfPeriod,
                 CycleLengthDays = cycleLengthDays,
+                PeriodDays = periodDays,
                 CycleType = cycleType
             };
 
@@ -101,6 +104,7 @@ public class DatabaseService
             .Where(c => c.UserId == userId)
             .FirstOrDefaultAsync();
     }
+
     public async Task SaveUserAgeRangeAsync(int userId, string username, string ageRange)
     {
         var existingCycleInfo = await _database.Table<UserCycleInfo>()

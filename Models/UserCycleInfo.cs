@@ -15,6 +15,8 @@ public class UserCycleInfo
 
     public int CycleLengthDays { get; set; }
 
+    public int PeriodDays { get; set; }
+
     public string CycleType { get; set; } = string.Empty;
 
     public string AgeRange { get; set; } = string.Empty;

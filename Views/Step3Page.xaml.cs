@@ -1,3 +1,5 @@
+using System;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Storage;
 
@@ -23,6 +25,15 @@ public partial class Step3Page : ContentPage
         LastPeriodDateButton.Text = !string.IsNullOrWhiteSpace(lastDateOfPeriod)
             ? lastDateOfPeriod
             : "Select date";
+
+        int savedCycleLength = Preferences.Get("CycleLengthDays", 0);
+        int savedPeriodDays = Preferences.Get("PeriodDays", 0);
+
+        if (savedCycleLength > 0)
+            CycleLengthEntry.Text = savedCycleLength.ToString();
+
+        if (savedPeriodDays > 0)
+            PeriodDaysEntry.Text = savedPeriodDays.ToString();
     }
 
     private async void OnOpenDatePickerPageClicked(object sender, EventArgs e)
@@ -102,6 +113,25 @@ public partial class Step3Page : ContentPage
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(PeriodDaysEntry.Text) ||
+            !int.TryParse(PeriodDaysEntry.Text.Trim(), out int periodDays))
+        {
+            ShowCustomAlert("Required", "Please enter valid period days.");
+            return;
+        }
+
+        if (cycleLengthDays <= 0 || periodDays <= 0)
+        {
+            ShowCustomAlert("Invalid", "Cycle length and period days must be greater than 0.");
+            return;
+        }
+
+        if (periodDays > cycleLengthDays)
+        {
+            ShowCustomAlert("Invalid", "Period days cannot be greater than cycle length.");
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(selectedCycleType))
         {
             ShowCustomAlert("Required", "Please select your cycle type.");
@@ -109,12 +139,17 @@ public partial class Step3Page : ContentPage
         }
 
         await _databaseService.SaveUserCycleInfoAsync(
-            userId,
-            username,
-            lastDateOfPeriod,
-            cycleLengthDays,
-            selectedCycleType
-        );
+    userId,
+    username,
+    lastDateOfPeriod,
+    cycleLengthDays,
+    periodDays,
+    selectedCycleType
+);
+
+        Preferences.Set("CycleLengthDays", cycleLengthDays);
+        Preferences.Set("PeriodDays", periodDays);
+        Preferences.Set("CycleType", selectedCycleType);
 
         await Shell.Current.GoToAsync(nameof(Step4Page));
     }

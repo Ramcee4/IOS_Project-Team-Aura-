@@ -17,35 +17,14 @@
 
                 <BoxView HeightRequest="110" Opacity="0" />
 
-                <Border
-                    HeightRequest="86"
-                    WidthRequest="86"
-                    HorizontalOptions="Center"
-                    StrokeThickness="0"
-                    BackgroundColor="Transparent"
-                    StrokeShape="RoundRectangle 43">
-
-                    <Image
-                        Source="logo_icon.png"
-                        Aspect="AspectFill" />
+                <Border HeightRequest="86" WidthRequest="86" HorizontalOptions="Center" StrokeThickness="0" BackgroundColor="Transparent" StrokeShape="RoundRectangle 43">
+                    <Image Source="logo_icon.png" Aspect="AspectFill" />
                 </Border>
 
-              
-
-                <Label
-                    Text="Period Tracker"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Margin="0,8,0,0"
-                    FontSize="28"
-                    FontAttributes="Bold"
-                    TextColor="#EA5B73" />
+                <Label Text="Period Tracker" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,8,0,0" FontSize="28" FontAttributes="Bold" TextColor="#EA5B73" />
 
                 <VerticalStackLayout Margin="0,12,0,0" Spacing="6">
-                    <HorizontalStackLayout
-                        HorizontalOptions="Center"
-                        Spacing="4">
-
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
                         <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
                         <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
                         <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
@@ -54,164 +33,53 @@
                         <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
                     </HorizontalStackLayout>
 
-                    <Label
-                        Text="Step 4 of 6"
-                        HorizontalOptions="Center"
-                        FontSize="12"
-                        TextColor="#8F8A93" />
+                    <Label Text="Step 4 of 6" HorizontalOptions="Center" FontSize="12" TextColor="#8F8A93" />
                 </VerticalStackLayout>
 
-                <Border
-                    Margin="0,18,0,20"
-                    Padding="22,24,22,24"
-                    BackgroundColor="#F8F8F8"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 24">
-
+                <Border Margin="0,18,0,20" Padding="22,24,22,24" BackgroundColor="#F8F8F8" StrokeThickness="0" StrokeShape="RoundRectangle 24">
                     <VerticalStackLayout Spacing="10">
 
-                        <Label
-                            Text="Age Range"
-                            FontSize="28"
-                            FontAttributes="Bold"
-                            TextColor="#111111" />
+                        <Label Text="Age Range" FontSize="28" FontAttributes="Bold" TextColor="#111111" />
 
-                        
-
-                        <Button
-                            x:Name="Age1"
-                            Text="13 - 18"
-                            Clicked="OnAgeClicked"
-                            BackgroundColor="#F8F8F8"
-                            TextColor="#222222"
-                            BorderColor="#111111"
-                            BorderWidth="1"
-                            CornerRadius="22"
-                            HeightRequest="40"
-                            FontSize="14" />
-
-                        <Button
-                            x:Name="Age2"
-                            Text="19 - 30"
-                            Clicked="OnAgeClicked"
-                            BackgroundColor="#F8F8F8"
-                            TextColor="#222222"
-                            BorderColor="#111111"
-                            BorderWidth="1"
-                            CornerRadius="22"
-                            HeightRequest="40"
-                            FontSize="14" />
-
-                        <Button
-                            x:Name="Age3"
-                            Text="31 - 40"
-                            Clicked="OnAgeClicked"
-                            BackgroundColor="#F8F8F8"
-                            TextColor="#222222"
-                            BorderColor="#111111"
-                            BorderWidth="1"
-                            CornerRadius="22"
-                            HeightRequest="40"
-                            FontSize="14" />
-
-                        <Button
-                            x:Name="Age4"
-                            Text="41 - 50"
-                            Clicked="OnAgeClicked"
-                            BackgroundColor="#F8F8F8"
-                            TextColor="#222222"
-                            BorderColor="#111111"
-                            BorderWidth="1"
-                            CornerRadius="22"
-                            HeightRequest="40"
-                            FontSize="14" />
+                        <Button x:Name="Age1" Text="13 - 18" Clicked="OnAgeClicked" BackgroundColor="#F8F8F8" TextColor="#222222" BorderColor="#111111" BorderWidth="1" CornerRadius="22" HeightRequest="40" FontSize="14" />
+                        <Button x:Name="Age2" Text="19 - 30" Clicked="OnAgeClicked" BackgroundColor="#F8F8F8" TextColor="#222222" BorderColor="#111111" BorderWidth="1" CornerRadius="22" HeightRequest="40" FontSize="14" />
+                        <Button x:Name="Age3" Text="31 - 40" Clicked="OnAgeClicked" BackgroundColor="#F8F8F8" TextColor="#222222" BorderColor="#111111" BorderWidth="1" CornerRadius="22" HeightRequest="40" FontSize="14" />
+                        <Button x:Name="Age4" Text="41 - 50" Clicked="OnAgeClicked" BackgroundColor="#F8F8F8" TextColor="#222222" BorderColor="#111111" BorderWidth="1" CornerRadius="22" HeightRequest="40" FontSize="14" />
 
                     </VerticalStackLayout>
                 </Border>
-
             </VerticalStackLayout>
         </ScrollView>
-       
 
-        <Grid
-             Margin="0,18,0,0"
-            ColumnDefinitions="*,14,*"
-            Grid.Row="1"
-            ColumnSpacing="0"
-            Padding="28,11,28,90"
-           
-            BackgroundColor="#F4EDEF">
-
-            <Button
-                Grid.Column="0"
-                Text="Back"
-                Clicked="OnBackClicked"
-                HeightRequest="50"
-                CornerRadius="10"
-                BackgroundColor="#C24E63"
-                TextColor="White"
-                FontSize="17"
-                FontAttributes="Bold" />
-
-            <Button
-                Grid.Column="2"
-                Text="Next"
-                Clicked="OnNextClicked"
-                HeightRequest="50"
-                CornerRadius="10"
-                BackgroundColor="#E85B73"
-                TextColor="White"
-                FontSize="17"
-                FontAttributes="Bold" />
-
+        <Grid Grid.Row="1" Margin="0,18,0,0" ColumnDefinitions="*,14,*" ColumnSpacing="0" Padding="28,11,28,90" BackgroundColor="#F4EDEF">
+            <Button Grid.Column="0" Text="Back" Clicked="OnBackClicked" HeightRequest="50" CornerRadius="10" BackgroundColor="#C24E63" TextColor="White" FontSize="17" FontAttributes="Bold" />
+            <Button Grid.Column="2" Text="Next" Clicked="OnNextClicked" HeightRequest="50" CornerRadius="10" BackgroundColor="#E85B73" TextColor="White" FontSize="17" FontAttributes="Bold" />
         </Grid>
 
-        <!-- CUSTOM ALERT OVERLAY -->
+        <!-- CUSTOM ALERT -->
         <Grid
-    x:Name="CustomAlertOverlay"
-    IsVisible="False"
-    BackgroundColor="#80000000"
-    Padding="30">
+            x:Name="CustomAlertOverlay"
+            Grid.RowSpan="2"
+            IsVisible="False"
+            BackgroundColor="#80000000"
+            Padding="30"
+            ZIndex="99">
 
             <Border
-        BackgroundColor="White"
-        StrokeThickness="0"
-        StrokeShape="RoundRectangle 22"
-        Padding="24"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
-        WidthRequest="310">
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 22"
+                Padding="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="310">
 
-                <VerticalStackLayout Spacing="14">
-
-                    <Label
-                x:Name="CustomAlertTitle"
-                Text="Required"
-                FontSize="22"
-                FontAttributes="Bold"
-                TextColor="#E85B73"
-                HorizontalTextAlignment="Center" />
-
-                    <Label
-                x:Name="CustomAlertMessage"
-                Text="Message here"
-                FontSize="15"
-                TextColor="#4A4A4A"
-                HorizontalTextAlignment="Center" />
-
-                    <Button
-                Text="OK"
-                Clicked="OnCustomAlertOkClicked"
-                Margin="0,8,0,0"
-                HeightRequest="46"
-                CornerRadius="12"
-                BackgroundColor="#E85B73"
-                TextColor="White"
-                FontAttributes="Bold" />
-
+                <VerticalStackLayout Spacing="18">
+                    <Label x:Name="CustomAlertTitle" Text="Required" FontSize="24" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
+                    <Label x:Name="CustomAlertMessage" Text="Message here" FontSize="16" TextColor="#4A4A4A" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
+                    <Button Text="OK" Clicked="OnCustomAlertOkClicked" Margin="0,8,0,0" HeightRequest="48" CornerRadius="12" BackgroundColor="#E85B73" TextColor="White" FontSize="15" FontAttributes="Bold" />
                 </VerticalStackLayout>
             </Border>
         </Grid>
-
     </Grid>
 </ContentPage>

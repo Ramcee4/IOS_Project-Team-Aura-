@@ -10,7 +10,7 @@ namespace Team_Aura_Period_Tracker_
     {
         private int _currentMonth;
         private int _currentYear;
-        private DateTime? _selectedStartDate;
+        private DateTime? _selectedDate;
 
         public Step3_1Page()
         {
@@ -69,6 +69,7 @@ namespace Team_Aura_Period_Tracker_
             {
                 int day = daysInPreviousMonth - startDay + i + 1;
                 DateTime date = new DateTime(previousMonth.Year, previousMonth.Month, day);
+
                 AddDateCell(date, row, col, true);
                 col++;
             }
@@ -76,9 +77,11 @@ namespace Team_Aura_Period_Tracker_
             for (int day = 1; day <= daysInMonth; day++)
             {
                 DateTime date = new DateTime(_currentYear, _currentMonth, day);
+
                 AddDateCell(date, row, col, false);
 
                 col++;
+
                 if (col > 6)
                 {
                     col = 0;
@@ -92,6 +95,7 @@ namespace Team_Aura_Period_Tracker_
             while (row < 6)
             {
                 DateTime date = new DateTime(nextMonth.Year, nextMonth.Month, nextMonthDay);
+
                 AddDateCell(date, row, col, true);
 
                 nextMonthDay++;
@@ -107,35 +111,18 @@ namespace Team_Aura_Period_Tracker_
 
         private void AddDateCell(DateTime date, int row, int col, bool isOtherMonth)
         {
-            bool isInSelectedPeriod = false;
-            bool isPeriodStart = false;
-            bool isPeriodEnd = false;
-
-            if (_selectedStartDate.HasValue)
-            {
-                DateTime start = _selectedStartDate.Value.Date;
-                DateTime end = start.AddDays(4);
-
-                isInSelectedPeriod = date.Date >= start && date.Date <= end;
-                isPeriodStart = date.Date == start;
-                isPeriodEnd = date.Date == end;
-            }
+            bool isSelected = _selectedDate.HasValue &&
+                              date.Date == _selectedDate.Value.Date;
 
             Color backgroundColor = Colors.Transparent;
-            Color textColor = isOtherMonth ? Color.FromArgb("#B9B9B9") : Color.FromArgb("#2B2B2B");
+            Color textColor = isOtherMonth
+                ? Color.FromArgb("#B9B9B9")
+                : Color.FromArgb("#2B2B2B");
 
-            if (isInSelectedPeriod)
+            if (isSelected)
             {
-                if (isPeriodStart || isPeriodEnd)
-                {
-                    backgroundColor = Color.FromArgb("#2D2D2D");
-                    textColor = Colors.White;
-                }
-                else
-                {
-                    backgroundColor = Color.FromArgb("#F1F1F1");
-                    textColor = Color.FromArgb("#2B2B2B");
-                }
+                backgroundColor = Color.FromArgb("#E85B73");
+                textColor = Colors.White;
             }
 
             var label = new Label
@@ -155,7 +142,10 @@ namespace Team_Aura_Period_Tracker_
                 WidthRequest = 40,
                 StrokeThickness = 0,
                 BackgroundColor = backgroundColor,
-                StrokeShape = new RoundRectangle { CornerRadius = 12 },
+                StrokeShape = new RoundRectangle
+                {
+                    CornerRadius = 20
+                },
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
                 Content = label
@@ -164,7 +154,7 @@ namespace Team_Aura_Period_Tracker_
             var tap = new TapGestureRecognizer();
             tap.Tapped += (s, e) =>
             {
-                _selectedStartDate = date;
+                _selectedDate = date;
                 UpdateCalendar();
             };
 
@@ -245,13 +235,13 @@ namespace Team_Aura_Period_Tracker_
 
         private async void OnNextClicked(object sender, EventArgs e)
         {
-            if (!_selectedStartDate.HasValue)
+            if (!_selectedDate.HasValue)
             {
                 ShowCustomAlert("Required", "Please select your last period date.");
                 return;
             }
 
-            string selectedDate = _selectedStartDate.Value.ToString("yyyy-MM-dd");
+            string selectedDate = _selectedDate.Value.ToString("yyyy-MM-dd");
 
             Preferences.Set("LastDateOfPeriod", selectedDate);
 

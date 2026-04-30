@@ -25,10 +25,7 @@
                 StrokeThickness="0"
                 BackgroundColor="Transparent"
                 StrokeShape="RoundRectangle 43">
-
-                <Image
-                    Source="logo_icon.png"
-                    Aspect="AspectFill" />
+                <Image Source="logo_icon.png" Aspect="AspectFill" />
             </Border>
 
             <Label
@@ -40,14 +37,8 @@
                 FontAttributes="Bold"
                 TextColor="#EA5B73" />
 
-            <VerticalStackLayout
-                Margin="0,8,0,0"
-                Spacing="6">
-
-                <HorizontalStackLayout
-                    HorizontalOptions="Center"
-                    Spacing="4">
-
+            <VerticalStackLayout Margin="0,8,0,0" Spacing="6">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#6D86FF" />
@@ -56,14 +47,9 @@
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
                 </HorizontalStackLayout>
 
-                <Label
-                    Text="Step 3 of 6"
-                    HorizontalOptions="Center"
-                    FontSize="12"
-                    TextColor="#8F8A93" />
+                <Label Text="Step 3 of 6" HorizontalOptions="Center" FontSize="12" TextColor="#8F8A93" />
             </VerticalStackLayout>
 
-            <!-- Outer Card -->
             <Border
                 Margin="0,18,0,0"
                 Padding="18,18,18,18"
@@ -73,8 +59,6 @@
                 HeightRequest="375">
 
                 <VerticalStackLayout Spacing="14">
-
-                    <!-- Inner Calendar Card -->
                     <Border
                         Padding="14,14,14,16"
                         BackgroundColor="#F8F8F8"
@@ -84,64 +68,17 @@
 
                         <VerticalStackLayout Spacing="10">
 
-                            <!-- Header -->
-                            <Grid
-                                ColumnDefinitions="28,1.2*,1*,28"
-                                ColumnSpacing="10"
-                                VerticalOptions="Center">
+                            <Grid ColumnDefinitions="28,1.2*,1*,28" ColumnSpacing="10" VerticalOptions="Center">
+                                <Button Grid.Column="0" Text="‹" Clicked="OnPreviousMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="24" Padding="0" HeightRequest="28" WidthRequest="28" />
 
-                                <Button
-                                    Grid.Column="0"
-                                    Text="‹"
-                                    Clicked="OnPreviousMonthClicked"
-                                    BackgroundColor="Transparent"
-                                    TextColor="#222222"
-                                    FontSize="24"
-                                    Padding="0"
-                                    HeightRequest="28"
-                                    WidthRequest="28" />
+                                <Picker Grid.Column="1" x:Name="MonthPicker" SelectedIndexChanged="OnMonthOrYearChanged" FontSize="14" TextColor="#2B2B2B" TitleColor="#2B2B2B" BackgroundColor="#F8F8F8" HeightRequest="38" HorizontalOptions="Fill" VerticalOptions="Center" />
 
-                                <Picker
-                                    Grid.Column="1"
-                                    x:Name="MonthPicker"
-                                    SelectedIndexChanged="OnMonthOrYearChanged"
-                                    FontSize="14"
-                                    TextColor="#2B2B2B"
-                                    TitleColor="#2B2B2B"
-                                    BackgroundColor="#F8F8F8"
-                                    HeightRequest="38"
-                                    HorizontalOptions="Fill"
-                                    VerticalOptions="Center" />
+                                <Picker Grid.Column="2" x:Name="YearPicker" SelectedIndexChanged="OnMonthOrYearChanged" FontSize="14" TextColor="#2B2B2B" TitleColor="#2B2B2B" BackgroundColor="#F8F8F8" HeightRequest="38" HorizontalOptions="Fill" VerticalOptions="Center" />
 
-                                <Picker
-                                    Grid.Column="2"
-                                    x:Name="YearPicker"
-                                    SelectedIndexChanged="OnMonthOrYearChanged"
-                                    FontSize="14"
-                                    TextColor="#2B2B2B"
-                                    TitleColor="#2B2B2B"
-                                    BackgroundColor="#F8F8F8"
-                                    HeightRequest="38"
-                                    HorizontalOptions="Fill"
-                                    VerticalOptions="Center" />
-
-                                <Button
-                                    Grid.Column="3"
-                                    Text="›"
-                                    Clicked="OnNextMonthClicked"
-                                    BackgroundColor="Transparent"
-                                    TextColor="#222222"
-                                    FontSize="24"
-                                    Padding="0"
-                                    HeightRequest="28"
-                                    WidthRequest="28" />
+                                <Button Grid.Column="3" Text="›" Clicked="OnNextMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="24" Padding="0" HeightRequest="28" WidthRequest="28" />
                             </Grid>
 
-                            <!-- Week Labels -->
-                            <Grid
-                                ColumnDefinitions="*,*,*,*,*,*,*"
-                                ColumnSpacing="4">
-
+                            <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="4">
                                 <Label Grid.Column="0" Text="Su" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
                                 <Label Grid.Column="1" Text="Mo" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
                                 <Label Grid.Column="2" Text="Tu" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
@@ -151,7 +88,6 @@
                                 <Label Grid.Column="6" Text="Sa" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
                             </Grid>
 
-                            <!-- Dates -->
                             <Grid
                                 x:Name="CalendarGrid"
                                 ColumnDefinitions="*,*,*,*,*,*,*"
@@ -163,18 +99,13 @@
 
                         </VerticalStackLayout>
                     </Border>
-
                 </VerticalStackLayout>
             </Border>
-
         </VerticalStackLayout>
 
-        <!-- Bottom Buttons -->
-
-
         <Grid
-            Margin="0,18,0,0"
             Grid.Row="1"
+            Margin="0,18,0,0"
             ColumnDefinitions="*,14,*"
             Padding="28,10,28,20"
             ColumnSpacing="0"
@@ -201,55 +132,55 @@
                 TextColor="White"
                 FontSize="17"
                 FontAttributes="Bold" />
-
         </Grid>
 
-        <!-- CUSTOM ALERT OVERLAY -->
+        <!-- CUSTOM ALERT -->
         <Grid
-    x:Name="CustomAlertOverlay"
-    IsVisible="False"
-    BackgroundColor="#80000000"
-    Padding="30">
+            x:Name="CustomAlertOverlay"
+            Grid.RowSpan="2"
+            IsVisible="False"
+            BackgroundColor="#80000000"
+            Padding="30"
+            ZIndex="99">
 
             <Border
-        BackgroundColor="White"
-        StrokeThickness="0"
-        StrokeShape="RoundRectangle 22"
-        Padding="24"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
-        WidthRequest="310">
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 22"
+                Padding="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="310">
 
-                <VerticalStackLayout Spacing="14">
+                <VerticalStackLayout Spacing="18">
+                    <Label
+                        x:Name="CustomAlertTitle"
+                        Text="Required"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#E85B73"
+                        HorizontalTextAlignment="Center" />
 
                     <Label
-                x:Name="CustomAlertTitle"
-                Text="Required"
-                FontSize="22"
-                FontAttributes="Bold"
-                TextColor="#E85B73"
-                HorizontalTextAlignment="Center" />
-
-                    <Label
-                x:Name="CustomAlertMessage"
-                Text="Message here"
-                FontSize="15"
-                TextColor="#4A4A4A"
-                HorizontalTextAlignment="Center" />
+                        x:Name="CustomAlertMessage"
+                        Text="Message here"
+                        FontSize="16"
+                        TextColor="#4A4A4A"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap" />
 
                     <Button
-                Text="OK"
-                Clicked="OnCustomAlertOkClicked"
-                Margin="0,8,0,0"
-                HeightRequest="46"
-                CornerRadius="12"
-                BackgroundColor="#E85B73"
-                TextColor="White"
-                FontAttributes="Bold" />
-
+                        Text="OK"
+                        Clicked="OnCustomAlertOkClicked"
+                        Margin="0,8,0,0"
+                        HeightRequest="48"
+                        CornerRadius="12"
+                        BackgroundColor="#E85B73"
+                        TextColor="White"
+                        FontSize="15"
+                        FontAttributes="Bold" />
                 </VerticalStackLayout>
             </Border>
         </Grid>
-
     </Grid>
 </ContentPage>
