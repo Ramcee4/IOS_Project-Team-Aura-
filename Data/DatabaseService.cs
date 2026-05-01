@@ -14,6 +14,8 @@ public class DatabaseService
         _database.CreateTableAsync<User>().Wait();
         _database.CreateTableAsync<UserPreferences>().Wait();
         _database.CreateTableAsync<UserCycleInfo>().Wait();
+        _database.CreateTableAsync<DailyLog>().Wait();
+        _database.CreateTableAsync<HealthJournal>().Wait();
     }
 
     public Task<int> AddUserAsync(User user)
@@ -38,6 +40,7 @@ public class DatabaseService
         {
             existingPreference.Username = username;
             existingPreference.WhatBringsYouHere = selectedOptions;
+
             await _database.UpdateAsync(existingPreference);
         }
         else
@@ -129,5 +132,78 @@ public class DatabaseService
 
             await _database.InsertAsync(cycleInfo);
         }
+    }
+
+    public async Task SaveDailyLogAsync(DailyLog log)
+    {
+        await _database.InsertAsync(log);
+    }
+
+    public Task<List<DailyLog>> GetDailyLogsByUserAsync(int userId)
+    {
+        return _database.Table<DailyLog>()
+            .Where(l => l.UserId == userId)
+            .OrderByDescending(l => l.Date)
+            .ToListAsync();
+    }
+
+    public Task<DailyLog?> GetDailyLogByDateAsync(int userId, string date)
+    {
+        return _database.Table<DailyLog>()
+            .Where(l => l.UserId == userId && l.Date == date)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task SaveOrUpdateDailyLogAsync(DailyLog log)
+    {
+        var existingLog = await _database.Table<DailyLog>()
+            .Where(l => l.UserId == log.UserId && l.Date == log.Date)
+            .FirstOrDefaultAsync();
+
+        if (existingLog != null)
+        {
+            existingLog.Username = log.Username;
+            existingLog.Flow = log.Flow;
+            existingLog.Mood = log.Mood;
+            existingLog.EnergyLevel = log.EnergyLevel;
+            existingLog.Symptoms = log.Symptoms;
+            existingLog.Notes = log.Notes;
+
+            await _database.UpdateAsync(existingLog);
+        }
+        else
+        {
+            await _database.InsertAsync(log);
+        }
+    }
+
+    public async Task SaveHealthJournalAsync(HealthJournal journal)
+    {
+        await _database.InsertAsync(journal);
+    }
+
+    public Task<List<HealthJournal>> GetHealthJournalsByUserAsync(int userId)
+    {
+        return _database.Table<HealthJournal>()
+            .Where(j => j.UserId == userId)
+            .OrderByDescending(j => j.Date)
+            .ToListAsync();
+    }
+
+    public Task<HealthJournal?> GetHealthJournalByIdAsync(int id)
+    {
+        return _database.Table<HealthJournal>()
+            .Where(j => j.Id == id)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task UpdateHealthJournalAsync(HealthJournal journal)
+    {
+        await _database.UpdateAsync(journal);
+    }
+
+    public async Task DeleteHealthJournalAsync(HealthJournal journal)
+    {
+        await _database.DeleteAsync(journal);
     }
 }

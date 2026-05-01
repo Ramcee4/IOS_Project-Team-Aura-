@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -10,6 +11,8 @@ public partial class DailyLogPage : ContentPage
     private Button? _selectedFlowButton;
     private Border? _selectedMoodBorder;
     private readonly HashSet<Button> _selectedSymptoms = new();
+
+    private readonly DatabaseService _databaseService = new();
 
     public DailyLogPage()
     {
@@ -63,25 +66,10 @@ public partial class DailyLogPage : ContentPage
         _selectedMoodBorder = border;
     }
 
-    private void OnMood1Tapped(object sender, TappedEventArgs e)
-    {
-        SelectMood(Mood1Border);
-    }
-
-    private void OnMood2Tapped(object sender, TappedEventArgs e)
-    {
-        SelectMood(Mood2Border);
-    }
-
-    private void OnMood3Tapped(object sender, TappedEventArgs e)
-    {
-        SelectMood(Mood3Border);
-    }
-
-    private void OnMood4Tapped(object sender, TappedEventArgs e)
-    {
-        SelectMood(Mood4Border);
-    }
+    private void OnMood1Tapped(object sender, TappedEventArgs e) => SelectMood(Mood1Border);
+    private void OnMood2Tapped(object sender, TappedEventArgs e) => SelectMood(Mood2Border);
+    private void OnMood3Tapped(object sender, TappedEventArgs e) => SelectMood(Mood3Border);
+    private void OnMood4Tapped(object sender, TappedEventArgs e) => SelectMood(Mood4Border);
 
     private void OnSymptomClicked(object sender, EventArgs e)
     {
@@ -108,7 +96,42 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
+        int userId = Preferences.Get("UserId", 0);
+        string username = Preferences.Get("UserName", "");
+
+        if (userId == 0)
+        {
+            await DisplayAlert("Error", "User not found.", "OK");
+            return;
+        }
+
+        string flow = _selectedFlowButton?.Text ?? "";
+        string mood = _selectedMoodBorder?.Content is Label label ? label.Text : "";
+        double energy = EnergySlider.Value;
+
         string notes = NotesEditor.Text?.Trim() ?? "";
+
+        List<string> symptomsList = new();
+        foreach (var btn in _selectedSymptoms)
+        {
+            symptomsList.Add(btn.Text);
+        }
+
+        string symptoms = string.Join(",", symptomsList);
+
+        var log = new DailyLog
+        {
+            UserId = userId,
+            Username = username,
+            Date = DateTime.Now.ToString("yyyy-MM-dd"),
+            Flow = flow,
+            Mood = mood,
+            EnergyLevel = energy,
+            Symptoms = symptoms,
+            Notes = notes
+        };
+
+        await _databaseService.SaveDailyLogAsync(log);
 
         await DisplayAlert("Saved", "Your daily log has been saved.", "OK");
     }
@@ -125,7 +148,7 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnDailyTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Daily", "You are already on Daily.", "OK");
+        await DisplayAlert("Daily", "You are already here.", "OK");
     }
 
     private async void OnInsightTapped(object sender, TappedEventArgs e)

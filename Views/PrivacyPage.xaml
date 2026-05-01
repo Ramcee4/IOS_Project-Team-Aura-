@@ -7,17 +7,21 @@
     BackgroundColor="#F4EDEF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="24,50,24,24" Spacing="28">
+        <VerticalStackLayout Padding="24,20,24,24" Spacing="28">
 
             <!-- Header -->
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                 <ImageButton
-                    Source="back_icon.png"
-                    Clicked="OnBackClicked"
-                    Margin="0,14,0,0"
-                    BackgroundColor="Transparent"
-                    WidthRequest="20"
-                    HeightRequest="20" />
+                   Grid.Column="0"
+Source="back_icon.png"
+Clicked="OnBackClicked"
+BackgroundColor="Transparent"
+Margin="0,20,5,20"
+WidthRequest="16"
+HeightRequest="16"
+Padding="0"
+HorizontalOptions="Start"
+VerticalOptions="Center" />
 
                 <VerticalStackLayout Grid.Column="1">
                     <Label
