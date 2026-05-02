@@ -12,24 +12,23 @@
             <VerticalStackLayout
                 Padding="24,30,24,20"
                 Spacing="0">
-                
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Spacing="2" Margin="0,0,0,0">
                         <Label
                             Text="Hello,"
-                             Margin="0,0,0,0"
+                            Margin="0,0,0,0"
                             FontSize="16"
                             TextColor="#6F6A6C" />
 
                         <Label
-    x:Name="UserNameLabel"
-    Text="User!"
-    FontSize="28"
-    FontAttributes="Bold"
-    TextColor="#E85B73"
-    LineBreakMode="WordWrap" />
+                            x:Name="UserNameLabel"
+                            Text="User!"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73"
+                            LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
                     <ImageButton
@@ -47,12 +46,12 @@
                 <Grid Margin="0,28,0,0" ColumnDefinitions="*,15,*">
 
                     <Border
-        Grid.Column="0"
-        Padding="15,14"
-        BackgroundColor="#F8F8F8"
-        Stroke="#DDD6D8"
-        StrokeThickness="1"
-        StrokeShape="RoundRectangle 16">
+                        Grid.Column="0"
+                        Padding="15,14"
+                        BackgroundColor="#F8F8F8"
+                        Stroke="#DDD6D8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16">
 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnCycleLengthTapped" />
@@ -62,49 +61,49 @@
 
                             <HorizontalStackLayout Spacing="8">
                                 <Border
-                    WidthRequest="28"
-                    HeightRequest="28"
-                    BackgroundColor="#E7F5EA"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 14">
+                                    WidthRequest="28"
+                                    HeightRequest="28"
+                                    BackgroundColor="#E7F5EA"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14">
 
                                     <Label
-                        Text="↻"
-                        FontSize="17"
-                        TextColor="#5CA66A"
-                        HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center" />
+                                        Text="↻"
+                                        FontSize="17"
+                                        TextColor="#5CA66A"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
                                 </Border>
 
                                 <Label
-                    Text="Cycle Length"
-                    FontSize="13"
-                    TextColor="#8A8A8A"
-                    VerticalOptions="Center" />
+                                    Text="Cycle Length"
+                                    FontSize="13"
+                                    TextColor="#8A8A8A"
+                                    VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
                             <Label
-                x:Name="CycleLengthValueLabel"
-                Text="28"
-                FontSize="24"
-                FontAttributes="Bold"
-                TextColor="#333333" />
+                                x:Name="CycleLengthValueLabel"
+                                Text="28"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="#333333" />
 
                             <Label
-                x:Name="CycleLengthSubtitleLabel"
-                Text="days average"
-                FontSize="12"
-                TextColor="#6F6A6C" />
+                                x:Name="CycleLengthSubtitleLabel"
+                                Text="days average"
+                                FontSize="12"
+                                TextColor="#6F6A6C" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border
-        Grid.Column="2"
-        Padding="16,14"
-        BackgroundColor="#F8F8F8"
-        Stroke="#DDD6D8"
-        StrokeThickness="1"
-        StrokeShape="RoundRectangle 16">
+                        Grid.Column="2"
+                        Padding="16,14"
+                        BackgroundColor="#F8F8F8"
+                        Stroke="#DDD6D8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16">
 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnPeriodDaysTapped" />
@@ -114,42 +113,43 @@
 
                             <HorizontalStackLayout Spacing="8">
                                 <Border
-                    WidthRequest="28"
-                    HeightRequest="28"
-                    BackgroundColor="#FFF1D8"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 14">
+                                    WidthRequest="28"
+                                    HeightRequest="28"
+                                    BackgroundColor="#FFF1D8"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14">
 
                                     <Label
-                        Text="●"
-                        FontSize="16"
-                        TextColor="#F2A83B"
-                        HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center" />
+                                        Text="●"
+                                        FontSize="16"
+                                        TextColor="#F2A83B"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
                                 </Border>
 
                                 <Label
-                    Text="Period Days"
-                    FontSize="13"
-                    TextColor="#8A8A8A"
-                    VerticalOptions="Center" />
+                                    Text="Period Days"
+                                    FontSize="13"
+                                    TextColor="#8A8A8A"
+                                    VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
                             <Label
-                x:Name="PeriodDaysValueLabel"
-                Text="5"
-                FontSize="24"
-                FontAttributes="Bold"
-                TextColor="#333333" />
+                                x:Name="PeriodDaysValueLabel"
+                                Text="5"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="#333333" />
 
                             <Label
-                x:Name="PeriodDaysSubtitleLabel"
-                Text="days average"
-                FontSize="12"
-                TextColor="#6F6A6C" />
+                                x:Name="PeriodDaysSubtitleLabel"
+                                Text="days average"
+                                FontSize="12"
+                                TextColor="#6F6A6C" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
+
                 <!-- Quick Actions -->
                 <Label
                     Text="Quick Actions"
@@ -171,6 +171,7 @@
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         HeightRequest="120">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnLogTodayTapped" />
                         </Border.GestureRecognizers>
@@ -179,10 +180,12 @@
                             Spacing="10"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
+
                             <Image
                                 Source="heart_outline.png"
                                 WidthRequest="36"
                                 HeightRequest="36" />
+
                             <Label
                                 Text="Log Today"
                                 FontSize="14"
@@ -201,6 +204,7 @@
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         HeightRequest="120">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnInsightsTapped" />
                         </Border.GestureRecognizers>
@@ -209,10 +213,12 @@
                             Spacing="10"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
+
                             <Image
                                 Source="insight_icon.png"
                                 WidthRequest="36"
                                 HeightRequest="36" />
+
                             <Label
                                 Text="Insights"
                                 FontSize="14"
@@ -231,6 +237,7 @@
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         HeightRequest="120">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnJournalTapped" />
                         </Border.GestureRecognizers>
@@ -239,10 +246,12 @@
                             Spacing="10"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
+
                             <Image
                                 Source="journal_icon.png"
                                 WidthRequest="36"
                                 HeightRequest="36" />
+
                             <Label
                                 Text="Journal"
                                 FontSize="14"
@@ -261,6 +270,7 @@
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         HeightRequest="120">
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnLearnTapped" />
                         </Border.GestureRecognizers>
@@ -269,10 +279,12 @@
                             Spacing="10"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
+
                             <Image
                                 Source="learn_icon.png"
                                 WidthRequest="36"
                                 HeightRequest="36" />
+
                             <Label
                                 Text="Learn"
                                 FontSize="14"
@@ -283,94 +295,98 @@
                     </Border>
                 </Grid>
 
-               <!-- What's Coming -->
-<Border
-    Margin="0,24,0,0"
-    Padding="28,22"
-    BackgroundColor="#FFFFFF"
-    Stroke="#DDD6D8"
-    StrokeThickness="1"
-    StrokeShape="RoundRectangle 14">
+                <!-- What's Coming -->
+                <Border
+                    Margin="0,24,0,0"
+                    Padding="28,22"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14">
 
-    <VerticalStackLayout Spacing="20">
+                    <VerticalStackLayout Spacing="20">
 
-        <Label
-            Text="What’s Coming"
-            FontSize="16"
-            FontAttributes="Bold"
-            TextColor="#333333" />
+                        <Label
+                            Text="What’s Coming"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#333333" />
 
-        <Grid ColumnDefinitions="*,Auto">
-            <VerticalStackLayout Spacing="1">
-                <Label
-                    Text="Fertile Window"
-                    FontSize="14"
-                    TextColor="#333333" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="1">
+                                <Label
+                                    Text="Fertile Window"
+                                    FontSize="14"
+                                    TextColor="#333333" />
 
-                <Label
-                    Text="In 5 days"
-                    FontSize="14"
-                    TextColor="#9A9A9A" />
-            </VerticalStackLayout>
+                                <Label
+                                    x:Name="FertileWindowCountdownLabel"
+                                    Text="In 5 days"
+                                    FontSize="14"
+                                    TextColor="#9A9A9A" />
+                            </VerticalStackLayout>
 
-            <Label
-                Grid.Column="1"
-                Text="Day 17–19"
-                FontSize="14"
-                FontAttributes="Bold"
-                TextColor="#333333"
-                VerticalOptions="Center" />
-        </Grid>
+                            <Label
+                                x:Name="FertileWindowDayLabel"
+                                Grid.Column="1"
+                                Text="Day 17–19"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#333333"
+                                VerticalOptions="Center" />
+                        </Grid>
 
-        <Grid ColumnDefinitions="*,Auto">
-            <VerticalStackLayout Spacing="1">
-                <Label
-                    Text="Next Period"
-                    FontSize="14"
-                    TextColor="#333333" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="1">
+                                <Label
+                                    Text="Next Period"
+                                    FontSize="14"
+                                    TextColor="#333333" />
 
-                <Label
-                    Text="In 16 days"
-                    FontSize="14"
-                    TextColor="#9A9A9A" />
-            </VerticalStackLayout>
+                                <Label
+                                    x:Name="NextPeriodCountdownLabel"
+                                    Text="In 16 days"
+                                    FontSize="14"
+                                    TextColor="#9A9A9A" />
+                            </VerticalStackLayout>
 
-            <Label
-                Grid.Column="1"
-                Text="Day 28"
-                FontSize="14"
-                FontAttributes="Bold"
-                TextColor="#333333"
-                VerticalOptions="Center" />
-        </Grid>
+                            <Label
+                                x:Name="NextPeriodDayLabel"
+                                Grid.Column="1"
+                                Text="Day 28"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#333333"
+                                VerticalOptions="Center" />
+                        </Grid>
 
-    </VerticalStackLayout>
-</Border>
+                    </VerticalStackLayout>
+                </Border>
 
-<!-- Did You Know -->
-<Border
-    Margin="0,26,0,20"
-    Padding="28,24"
-    BackgroundColor="#E8DADB"
-    StrokeThickness="0"
-    StrokeShape="RoundRectangle 14">
+                <!-- Did You Know -->
+                <Border
+                    Margin="0,26,0,20"
+                    Padding="28,24"
+                    BackgroundColor="#E8DADB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14">
 
-    <VerticalStackLayout Spacing="28">
+                    <VerticalStackLayout Spacing="28">
 
-        <Label
-            Text="Did You Know?"
-            FontSize="20"
-            FontAttributes="Bold"
-            TextColor="#333333" />
+                        <Label
+                            Text="Did You Know?"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="#333333" />
 
-        <Label
-            Text="Your cycle has four distinct phases, each with a unique hormonal patterns. Understanding them helps you work with your body, not against it."
-            FontSize="14"
-            TextColor="#7A7476"
-            LineBreakMode="WordWrap" />
+                        <Label
+                            Text="Your cycle has four distinct phases, each with unique hormonal patterns. Understanding them helps you work with your body, not against it."
+                            FontSize="14"
+                            TextColor="#7A7476"
+                            LineBreakMode="WordWrap" />
 
-    </VerticalStackLayout>
-</Border>
+                    </VerticalStackLayout>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>
@@ -389,55 +405,105 @@
                     Grid.Column="0"
                     Spacing="4"
                     HorizontalOptions="Center">
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnHomeTapped" />
                     </VerticalStackLayout.GestureRecognizers>
-                    <Image Source="home_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Home" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+
+                    <Image
+                        Source="home_icon.png"
+                        WidthRequest="26"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="Home"
+                        FontSize="12"
+                        TextColor="#111111"
+                        HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout
                     Grid.Column="1"
                     Spacing="4"
                     HorizontalOptions="Center">
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnDailyTapped" />
                     </VerticalStackLayout.GestureRecognizers>
-                    <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Daily" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+
+                    <Image
+                        Source="daily_icon.png"
+                        WidthRequest="26"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="Daily"
+                        FontSize="12"
+                        TextColor="#111111"
+                        HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout
                     Grid.Column="2"
                     Spacing="4"
                     HorizontalOptions="Center">
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnInsightNavTapped" />
                     </VerticalStackLayout.GestureRecognizers>
-                    <Image Source="insight_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Insight" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+
+                    <Image
+                        Source="insight_icon.png"
+                        WidthRequest="26"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="Insight"
+                        FontSize="12"
+                        TextColor="#111111"
+                        HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout
                     Grid.Column="3"
                     Spacing="4"
                     HorizontalOptions="Center">
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLearnNavTapped" />
                     </VerticalStackLayout.GestureRecognizers>
-                    <Image Source="learn_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Learn" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+
+                    <Image
+                        Source="learn_icon.png"
+                        WidthRequest="26"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="Learn"
+                        FontSize="12"
+                        TextColor="#111111"
+                        HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout
                     Grid.Column="4"
                     Spacing="4"
                     HorizontalOptions="Center">
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnSettingsTapped" />
                     </VerticalStackLayout.GestureRecognizers>
-                    <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Settings" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+
+                    <Image
+                        Source="settings_icon.png"
+                        WidthRequest="26"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="Settings"
+                        FontSize="12"
+                        TextColor="#111111"
+                        HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
             </Grid>

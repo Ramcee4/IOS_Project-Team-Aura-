@@ -206,4 +206,9 @@ public class DatabaseService
     {
         await _database.DeleteAsync(journal);
     }
+
+    public async Task DeleteDailyLogAsync(DailyLog log)
+    {
+        await _database.DeleteAsync(log);
+    }
 }

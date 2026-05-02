@@ -9,35 +9,31 @@
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout
-                Padding="24,20,24,20"
-                Spacing="18">
+            <VerticalStackLayout Padding="24,20,24,20" Spacing="18">
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="36,*" ColumnSpacing="6">
                     <ImageButton
-                       Grid.Column="0"
- Source="back_icon.png"
- Clicked="OnBackClicked"
- BackgroundColor="Transparent"
- Margin="0,20,0,20"
- WidthRequest="16"
- HeightRequest="16"
- Padding="0"
- HorizontalOptions="Start"
- VerticalOptions="Center" />
-                    
+                        Grid.Column="0"
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,0,20"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center" />
+
                     <VerticalStackLayout Grid.Column="1" Spacing="0">
                         <Label
                             Text="Cycle Insights"
-                          Margin="0,0,00,0"
                             FontSize="28"
                             FontAttributes="Bold"
                             TextColor="#E85B73" />
 
                         <Label
                             Text="Understand your pattern"
-                            Margin="0,0,0,0"
                             FontSize="14"
                             TextColor="#6F6A6C" />
                     </VerticalStackLayout>
@@ -45,83 +41,64 @@
 
                 <!-- Current Phase -->
                 <Border
-                    Padding="16,16,16,16"
+                    Padding="16"
                     BackgroundColor="#F8F8F8"
                     Stroke="#DDD6D8"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 18">
 
                     <VerticalStackLayout Spacing="10">
+
                         <Label
                             Text="Current Phase"
                             FontSize="16"
                             FontAttributes="Bold"
                             TextColor="#333333" />
 
+                        <!-- 🔥 DYNAMIC -->
                         <Label
-                            Text="Follicular Phase"
+                            x:Name="PhaseLabel"
+                            Text="—"
                             FontSize="14"
                             FontAttributes="Bold"
                             TextColor="#333333" />
 
+                        <!-- 🔥 DYNAMIC -->
                         <Label
-                            Text="Days 5 of 13 of your cycle"
+                            x:Name="DayLabel"
+                            Text="—"
                             FontSize="13"
                             TextColor="#7A7A7A" />
 
-                        <!-- Phase Progress Dots -->
-                        <HorizontalStackLayout Spacing="4">
-                            <Border BackgroundColor="#E85B73" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="#E85B73" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="#E85B73" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="#E85B73" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="#E85B73" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                            <Border BackgroundColor="White" Stroke="#111111" StrokeThickness="1" StrokeShape="RoundRectangle 4" WidthRequest="16" HeightRequest="8" />
-                        </HorizontalStackLayout>
-
+                        <!-- 🔥 OPTIONAL TIP -->
                         <Label
-                            Text="Rising estrogen = increased energy and mood"
+                            x:Name="PhaseTipLabel"
+                            Text="—"
                             FontSize="13"
                             TextColor="#6F6A6C" />
 
-                        <HorizontalStackLayout Spacing="6">
-                            <Label
-                                Text="✔"
-                                FontSize="14"
-                                TextColor="#E85B73"
-                                FontAttributes="Bold" />
-                            <Label
-                                Text="Best time for social activities"
-                                FontSize="13"
-                                TextColor="#E85B73" />
-                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- What's Next -->
                 <Border
-                    Padding="16,16,16,16"
+                    Padding="16"
                     BackgroundColor="#F8F8F8"
                     Stroke="#DDD6D8"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 18">
 
                     <VerticalStackLayout Spacing="14">
+
                         <Label
                             Text="What’s Next"
                             FontSize="16"
                             FontAttributes="Bold"
                             TextColor="#333333" />
 
+                        <!-- Ovulation -->
                         <Border
-                            Padding="14,12,14,12"
+                            Padding="14"
                             BackgroundColor="#F8F8F8"
                             Stroke="#8F8A93"
                             StrokeThickness="1"
@@ -134,20 +111,23 @@
                                     FontAttributes="Bold"
                                     TextColor="#333333" />
 
+                                <!-- 🔥 DYNAMIC -->
                                 <Label
-                                    Text="In 5 days (Day 14)"
+                                    x:Name="OvulationLabel"
+                                    Text="—"
                                     FontSize="13"
                                     TextColor="#6F6A6C" />
 
                                 <Label
-                                    Text="Peak fertility window. Highest energy and confidence"
+                                    Text="Peak fertility window"
                                     FontSize="13"
                                     TextColor="#6F6A6C" />
                             </VerticalStackLayout>
                         </Border>
 
+                        <!-- Next Period -->
                         <Border
-                            Padding="14,12,14,12"
+                            Padding="14"
                             BackgroundColor="#F8F8F8"
                             Stroke="#8F8A93"
                             StrokeThickness="1"
@@ -155,94 +135,77 @@
 
                             <VerticalStackLayout Spacing="6">
                                 <Label
-                                    Text="Luteal Phase"
+                                    Text="Next Period"
                                     FontSize="15"
                                     FontAttributes="Bold"
                                     TextColor="#333333" />
 
+                                <!-- 🔥 DYNAMIC -->
                                 <Label
-                                    Text="In 16 days (Day 15–28)"
+                                    x:Name="NextPeriodLabel"
+                                    Text="—"
                                     FontSize="13"
                                     TextColor="#6F6A6C" />
 
                                 <Label
-                                    Text="Progesterone rises. More introspective, need more rest."
+                                    Text="Prepare your body"
                                     FontSize="13"
                                     TextColor="#6F6A6C" />
                             </VerticalStackLayout>
                         </Border>
+
                     </VerticalStackLayout>
                 </Border>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Navigation -->
-        <Border
-            Grid.Row="1"
-            BackgroundColor="White"
-            StrokeThickness="0"
-            Padding="18,12,18,10">
-
+        <!-- Bottom Navigation (UNCHANGED) -->
+        <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="18,12,18,10">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="24,24,0,0" />
             </Border.StrokeShape>
 
             <Grid ColumnDefinitions="*,*,*,*,*">
 
-                <VerticalStackLayout
-                    Grid.Column="0"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnHomeTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="home_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Home" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                    <Label Text="Home" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="1"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnDailyTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Daily" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                    <Label Text="Daily" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="2"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnInsightTapped" />
+                       
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="insight_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Insight" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                    <Label Text="Insight" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="3"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="3" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLearnTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="learn_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Learn" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                    <Label Text="Learn" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="4"
-                    Spacing="4"
-                    HorizontalOptions="Center">
+                <VerticalStackLayout Grid.Column="4" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnSettingsTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Settings" FontSize="12" TextColor="#111111" HorizontalTextAlignment="Center" />
+                    <Label Text="Settings" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
             </Grid>

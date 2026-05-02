@@ -87,6 +87,9 @@
 	  <Compile Update="Views\LearnPage.xaml.cs">
 	    <DependentUpon>LearnPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\DailyPulseHistoryPage.xaml.cs">
+	    <DependentUpon>DailyPulseHistoryPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\SixPageStep.xaml.cs">
 	    <DependentUpon>SixPageStep.xaml</DependentUpon>
 	  </Compile>
@@ -133,6 +136,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LearnPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\DailyPulseHistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PrivacyPage.xaml">

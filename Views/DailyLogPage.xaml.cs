@@ -94,30 +94,56 @@ public partial class DailyLogPage : ContentPage
         }
     }
 
+    private async void ShowCustomAlert(string title, string message)
+    {
+        CustomAlertTitle.Text = title;
+        CustomAlertMessage.Text = message;
+
+        CustomAlertOverlay.Opacity = 0;
+        CustomAlertOverlay.IsVisible = true;
+
+        await CustomAlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+    {
+        await CustomAlertOverlay.FadeTo(0, 150);
+        CustomAlertOverlay.IsVisible = false;
+    }
+
     private async void OnSaveClicked(object sender, EventArgs e)
     {
         int userId = Preferences.Get("UserId", 0);
         string username = Preferences.Get("UserName", "");
 
-        if (userId == 0)
+        if (userId == 0 || string.IsNullOrWhiteSpace(username))
         {
-            await DisplayAlert("Error", "User not found.", "OK");
+            ShowCustomAlert("Error", "User not found.");
             return;
         }
 
         string flow = _selectedFlowButton?.Text ?? "";
         string mood = _selectedMoodBorder?.Content is Label label ? label.Text : "";
         double energy = EnergySlider.Value;
-
         string notes = NotesEditor.Text?.Trim() ?? "";
 
         List<string> symptomsList = new();
+
         foreach (var btn in _selectedSymptoms)
         {
             symptomsList.Add(btn.Text);
         }
 
         string symptoms = string.Join(",", symptomsList);
+
+        if (string.IsNullOrWhiteSpace(flow) ||
+            string.IsNullOrWhiteSpace(mood) ||
+            string.IsNullOrWhiteSpace(symptoms) ||
+            string.IsNullOrWhiteSpace(notes))
+        {
+            ShowCustomAlert("Required", "Please input all fields.");
+            return;
+        }
 
         var log = new DailyLog
         {
@@ -133,7 +159,9 @@ public partial class DailyLogPage : ContentPage
 
         await _databaseService.SaveDailyLogAsync(log);
 
-        await DisplayAlert("Saved", "Your daily log has been saved.", "OK");
+        ClearForm();
+
+        ShowCustomAlert("Success", "Daily pulse entry saved successfully.");
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
@@ -146,9 +174,9 @@ public partial class DailyLogPage : ContentPage
         await Navigation.PushAsync(new HomePage());
     }
 
-    private async void OnDailyTapped(object sender, TappedEventArgs e)
+    private void OnDailyTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Daily", "You are already here.", "OK");
+        // Already on Daily page
     }
 
     private async void OnInsightTapped(object sender, TappedEventArgs e)
@@ -164,5 +192,33 @@ public partial class DailyLogPage : ContentPage
     private async void OnSettingsTapped(object sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new SettingsPage());
+    }
+
+    private void ClearForm()
+    {
+        ResetFlowButtons();
+        ResetMoodBorders();
+
+        _selectedFlowButton = null;
+        _selectedMoodBorder = null;
+        _selectedSymptoms.Clear();
+
+        Button[] symptomButtons =
+        {
+        CrampsButton, WeakButton, DullButton, AcneButton, MoodyButton, BlueButton,
+        BloatingButton, CravingButton, HeatButton, NauseaButton, RestlessButton,
+        OilyButton, FatigueButton, SorenessButton, RushButton, AnxietyButton,
+        IrritateButton, SickButton
+    };
+
+        foreach (var button in symptomButtons)
+        {
+            button.BackgroundColor = Color.FromArgb("#F8F8F8");
+            button.TextColor = Color.FromArgb("#333333");
+            button.BorderColor = Color.FromArgb("#222222");
+        }
+
+        EnergySlider.Value = 5;
+        NotesEditor.Text = string.Empty;
     }
 }
