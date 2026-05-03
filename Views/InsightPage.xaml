@@ -189,7 +189,7 @@
                        
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="insight_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Insight" FontSize="12" TextColor="#111111" />
+                    <Label Text="Insight" FontSize="12" TextColor="#E85B73" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="3" Spacing="4" HorizontalOptions="Center">

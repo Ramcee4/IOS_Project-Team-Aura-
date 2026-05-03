@@ -417,8 +417,9 @@
 
                     <Label
                         Text="Home"
+                        
                         FontSize="12"
-                        TextColor="#111111"
+                        TextColor="#E85B73"
                         HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 

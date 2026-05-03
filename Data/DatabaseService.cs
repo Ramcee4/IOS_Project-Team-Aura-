@@ -30,6 +30,18 @@ public class DatabaseService
             .FirstOrDefaultAsync();
     }
 
+    public Task<User?> GetUserByIdAsync(int userId)
+    {
+        return _database.Table<User>()
+            .Where(u => u.Id == userId)
+            .FirstOrDefaultAsync();
+    }
+
+    public Task<int> UpdateUserAsync(User user)
+    {
+        return _database.UpdateAsync(user);
+    }
+
     public async Task SaveUserPreferencesAsync(int userId, string username, string selectedOptions)
     {
         var existingPreference = await _database.Table<UserPreferences>()

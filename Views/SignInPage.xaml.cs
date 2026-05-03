@@ -61,6 +61,7 @@ public partial class SignInPage : ContentPage
             return;
         }
 
+        Preferences.Set("UserId", user.Id);
         Preferences.Set("UserName", user.Name);
         Preferences.Set("UserEmail", user.Email);
         Preferences.Set("UserPassword", user.Password);

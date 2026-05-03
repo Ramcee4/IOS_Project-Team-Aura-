@@ -6,7 +6,7 @@
     Shell.NavBarIsVisible="False"
     BackgroundColor="#F4EDEF">
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid x:Name="RootGrid" RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0">
             <VerticalStackLayout
@@ -15,16 +15,16 @@
 
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                     <ImageButton
-                       Grid.Column="0"
-Source="back_icon.png"
-Clicked="OnBackClicked"
-BackgroundColor="Transparent"
-Margin="0,20,5,20"
-WidthRequest="16"
-HeightRequest="16"
-Padding="0"
-HorizontalOptions="Start"
-VerticalOptions="Center" />
+                        Grid.Column="0"
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,5,20"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center" />
 
                     <VerticalStackLayout Grid.Column="1">
                         <Label
@@ -35,7 +35,6 @@ VerticalOptions="Center" />
 
                         <Label
                             Text="Manage your personal information"
-                            Margin="0,0,0,0"
                             FontSize="14"
                             TextColor="#6F6A6C" />
                     </VerticalStackLayout>
@@ -51,7 +50,6 @@ VerticalOptions="Center" />
 
                     <VerticalStackLayout Spacing="18">
 
-                        <!-- Profile Icon -->
                         <Border
                             WidthRequest="90"
                             HeightRequest="90"
@@ -68,12 +66,8 @@ VerticalOptions="Center" />
                                 VerticalOptions="Center" />
                         </Border>
 
-                        <!-- Name -->
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                Text="Name"
-                                FontSize="14"
-                                TextColor="#111111" />
+                            <Label Text="Name" FontSize="14" TextColor="#111111" />
 
                             <Border
                                 BackgroundColor="#F1F1F4"
@@ -84,7 +78,7 @@ VerticalOptions="Center" />
                                 <Grid ColumnDefinitions="*,Auto">
                                     <Entry
                                         x:Name="NameEntry"
-                                        Text="Jessel Bustamante"
+                                        Placeholder="Name"
                                         TextColor="#222222"
                                         PlaceholderColor="#8A8A8A"
                                         BackgroundColor="Transparent"
@@ -96,17 +90,17 @@ VerticalOptions="Center" />
                                         WidthRequest="22"
                                         HeightRequest="22"
                                         Margin="0,0,12,0"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnEditNameClicked" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
 
-                        <!-- Email -->
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                Text="Email"
-                                FontSize="14"
-                                TextColor="#111111" />
+                            <Label Text="Email" FontSize="14" TextColor="#111111" />
 
                             <Border
                                 BackgroundColor="#F1F1F4"
@@ -117,7 +111,7 @@ VerticalOptions="Center" />
                                 <Grid ColumnDefinitions="*,Auto">
                                     <Entry
                                         x:Name="EmailEntry"
-                                        Text="jes..........z.gmail.com"
+                                        Placeholder="Email"
                                         Keyboard="Email"
                                         TextColor="#222222"
                                         PlaceholderColor="#8A8A8A"
@@ -130,17 +124,17 @@ VerticalOptions="Center" />
                                         WidthRequest="22"
                                         HeightRequest="22"
                                         Margin="0,0,12,0"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnEditEmailClicked" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
 
-                        <!-- Password -->
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                Text="Password"
-                                FontSize="14"
-                                TextColor="#111111" />
+                            <Label Text="Password" FontSize="14" TextColor="#111111" />
 
                             <Border
                                 BackgroundColor="#F1F1F4"
@@ -151,7 +145,7 @@ VerticalOptions="Center" />
                                 <Grid ColumnDefinitions="*,Auto">
                                     <Entry
                                         x:Name="PasswordEntry"
-                                        Text="**********"
+                                        Placeholder="Password"
                                         IsPassword="True"
                                         TextColor="#222222"
                                         PlaceholderColor="#8A8A8A"
@@ -164,7 +158,11 @@ VerticalOptions="Center" />
                                         WidthRequest="22"
                                         HeightRequest="22"
                                         Margin="0,0,12,0"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnEditPasswordClicked" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
@@ -201,6 +199,54 @@ VerticalOptions="Center" />
                 TextColor="White"
                 FontSize="15" />
 
+        </Grid>
+
+        <!-- CUSTOM ALERT -->
+        <Grid
+            x:Name="CustomAlertOverlay"
+            Grid.RowSpan="2"
+            IsVisible="False"
+            BackgroundColor="#80000000"
+            Padding="30">
+
+            <Border
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24"
+                Padding="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="320">
+
+                <VerticalStackLayout Spacing="22">
+
+                    <Label
+                        x:Name="CustomAlertTitle"
+                        Text="Success"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="#E85B73"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        x:Name="CustomAlertMessage"
+                        Text="Profile updated successfully."
+                        FontSize="18"
+                        TextColor="#333333"
+                        HorizontalTextAlignment="Center" />
+
+                    <Button
+                        Text="OK"
+                        Clicked="OnCustomAlertOkClicked"
+                        HeightRequest="56"
+                        CornerRadius="14"
+                        BackgroundColor="#E85B73"
+                        TextColor="White"
+                        FontSize="18"
+                        FontAttributes="Bold" />
+
+                </VerticalStackLayout>
+            </Border>
         </Grid>
 
     </Grid>
