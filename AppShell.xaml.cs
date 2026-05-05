@@ -28,6 +28,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(SettingsNotificationPage), typeof(SettingsNotificationPage));
         Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
         Routing.RegisterRoute(nameof(DailyPulseHistoryPage), typeof(DailyPulseHistoryPage));
+        Routing.RegisterRoute(nameof(OtpVerificationPage), typeof(OtpVerificationPage));
+        Routing.RegisterRoute(nameof(NewPasswordPage), typeof(NewPasswordPage));
 
     }
 }

@@ -28,12 +28,26 @@ public partial class Step3Page : ContentPage
 
         int savedCycleLength = Preferences.Get("CycleLengthDays", 0);
         int savedPeriodDays = Preferences.Get("PeriodDays", 0);
+        string savedCycleType = Preferences.Get("CycleType", "");
 
         if (savedCycleLength > 0)
             CycleLengthEntry.Text = savedCycleLength.ToString();
 
         if (savedPeriodDays > 0)
             PeriodDaysEntry.Text = savedPeriodDays.ToString();
+
+        if (!string.IsNullOrWhiteSpace(savedCycleType))
+        {
+            selectedCycleType = savedCycleType;
+
+            SetCycleButtonUnselected(RegularButton);
+            SetCycleButtonUnselected(IrregularButton);
+
+            if (savedCycleType == RegularButton.Text)
+                SetCycleButtonSelected(RegularButton);
+            else if (savedCycleType == IrregularButton.Text)
+                SetCycleButtonSelected(IrregularButton);
+        }
     }
 
     private async void OnOpenDatePickerPageClicked(object sender, EventArgs e)
@@ -126,6 +140,18 @@ public partial class Step3Page : ContentPage
             return;
         }
 
+        if (cycleLengthDays < 21 || cycleLengthDays > 45)
+        {
+            ShowCustomAlert("Invalid", "Cycle length should usually be between 21 and 45 days.");
+            return;
+        }
+
+        if (periodDays < 1 || periodDays > 10)
+        {
+            ShowCustomAlert("Invalid", "Period days should usually be between 1 and 10 days.");
+            return;
+        }
+
         if (periodDays > cycleLengthDays)
         {
             ShowCustomAlert("Invalid", "Period days cannot be greater than cycle length.");
@@ -139,13 +165,13 @@ public partial class Step3Page : ContentPage
         }
 
         await _databaseService.SaveUserCycleInfoAsync(
-    userId,
-    username,
-    lastDateOfPeriod,
-    cycleLengthDays,
-    periodDays,
-    selectedCycleType
-);
+            userId,
+            username,
+            lastDateOfPeriod,
+            cycleLengthDays,
+            periodDays,
+            selectedCycleType
+        );
 
         Preferences.Set("CycleLengthDays", cycleLengthDays);
         Preferences.Set("PeriodDays", periodDays);

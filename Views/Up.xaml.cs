@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 
@@ -42,6 +45,39 @@ public partial class Up : ContentPage
         CustomAlertOverlay.IsVisible = false;
     }
 
+    // ✅ EMAIL SENDER METHOD
+    private async Task SendWelcomeEmailAsync(string userEmail, string userName)
+    {
+        try
+        {
+            var fromEmail = "teamauraofficial94@gmail.com"; // CHANGE THIS
+            var appPassword = "pbwzyzwygscxgtsa"; // CHANGE THIS
+
+            var message = new MailMessage();
+            message.From = new MailAddress(fromEmail, "Period Tracker");
+            message.To.Add(userEmail);
+            message.Subject = "Welcome to Period Tracker";
+            message.Body =
+                $"Hi {userName},\n\n" +
+                "You have successfully signed up for Period Tracker.\n\n" +
+                "We’re happy to have you!\n\n" +
+                "- Team Aura";
+
+            using var smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(fromEmail, appPassword),
+                EnableSsl = true
+            };
+
+            await smtp.SendMailAsync(message);
+        }
+        catch (Exception ex)
+        {
+            // Optional: log or ignore
+            Console.WriteLine($"Email failed: {ex.Message}");
+        }
+    }
+
     private async void OnSignUpClicked(object sender, EventArgs e)
     {
         string name = NameEntry.Text?.Trim() ?? "";
@@ -80,6 +116,9 @@ public partial class Up : ContentPage
         };
 
         await _databaseService.AddUserAsync(user);
+
+        // ✅ SEND EMAIL AFTER SUCCESSFUL SIGNUP
+        await SendWelcomeEmailAsync(user.Email, user.Name);
 
         Preferences.Set("UserId", user.Id);
         Preferences.Set("UserName", user.Name);

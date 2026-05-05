@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using Microsoft.Maui.Storage;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -16,6 +17,7 @@ public class DatabaseService
         _database.CreateTableAsync<UserCycleInfo>().Wait();
         _database.CreateTableAsync<DailyLog>().Wait();
         _database.CreateTableAsync<HealthJournal>().Wait();
+        _database.CreateTableAsync<PasswordChangeHistory>().Wait();
     }
 
     public Task<int> AddUserAsync(User user)
@@ -40,6 +42,47 @@ public class DatabaseService
     public Task<int> UpdateUserAsync(User user)
     {
         return _database.UpdateAsync(user);
+    }
+
+    public async Task<bool> ChangePasswordByEmailAsync(
+        string email,
+        string newPassword,
+        string confirmPassword)
+    {
+        var user = await GetUserByEmailAsync(email);
+
+        if (user == null)
+            return false;
+
+        user.Password = newPassword;
+        await _database.UpdateAsync(user);
+
+        var passwordHistory = new PasswordChangeHistory
+        {
+            UserId = user.Id,
+            Username = user.Name,
+            UserEmail = user.Email,
+            NewPassword = newPassword,
+            ConfirmPassword = confirmPassword,
+            ChangedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        };
+
+        await _database.InsertAsync(passwordHistory);
+
+        Preferences.Set("UserId", user.Id);
+        Preferences.Set("UserName", user.Name);
+        Preferences.Set("UserEmail", user.Email);
+        Preferences.Set("UserPassword", newPassword);
+
+        return true;
+    }
+
+    public Task<List<PasswordChangeHistory>> GetPasswordChangeHistoryAsync(int userId)
+    {
+        return _database.Table<PasswordChangeHistory>()
+            .Where(p => p.UserId == userId)
+            .OrderByDescending(p => p.ChangedAt)
+            .ToListAsync();
     }
 
     public async Task SaveUserPreferencesAsync(int userId, string username, string selectedOptions)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Team_Aura_Period_Tracker_.ForgotPasswordPage"
+    x:Class="Team_Aura_Period_Tracker_.OtpVerificationPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Shell.NavBarIsVisible="False"
@@ -11,34 +11,26 @@
         <VerticalStackLayout Padding="32" Spacing="20" VerticalOptions="Center">
 
             <Label
-                Text="Forgot Password"
+                Text="Verify OTP"
                 FontSize="32"
                 FontAttributes="Bold"
                 TextColor="#E85B73"
                 HorizontalTextAlignment="Center" />
 
             <Label
-                Text="Enter your registered Gmail account. We will send an OTP to reset your password."
+                Text="Enter the code sent to your email"
                 FontSize="16"
                 TextColor="#6F6A6C"
                 HorizontalTextAlignment="Center" />
 
-            <Label
-                Text="Email"
-                FontSize="15"
-                FontAttributes="Bold"
-                TextColor="#111111" />
+            <Label Text="OTP Code" FontSize="15" FontAttributes="Bold" TextColor="#111111" />
 
-            <Border
-                BackgroundColor="White"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 16"
-                HeightRequest="58">
-
+            <Border BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 16" HeightRequest="58">
                 <Entry
-                    x:Name="ResetEmailEntry"
-                    Placeholder="Enter your Gmail"
-                    Keyboard="Email"
+                    x:Name="OtpEntry"
+                    Placeholder="Enter OTP"
+                    Keyboard="Numeric"
+                    MaxLength="6"
                     TextColor="#222222"
                     PlaceholderColor="#8A8A8A"
                     BackgroundColor="Transparent"
@@ -46,8 +38,8 @@
             </Border>
 
             <Button
-                Text="Send OTP"
-                Clicked="OnSendResetLinkClicked"
+                Text="Verify"
+                Clicked="OnVerifyOtpClicked"
                 HeightRequest="58"
                 CornerRadius="16"
                 BackgroundColor="#E85B73"
@@ -56,8 +48,16 @@
                 FontAttributes="Bold" />
 
             <Button
-                Text="Back to Sign In"
-                Clicked="OnBackToSignInClicked"
+    Text="Resend OTP"
+    Clicked="OnResendOtpClicked"
+    BackgroundColor="Transparent"
+    TextColor="#E85B73"
+    FontSize="16"
+    FontAttributes="Bold" />
+
+            <Button
+                Text="Back"
+                Clicked="OnBackClicked"
                 BackgroundColor="Transparent"
                 TextColor="#C24E63"
                 FontSize="16" />
@@ -82,7 +82,7 @@
 
                     <Label
                         x:Name="CustomAlertTitle"
-                        Text="Error"
+                        Text="Success"
                         FontSize="30"
                         FontAttributes="Bold"
                         TextColor="#E85B73"
@@ -90,7 +90,7 @@
 
                     <Label
                         x:Name="CustomAlertMessage"
-                        Text="Message"
+                        Text="OTP verified successfully."
                         FontSize="18"
                         TextColor="#333333"
                         HorizontalTextAlignment="Center" />
