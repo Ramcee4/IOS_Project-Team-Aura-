@@ -151,12 +151,47 @@
                 </Grid>
 
                 <!-- Quick Actions -->
-                <Label
-                    Text="Quick Actions"
-                    Margin="0,22,0,14"
-                    FontSize="17"
-                    FontAttributes="Bold"
-                    TextColor="#333333" />
+                <Grid Margin="0,22,0,14" ColumnDefinitions="*,Auto">
+
+                    <Label
+                        Text="Quick Actions"
+                        FontSize="17"
+                        FontAttributes="Bold"
+                        TextColor="#333333"
+                        VerticalOptions="Center" />
+
+                    <!-- Start Period Countdown -->
+                    <Border
+                        Grid.Column="1"
+                        Padding="12,6"
+                        BackgroundColor="#E85B73"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        VerticalOptions="Center">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStartPeriodTapped" />
+                        </Border.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="0">
+
+                            <Label
+                                Text="Start Period"
+                                FontSize="11"
+                                TextColor="White"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="StartPeriodCountdownLabel"
+                                Text="--"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                HorizontalTextAlignment="Center" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
 
                 <Grid
                     ColumnDefinitions="*,15,*"
@@ -417,7 +452,6 @@
 
                     <Label
                         Text="Home"
-                        
                         FontSize="12"
                         TextColor="#E85B73"
                         HorizontalTextAlignment="Center" />

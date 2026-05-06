@@ -266,4 +266,17 @@ public class DatabaseService
     {
         await _database.DeleteAsync(log);
     }
+
+    public async Task UpdateLastPeriodDateAsync(int userId, string newLastPeriodDate)
+    {
+        var existingCycleInfo = await _database.Table<UserCycleInfo>()
+            .Where(c => c.UserId == userId)
+            .FirstOrDefaultAsync();
+
+        if (existingCycleInfo != null)
+        {
+            existingCycleInfo.LastDateOfPeriod = newLastPeriodDate;
+            await _database.UpdateAsync(existingCycleInfo);
+        }
+    }
 }

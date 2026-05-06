@@ -56,7 +56,7 @@ public partial class InsightPage : ContentPage
             ovulationDay = cycleLength / 2;
         }
 
-        string phase = GetPhase(currentDay, periodDays, ovulationDay);
+        string phase = GetPhase(currentDay, periodDays, ovulationDay, cycleLength);
 
         PhaseLabel.Text = phase;
         DayLabel.Text = $"Day {currentDay} of {cycleLength}";
@@ -73,14 +73,18 @@ public partial class InsightPage : ContentPage
             ? $"Today (Day {ovulationDay})"
             : $"In {daysUntilOvulation} days (Day {ovulationDay})";
 
-        int daysUntilNextPeriod = cycleLength - currentDay;
+        int daysUntilNextPeriod = cycleLength - currentDay + 1;
 
-        if (daysUntilNextPeriod == 0)
+        if (currentDay <= periodDays)
         {
-            daysUntilNextPeriod = cycleLength;
+            NextPeriodLabel.Text = $"Current period day {currentDay}. Next cycle in {daysUntilNextPeriod} days.";
         }
-
-        NextPeriodLabel.Text = $"In {daysUntilNextPeriod} days (Day {cycleLength})";
+        else
+        {
+            NextPeriodLabel.Text = daysUntilNextPeriod == 1
+                ? $"Tomorrow (Day {cycleLength})"
+                : $"In {daysUntilNextPeriod} days (Day {cycleLength})";
+        }
     }
 
     private void SetEmptyState()
@@ -92,10 +96,10 @@ public partial class InsightPage : ContentPage
         NextPeriodLabel.Text = "Not set";
     }
 
-    private string GetPhase(int currentDay, int periodDays, int ovulationDay)
+    private string GetPhase(int currentDay, int periodDays, int ovulationDay, int cycleLength)
     {
         int fertileStartDay = Math.Max(1, ovulationDay - 5);
-        int fertileEndDay = ovulationDay + 1;
+        int fertileEndDay = Math.Min(cycleLength, ovulationDay + 1);
 
         if (currentDay <= periodDays)
             return "Menstrual Phase";
