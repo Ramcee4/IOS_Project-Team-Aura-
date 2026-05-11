@@ -50,7 +50,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		
+
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
@@ -63,127 +63,128 @@
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.7" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\FivePageStep.xaml.cs">
-	    <DependentUpon>FivePageStep.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\ForgotPasswordPage.xaml.cs">
-	    <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\HomePage.xaml.cs">
-	    <DependentUpon>HomePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\DailyLogPage.xaml.cs">
-	    <DependentUpon>DailyLogPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\JournalPage.xaml.cs">
-	    <DependentUpon>JournalPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\AddJournalEntryPage.xaml.cs">
-	    <DependentUpon>AddJournalEntryPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\LearnPage.xaml.cs">
-	    <DependentUpon>LearnPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\DailyPulseHistoryPage.xaml.cs">
-	    <DependentUpon>DailyPulseHistoryPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\SixPageStep.xaml.cs">
-	    <DependentUpon>SixPageStep.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Step4Page.xaml.cs">
-	    <DependentUpon>Step4Page.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Step3_1Page.xaml.cs">
-	    <DependentUpon>Step3_1Page.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Step3Page.xaml.cs">
-	    <DependentUpon>Step3Page.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Step2Page.xaml.cs">
-	    <DependentUpon>Step2Page.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Step1Page.xaml.cs">
-	    <DependentUpon>Step1Page.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Up.xaml.cs">
-	    <DependentUpon>Up.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Views\FivePageStep.xaml.cs">
+			<DependentUpon>FivePageStep.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ForgotPasswordPage.xaml.cs">
+			<DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\HomePage.xaml.cs">
+			<DependentUpon>HomePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\DailyLogPage.xaml.cs">
+			<DependentUpon>DailyLogPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\JournalPage.xaml.cs">
+			<DependentUpon>JournalPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\AddJournalEntryPage.xaml.cs">
+			<DependentUpon>AddJournalEntryPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\LearnPage.xaml.cs">
+			<DependentUpon>LearnPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\DailyPulseHistoryPage.xaml.cs">
+			<DependentUpon>DailyPulseHistoryPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SixPageStep.xaml.cs">
+			<DependentUpon>SixPageStep.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Step4Page.xaml.cs">
+			<DependentUpon>Step4Page.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Step3_1Page.xaml.cs">
+			<DependentUpon>Step3_1Page.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Step3Page.xaml.cs">
+			<DependentUpon>Step3Page.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Step2Page.xaml.cs">
+			<DependentUpon>Step2Page.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Step1Page.xaml.cs">
+			<DependentUpon>Step1Page.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Up.xaml.cs">
+			<DependentUpon>Up.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\FivePageStep.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ForgotPasswordPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\HomePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DailyLogPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\InsightPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\JournalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AddJournalEntryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LearnPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DailyPulseHistoryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NewPasswordPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OtpVerificationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PrivacyPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ReportsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SettingsNotificationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SettingsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SixPageStep.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Step4Page.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Step3_1Page.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Step3Page.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Step2Page.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Step1Page.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Up.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Views\FivePageStep.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ForgotPasswordPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\HomePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DailyLogPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\InsightPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\JournalPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\AddJournalEntryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\LearnPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DailyPulseHistoryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\NewPasswordPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\NotificationsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\OtpVerificationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ProfilePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ReportsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsNotificationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SixPageStep.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Step4Page.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Step3_1Page.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Step3Page.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Step2Page.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Step1Page.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Up.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

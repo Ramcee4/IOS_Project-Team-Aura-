@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Team_Aura_Period_Tracker_.NotificationsPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4EDEF">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- HEADER (UNCHANGED) -->
+        <Grid Grid.Row="0" Padding="24,30,24,20" ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
+            <ImageButton Grid.Column="0" Source="back_icon.png" Clicked="OnBackClicked" BackgroundColor="Transparent" Margin="0,20,0,20" WidthRequest="16" HeightRequest="16" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                <Label Text="Notifications" FontSize="30" FontAttributes="Bold" TextColor="#E85B73" />
+                <Label Text="Stay updated with your cycle and health alerts" FontSize="14" TextColor="#6F6A6C" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- REAL-TIME LIST (No hardcoded data) -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,10" Spacing="15">
+
+                <Label x:Name="NoNotifLabel" Text="No new alerts today" IsVisible="False" HorizontalTextAlignment="Center" Margin="0,50" TextColor="#8A8A8A"/>
+
+                <!-- Kini ang mahimong sudlanan sa atong dynamic cards -->
+                <VerticalStackLayout x:Name="NotificationContainer" Spacing="15" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="2" Text="Clear All" Clicked="OnClearAllClicked" BackgroundColor="#E85B73" TextColor="White" CornerRadius="12" HeightRequest="55" Margin="20,10,20,20" FontAttributes="Bold"/>
+    </Grid>
+</ContentPage>

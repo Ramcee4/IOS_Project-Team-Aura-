@@ -20,10 +20,7 @@ public partial class SettingsPage : ContentPage
         await Navigation.PushAsync(new ProfilePage());
     }
 
-    private async void OnPrivacyTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new PrivacyPage());
-    }
+    
 
     private async void OnReportsTapped(object sender, TappedEventArgs e)
     {

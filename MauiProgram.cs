@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Plugin.LocalNotification; // 1. I-add ni nga namespace
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification() // 2. I-add ni para mo-gana ang notifications
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

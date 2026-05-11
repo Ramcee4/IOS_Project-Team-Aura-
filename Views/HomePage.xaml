@@ -15,31 +15,47 @@
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
-                    <VerticalStackLayout Spacing="2" Margin="0,0,0,0">
+                    <VerticalStackLayout Spacing="2">
                         <Label
-                            Text="Hello,"
-                            Margin="0,0,0,0"
-                            FontSize="16"
-                            TextColor="#6F6A6C" />
+            Text="Hello,"
+            FontSize="16"
+            TextColor="#6F6A6C" />
 
                         <Label
-                            x:Name="UserNameLabel"
-                            Text="User!"
-                            FontSize="28"
-                            FontAttributes="Bold"
-                            TextColor="#E85B73"
-                            LineBreakMode="WordWrap" />
+            x:Name="UserNameLabel"
+            Text="User!"
+            FontSize="28"
+            FontAttributes="Bold"
+            TextColor="#E85B73"
+            LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
-                    <ImageButton
-                        Grid.Column="1"
-                        Source="bell_icon.png"
-                        Clicked="OnBellClicked"
-                        BackgroundColor="Transparent"
-                        WidthRequest="50"
-                        HeightRequest="50"
-                        HorizontalOptions="End"
-                        VerticalOptions="Center" />
+                    <!-- Notification Bell with Red Dot Indicator -->
+                    <Grid Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="50" HeightRequest="50">
+                        <ImageButton
+            Source="bell_icon.png"
+            Clicked="OnBellClicked"
+            BackgroundColor="Transparent"
+            WidthRequest="50"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+                        <!-- Red Dot Indicator -->
+                        <Border x:Name="NotificationDot"
+                IsVisible="False" 
+                WidthRequest="12"
+                HeightRequest="12"
+                BackgroundColor="#FF0000"
+                StrokeThickness="0"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="0,8,8,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6" />
+                            </Border.StrokeShape>
+                        </Border>
+                    </Grid>
                 </Grid>
 
                 <!-- Stats -->

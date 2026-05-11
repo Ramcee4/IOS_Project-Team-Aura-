@@ -6,111 +6,255 @@
     Shell.NavBarIsVisible="False"
     BackgroundColor="#F4EDEF">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20,20,20,24" Spacing="24">
+	<ScrollView>
+		<VerticalStackLayout Padding="20,20,20,24" Spacing="24">
 
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
-                <ImageButton
+			<!-- Header -->
+			<Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+				<ImageButton
                     Grid.Column="0"
-Source="back_icon.png"
-Clicked="OnBackClicked"
-BackgroundColor="Transparent"
-Margin="0,20,5,20"
-WidthRequest="16"
-HeightRequest="16"
-Padding="0"
-HorizontalOptions="Start"
-VerticalOptions="Center" />
+                    Source="back_icon.png"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="Transparent"
+                    Margin="0,20,5,20"
+                    WidthRequest="16"
+                    HeightRequest="16"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center" />
 
-                <VerticalStackLayout Grid.Column="1">
-                    <Label
+				<VerticalStackLayout Grid.Column="1">
+					<Label
                         Text="Reports &amp; History"
                         FontSize="28"
                         FontAttributes="Bold"
                         TextColor="#E85B73" />
 
-                    <Label
+					<Label
                         Text="Analyze your cycle trends and patterns"
-                        Margin="0,0,0,0"
                         FontSize="15"
                         TextColor="#6F6A6C" />
-                </VerticalStackLayout>
-            </Grid>
+				</VerticalStackLayout>
+			</Grid>
 
-            <Label
+			<!-- Cycle Summary -->
+			<Label
                 Text="Cycle Summary"
                 FontSize="20"
                 FontAttributes="Bold"
                 TextColor="#333333" />
 
-            <Grid ColumnDefinitions="*,14,*,14,*,14,*">
+			<Grid ColumnDefinitions="*,14,*,14,*,14,*">
 
-                <Border Grid.Column="0" Padding="10,18" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                    <VerticalStackLayout Spacing="22" HorizontalOptions="Center">
-                        <Label Text="Total&#10;Cycles" FontSize="13" TextColor="#666666" HorizontalTextAlignment="Center" />
-                        <Label Text="0" FontSize="30" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+				<Border
+                    Grid.Column="0"
+                    Padding="10,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+					<VerticalStackLayout Spacing="22" HorizontalOptions="Center">
+						<Label
+                            Text="Total&#10;Cycles"
+                            FontSize="13"
+                            TextColor="#666666"
+                            HorizontalTextAlignment="Center" />
+						<Label
+                            x:Name="TotalCyclesLabel"
+                            Text="0"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73"
+                            HorizontalTextAlignment="Center" />
+					</VerticalStackLayout>
+				</Border>
 
-                <Border Grid.Column="2" Padding="10,18" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                    <VerticalStackLayout Spacing="22" HorizontalOptions="Center">
-                        <Label Text="Avg Cycle&#10;Length" FontSize="13" TextColor="#666666" HorizontalTextAlignment="Center" />
-                        <Label Text="28" FontSize="30" FontAttributes="Bold" TextColor="#A88DDB" HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+				<Border
+                    Grid.Column="2"
+                    Padding="10,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+					<VerticalStackLayout Spacing="22" HorizontalOptions="Center">
+						<Label
+                            Text="Avg Cycle&#10;Length"
+                            FontSize="13"
+                            TextColor="#666666"
+                            HorizontalTextAlignment="Center" />
+						<Label
+                            x:Name="AvgCycleLengthLabel"
+                            Text="--"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#A88DDB"
+                            HorizontalTextAlignment="Center" />
+					</VerticalStackLayout>
+				</Border>
 
-                <Border Grid.Column="4" Padding="10,18" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                    <VerticalStackLayout Spacing="22" HorizontalOptions="Center">
-                        <Label Text="Total&#10;Cycles" FontSize="13" TextColor="#666666" HorizontalTextAlignment="Center" />
-                        <Label Text="0" FontSize="30" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+				<Border
+                    Grid.Column="4"
+                    Padding="10,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+					<VerticalStackLayout Spacing="22" HorizontalOptions="Center">
+						<Label
+                            Text="Log&#10;Entries"
+                            FontSize="13"
+                            TextColor="#666666"
+                            HorizontalTextAlignment="Center" />
+						<Label
+                            x:Name="TotalLogsLabel"
+                            Text="0"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#E85B73"
+                            HorizontalTextAlignment="Center" />
+					</VerticalStackLayout>
+				</Border>
 
-                <Border Grid.Column="6" Padding="10,18" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                    <VerticalStackLayout Spacing="22" HorizontalOptions="Center">
-                        <Label Text="Avg&#10;Period" FontSize="13" TextColor="#666666" HorizontalTextAlignment="Center" />
-                        <Label Text="5" FontSize="30" FontAttributes="Bold" TextColor="Green" HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+				<Border
+                    Grid.Column="6"
+                    Padding="10,18"
+                    BackgroundColor="#F8F8F8"
+                    Stroke="#DDD6D8"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8">
+					<VerticalStackLayout Spacing="22" HorizontalOptions="Center">
+						<Label
+                            Text="Avg&#10;Period"
+                            FontSize="13"
+                            TextColor="#666666"
+                            HorizontalTextAlignment="Center" />
+						<Label
+                            x:Name="AvgPeriodLabel"
+                            Text="--"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="Green"
+                            HorizontalTextAlignment="Center" />
+					</VerticalStackLayout>
+				</Border>
+			</Grid>
 
-            </Grid>
+			<!-- Symptoms Frequency Section -->
+			<VerticalStackLayout Spacing="10" Margin="0,14,0,0">
+				<Label Text="Symptoms Frequency" FontSize="15" FontAttributes="Bold" TextColor="#E85B73" />
 
-            <VerticalStackLayout Spacing="10" Margin="0,14,0,0">
+				<VerticalStackLayout Spacing="12">
+					<!-- Reusable structure for all 18 symptoms -->
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Cramps" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="CrampsProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="CrampsPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-                <Label
-                    Text="Symptoms Frequency"
-                    FontSize="15"
-                    FontAttributes="Bold"
-                    TextColor="#E85B73" />
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Weak" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="WeakProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="WeakPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Cramps" FontSize="12" TextColor="#6F6A6C" />
-                    <Grid ColumnDefinitions="*,36">
-                        <ProgressBar Progress="0.80" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" />
-                        <Label Grid.Column="1" Text="80%" FontSize="12" TextColor="#6F6A6C" HorizontalTextAlignment="End" />
-                    </Grid>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Dull" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="DullProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="DullPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-                    <Label Text="Fatigue" FontSize="12" TextColor="#6F6A6C" />
-                    <Grid ColumnDefinitions="*,36">
-                        <ProgressBar Progress="0.50" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" />
-                        <Label Grid.Column="1" Text="50%" FontSize="12" TextColor="#6F6A6C" HorizontalTextAlignment="End" />
-                    </Grid>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Acne" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="AcneProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="AcnePercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-                    <Label Text="Mood Swings" FontSize="12" TextColor="#6F6A6C" />
-                    <Grid ColumnDefinitions="*,36">
-                        <ProgressBar Progress="0.40" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" />
-                        <Label Grid.Column="1" Text="40%" FontSize="12" TextColor="#6F6A6C" HorizontalTextAlignment="End" />
-                    </Grid>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Moody" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="MoodyProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="MoodyPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-                    <Label Text="Headache" FontSize="12" TextColor="#6F6A6C" />
-                    <Grid ColumnDefinitions="*,36">
-                        <ProgressBar Progress="0.30" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" />
-                        <Label Grid.Column="1" Text="30%" FontSize="12" TextColor="#6F6A6C" HorizontalTextAlignment="End" />
-                    </Grid>
-                </VerticalStackLayout>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Blue" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="BlueProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="BluePercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-            </VerticalStackLayout>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Bloating" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="BloatingProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="BloatingPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
 
-        </VerticalStackLayout>
-    </ScrollView>
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Craving" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="CravingProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="CravingPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Heat" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="HeatProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="HeatPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Nausea" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="NauseaProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="NauseaPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Restless" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="RestlessProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="RestlessPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Oily" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="OilyProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="OilyPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Fatigue" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="FatigueProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="FatiguePercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Soreness" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="SorenessProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="SorenessPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Rush" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="RushProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="RushPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Anxiety" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="AnxietyProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="AnxietyPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Irritate" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="IrritateProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="IrritatePercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+
+					<HorizontalStackLayout Spacing="5">
+						<Label Text="Sick" FontSize="12" TextColor="#6F6A6C" WidthRequest="80"/>
+						<ProgressBar x:Name="SickProgress" ProgressColor="#B59BE3" BackgroundColor="#F8F8F8" HeightRequest="10" WidthRequest="200"/>
+						<Label x:Name="SickPercent" Text="0%" FontSize="12" TextColor="#6F6A6C" />
+					</HorizontalStackLayout>
+				</VerticalStackLayout>
+			</VerticalStackLayout>
+			</VerticalStackLayout>
+		
+	</ScrollView>
 </ContentPage>

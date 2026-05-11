@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using Microsoft.Maui.Storage;
+using System.Text.Json;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -279,4 +280,67 @@ public class DatabaseService
             await _database.UpdateAsync(existingCycleInfo);
         }
     }
+
+    public async Task<string> ExportAllDataAsJsonAsync(int userId)
+    {
+        var user = await GetUserByIdAsync(userId);
+        var preferences = await GetUserPreferencesAsync(userId);
+        var cycleInfo = await GetUserCycleInfoAsync(userId);
+        var dailyLogs = await GetDailyLogsByUserAsync(userId);
+        var healthJournals = await GetHealthJournalsByUserAsync(userId);
+        var passwordHistory = await GetPasswordChangeHistoryAsync(userId);
+
+        var exportData = new
+        {
+            User = user,
+            Preferences = preferences,
+            CycleInfo = cycleInfo,
+            DailyLogs = dailyLogs,
+            HealthJournals = healthJournals,
+            PasswordChangeHistory = passwordHistory,
+            ExportedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        };
+
+        string json = JsonSerializer.Serialize(exportData, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
+
+        string fileName = $"team_aura_export_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+        string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+        await File.WriteAllTextAsync(filePath, json);
+
+        return filePath;
+    }
+
+    public async Task DeleteAllUserDataAsync(int userId)
+    {
+        var user = await GetUserByIdAsync(userId);
+
+        var preferences = await GetUserPreferencesAsync(userId);
+        if (preferences != null)
+            await _database.DeleteAsync(preferences);
+
+        var cycleInfo = await GetUserCycleInfoAsync(userId);
+        if (cycleInfo != null)
+            await _database.DeleteAsync(cycleInfo);
+
+        var dailyLogs = await GetDailyLogsByUserAsync(userId);
+        foreach (var log in dailyLogs)
+            await _database.DeleteAsync(log);
+
+        var journals = await GetHealthJournalsByUserAsync(userId);
+        foreach (var journal in journals)
+            await _database.DeleteAsync(journal);
+
+        var passwordHistory = await GetPasswordChangeHistoryAsync(userId);
+        foreach (var history in passwordHistory)
+            await _database.DeleteAsync(history);
+
+        if (user != null)
+            await _database.DeleteAsync(user);
+
+        Preferences.Clear();
+    }   
 }

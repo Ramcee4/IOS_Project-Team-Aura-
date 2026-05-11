@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 
@@ -52,6 +54,9 @@ public partial class HomePage : ContentPage
         PeriodDaysSubtitleLabel.Text = "days average";
 
         UpdateWhatsComing(lastDateOfPeriod, cycleLengthDays, periodDays);
+
+        // --- BAG-ONG LOGIC: Check for Notifications (Red Dot) ---
+        await CheckForNotifications(userId, lastDateOfPeriod, cycleLengthDays);
     }
 
     private void SetEmptyCycleState()
@@ -68,6 +73,8 @@ public partial class HomePage : ContentPage
         FertileWindowDayLabel.Text = "--";
         NextPeriodCountdownLabel.Text = "Not set";
         NextPeriodDayLabel.Text = "--";
+
+        NotificationDot.IsVisible = false;
     }
 
     private void UpdateWhatsComing(string lastDateOfPeriod, int cycleLengthDays, int periodDays)
@@ -82,7 +89,6 @@ public partial class HomePage : ContentPage
         }
 
         DateTime today = DateTime.Today;
-
         int daysSinceLastPeriod = (today - lastPeriodDate.Date).Days;
 
         while (daysSinceLastPeriod < 0)
@@ -91,7 +97,6 @@ public partial class HomePage : ContentPage
         }
 
         int currentCycleDay = (daysSinceLastPeriod % cycleLengthDays) + 1;
-
         int ovulationDay = cycleLengthDays - 14;
 
         if (ovulationDay < 1)
@@ -101,7 +106,6 @@ public partial class HomePage : ContentPage
 
         int fertileStartDay = Math.Max(1, ovulationDay - 5);
         int fertileEndDay = Math.Min(cycleLengthDays, ovulationDay + 1);
-
         int daysUntilFertileWindow = fertileStartDay - currentCycleDay;
 
         if (daysUntilFertileWindow < 0)
@@ -135,6 +139,40 @@ public partial class HomePage : ContentPage
         NextPeriodDayLabel.Text = $"Day {cycleLengthDays}";
     }
 
+    // --- LOGIC PARA SA RED DOT INDICATOR ---
+    private async Task CheckForNotifications(int userId, string lastDate, int cycleLength)
+    {
+        // 1. I-check kung naka-log na ba karon nga adlaw
+        var logs = await _databaseService.GetDailyLogsByUserAsync(userId);
+        string today = DateTime.Now.ToString("yyyy-MM-dd");
+        bool hasLoggedToday = logs.Any(l => l.Date == today);
+
+        // 2. I-check kung hapit na ang period (within 3 days)
+        bool isPeriodComing = false;
+        if (DateTime.TryParse(lastDate, out DateTime lastPeriod))
+        {
+            int daysSince = (DateTime.Today - lastPeriod.Date).Days;
+            while (daysSince < 0) daysSince += cycleLength;
+            int currentDay = (daysSince % cycleLength) + 1;
+            int daysUntilNext = cycleLength - currentDay + 1;
+
+            if (daysUntilNext <= 3) isPeriodComing = true;
+        }
+
+        // 3. I-show ang pula nga dot kung naay pending nga action
+        bool wasClicked = Preferences.Get("NotificationBellClicked", false);
+
+        if (!hasLoggedToday || isPeriodComing)
+        {
+            NotificationDot.IsVisible = !wasClicked;
+        }
+        else
+        {
+            NotificationDot.IsVisible = false;
+            Preferences.Set("NotificationBellClicked", false);
+        }
+    }
+
     private async void OnStartPeriodTapped(object sender, TappedEventArgs e)
     {
         int userId = Preferences.Get("UserId", 0);
@@ -163,19 +201,20 @@ public partial class HomePage : ContentPage
         }
 
         string formattedDate = newPeriodDate.ToString("yyyy-MM-dd");
-
         await _databaseService.UpdateLastPeriodDateAsync(userId, formattedDate);
-
         Preferences.Set("LastDateOfPeriod", formattedDate);
 
         await DisplayAlert("Saved", "Your new period start date has been updated.", "OK");
-
         OnAppearing();
     }
 
     private async void OnBellClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Notifications", "Open notifications page.", "OK");
+        // Ig tuplok, mawala ang red dot
+        NotificationDot.IsVisible = false;
+        Preferences.Set("NotificationBellClicked", true);
+
+        await Navigation.PushAsync(new NotificationsPage());
     }
 
     private async void OnCycleLengthTapped(object sender, EventArgs e)
