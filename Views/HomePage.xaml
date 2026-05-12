@@ -13,7 +13,6 @@
                 Padding="24,30,24,20"
                 Spacing="0">
 
-                <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Spacing="2">
                         <Label
@@ -30,7 +29,6 @@
             LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
-                    <!-- Notification Bell with Red Dot Indicator -->
                     <Grid Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="50" HeightRequest="50">
                         <ImageButton
             Source="bell_icon.png"
@@ -41,7 +39,6 @@
             HorizontalOptions="Center"
             VerticalOptions="Center" />
 
-                        <!-- Red Dot Indicator -->
                         <Border x:Name="NotificationDot"
                 IsVisible="False" 
                 WidthRequest="12"
@@ -58,7 +55,6 @@
                     </Grid>
                 </Grid>
 
-                <!-- Stats -->
                 <Grid Margin="0,28,0,0" ColumnDefinitions="*,15,*">
 
                     <Border
@@ -166,7 +162,6 @@
                     </Border>
                 </Grid>
 
-                <!-- Quick Actions -->
                 <Grid Margin="0,22,0,14" ColumnDefinitions="*,Auto">
 
                     <Label
@@ -176,7 +171,6 @@
                         TextColor="#333333"
                         VerticalOptions="Center" />
 
-                    <!-- Start Period Countdown -->
                     <Border
                         Grid.Column="1"
                         Padding="12,6"
@@ -346,7 +340,6 @@
                     </Border>
                 </Grid>
 
-                <!-- What's Coming -->
                 <Border
                     Margin="0,24,0,0"
                     Padding="28,22"
@@ -414,7 +407,6 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Did You Know -->
                 <Border
                     Margin="0,26,0,20"
                     Padding="28,24"
@@ -442,7 +434,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Navigation -->
         <Border
             Grid.Row="1"
             BackgroundColor="White"
@@ -560,5 +551,109 @@
             </Grid>
         </Border>
 
+        <Grid x:Name="StartPeriodAlertOverlay" 
+      Grid.RowSpan="2" 
+      IsVisible="False" 
+      BackgroundColor="#80000000" 
+      ZIndex="999">
+
+            <Border BackgroundColor="White"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 28"
+            Padding="30"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="320">
+
+                <VerticalStackLayout Spacing="20">
+
+                    <Label Text="🌸" 
+                   FontSize="60" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,-10"/>
+
+                    <Label Text="Start Period?" 
+                   FontSize="26" 
+                   FontAttributes="Bold" 
+                   TextColor="#E85B73" 
+                   HorizontalTextAlignment="Center" />
+
+                    <Label Text="Are you sure you want to log your period start today? This will update your cycle data." 
+                   FontSize="15" 
+                   TextColor="#444444" 
+                   HorizontalTextAlignment="Center" 
+                   LineBreakMode="WordWrap" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,10,0,0">
+
+                        <Button Grid.Column="0"
+                        Text="Cancel" 
+                        Clicked="OnCancelAlertClicked" 
+                        BackgroundColor="#F4EDEF" 
+                        TextColor="#6F6A6C" 
+                        CornerRadius="16" 
+                        HeightRequest="55" 
+                        FontAttributes="Bold" 
+                        FontSize="15"/>
+
+                        <Button Grid.Column="1"
+                        Text="Yes" 
+                        Clicked="OnConfirmStartClicked" 
+                        BackgroundColor="#E85B73" 
+                        TextColor="White" 
+                        CornerRadius="16" 
+                        HeightRequest="55" 
+                        FontAttributes="Bold" 
+                        FontSize="15"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="StatInfoAlertOverlay" 
+      Grid.RowSpan="2" 
+      IsVisible="False" 
+      BackgroundColor="#80000000" 
+      ZIndex="1000">
+
+            <Border BackgroundColor="White"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 28"
+            Padding="30"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="320">
+
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="StatAlertEmoji"
+                   Text="ℹ️" 
+                   FontSize="50" 
+                   HorizontalOptions="Center" />
+
+                    <Label x:Name="StatAlertTitle"
+                   Text="Information" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="#E85B73" 
+                   HorizontalTextAlignment="Center" />
+
+                    <Label x:Name="StatAlertMessage"
+                   Text="Description goes here." 
+                   FontSize="15" 
+                   TextColor="#444444" 
+                   HorizontalTextAlignment="Center" 
+                   LineBreakMode="WordWrap" />
+
+                    <Button Text="OK" 
+                    Clicked="OnCloseStatAlertClicked" 
+                    BackgroundColor="#E85B73" 
+                    TextColor="White" 
+                    CornerRadius="16" 
+                    HeightRequest="50" 
+                    FontAttributes="Bold" 
+                    FontSize="15"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 </ContentPage>

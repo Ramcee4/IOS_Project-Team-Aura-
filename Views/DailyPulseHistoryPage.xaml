@@ -79,7 +79,7 @@
                         <TapGestureRecognizer Tapped="OnDailyTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Daily" FontSize="12"  FontAttributes="Bold" />
+                    <Label Text="Daily"  FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">

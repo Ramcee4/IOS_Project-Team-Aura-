@@ -38,6 +38,7 @@ public partial class HomePage : ContentPage
             return;
         }
 
+        // I-sync ang preferences gikan sa database result
         int cycleLengthDays = cycle.CycleLengthDays;
         int periodDays = cycle.PeriodDays;
         string lastDateOfPeriod = cycle.LastDateOfPeriod;
@@ -45,109 +46,135 @@ public partial class HomePage : ContentPage
         Preferences.Set("LastDateOfPeriod", lastDateOfPeriod);
         Preferences.Set("CycleLengthDays", cycleLengthDays);
         Preferences.Set("PeriodDays", periodDays);
-        Preferences.Set("CycleType", cycle.CycleType);
 
-        CycleLengthValueLabel.Text = cycleLengthDays.ToString();
-        PeriodDaysValueLabel.Text = periodDays.ToString();
-
-        CycleLengthSubtitleLabel.Text = "days average";
-        PeriodDaysSubtitleLabel.Text = "days average";
-
+        // Tawgon ang logic para sa Dashboard Updates
         UpdateWhatsComing(lastDateOfPeriod, cycleLengthDays, periodDays);
 
-        // --- BAG-ONG LOGIC: Check for Notifications (Red Dot) ---
+        // Check for Red Dot notification
         await CheckForNotifications(userId, lastDateOfPeriod, cycleLengthDays);
     }
 
     private void SetEmptyCycleState()
     {
         CycleLengthValueLabel.Text = "--";
-        PeriodDaysValueLabel.Text = "--";
-
+        PeriodDaysValueLabel.Text = "5"; // Fixed base sa imong gusto
         CycleLengthSubtitleLabel.Text = "days average";
         PeriodDaysSubtitleLabel.Text = "days average";
-
         StartPeriodCountdownLabel.Text = "--";
-
         FertileWindowCountdownLabel.Text = "Not set";
         FertileWindowDayLabel.Text = "--";
         NextPeriodCountdownLabel.Text = "Not set";
         NextPeriodDayLabel.Text = "--";
-
         NotificationDot.IsVisible = false;
     }
 
     private void UpdateWhatsComing(string lastDateOfPeriod, int cycleLengthDays, int periodDays)
     {
+        // 1. SAFETY CHECK
         if (string.IsNullOrWhiteSpace(lastDateOfPeriod) ||
-            !DateTime.TryParse(lastDateOfPeriod, out DateTime lastPeriodDate) ||
-            cycleLengthDays <= 0 ||
-            periodDays <= 0)
+            lastDateOfPeriod == "string.Empty" ||
+            !DateTime.TryParse(lastDateOfPeriod, out DateTime lastPeriodDate))
         {
             SetEmptyCycleState();
             return;
         }
 
         DateTime today = DateTime.Today;
-        int daysSinceLastPeriod = (today - lastPeriodDate.Date).Days;
 
-        while (daysSinceLastPeriod < 0)
-        {
-            daysSinceLastPeriod += cycleLengthDays;
-        }
+        // Timaan kung karon ba gyud gipislit ang button sa Home (Reset Trigger)
+        bool isPeriodStartedToday = lastPeriodDate.Date == today;
 
-        int currentCycleDay = (daysSinceLastPeriod % cycleLengthDays) + 1;
+        // 2. BASIC CALCULATIONS (Base gyud sa Input Date)
         int ovulationDay = cycleLengthDays - 14;
-
-        if (ovulationDay < 1)
-        {
-            ovulationDay = cycleLengthDays / 2;
-        }
+        if (ovulationDay < 1) ovulationDay = cycleLengthDays / 2;
 
         int fertileStartDay = Math.Max(1, ovulationDay - 5);
         int fertileEndDay = Math.Min(cycleLengthDays, ovulationDay + 1);
-        int daysUntilFertileWindow = fertileStartDay - currentCycleDay;
 
-        if (daysUntilFertileWindow < 0)
+        // --- KANI ANG FIX PARA SA DATES ---
+        // Mag-ihap ta diretso gikan sa lastPeriodDate (e.g., May 1)
+        DateTime fertileTargetDate = lastPeriodDate.AddDays(fertileStartDay - 1);
+        DateTime nextPeriodTargetDate = lastPeriodDate.AddDays(cycleLengthDays);
+
+        // Countdown base sa Today
+        int daysUntilFertileWindow = (fertileTargetDate - today).Days;
+        int daysUntilNextPeriod = (nextPeriodTargetDate - today).Days;
+
+        // 3. PERIOD DAYS CARD LOGIC
+        if (isPeriodStartedToday)
         {
-            daysUntilFertileWindow += cycleLengthDays;
-        }
-
-        int daysUntilNextPeriod = cycleLengthDays - currentCycleDay + 1;
-
-        if (currentCycleDay <= periodDays)
-        {
-            StartPeriodCountdownLabel.Text = $"Day {currentCycleDay}";
-            NextPeriodCountdownLabel.Text = $"In {cycleLengthDays - currentCycleDay + 1} days";
+            // Mahimo lang 5 kung gipislit ang button karon
+            PeriodDaysValueLabel.Text = "5";
+            PeriodDaysSubtitleLabel.Text = "Day 1 of 5";
+            PeriodDaysValueLabel.TextColor = Color.FromArgb("#E85B73");
         }
         else
         {
-            StartPeriodCountdownLabel.Text = daysUntilNextPeriod == 1
-                ? "Tomorrow"
-                : $"In {daysUntilNextPeriod} days";
-
-            NextPeriodCountdownLabel.Text = daysUntilNextPeriod == 1
-                ? "Tomorrow"
-                : $"In {daysUntilNextPeriod} days";
+            // I-display ang gi-input sa Step 3 (e.g., 7 o unsa man to)
+            PeriodDaysValueLabel.Text = periodDays.ToString();
+            PeriodDaysSubtitleLabel.Text = "days average";
+            PeriodDaysValueLabel.TextColor = Color.FromArgb("#333333");
         }
 
-        FertileWindowCountdownLabel.Text = daysUntilFertileWindow == 0
-            ? "Today"
-            : $"In {daysUntilFertileWindow} days";
+        // 4. CYCLE LENGTH CARD
+        CycleLengthValueLabel.Text = cycleLengthDays.ToString();
+        CycleLengthSubtitleLabel.Text = "days average";
+
+        // 5. START PERIOD BUTTON (Clean)
+        StartPeriodCountdownLabel.Text = "--";
+
+        // 6. WHAT'S COMING SECTION (Direct Display)
+        // Fertile Window
+        if (daysUntilFertileWindow == 0) FertileWindowCountdownLabel.Text = $"Today ({fertileTargetDate:MMM dd})";
+        else if (daysUntilFertileWindow > 0) FertileWindowCountdownLabel.Text = $"In {daysUntilFertileWindow} days ({fertileTargetDate:MMM dd})";
+        else FertileWindowCountdownLabel.Text = $"Started ({fertileTargetDate:MMM dd})"; // Kung nilabay na gamay
 
         FertileWindowDayLabel.Text = $"Day {fertileStartDay}–{fertileEndDay}";
+
+        // Next Period
+        if (daysUntilNextPeriod == 1) NextPeriodCountdownLabel.Text = $"Tomorrow ({nextPeriodTargetDate:MMM dd})";
+        else if (daysUntilNextPeriod > 0) NextPeriodCountdownLabel.Text = $"In {daysUntilNextPeriod} days ({nextPeriodTargetDate:MMM dd})";
+        else NextPeriodCountdownLabel.Text = $"Due ({nextPeriodTargetDate:MMM dd})";
+
         NextPeriodDayLabel.Text = $"Day {cycleLengthDays}";
     }
+    private void OnStartPeriodTapped(object sender, TappedEventArgs e)
+    {
+        // I-show ang stylish alert overlay
+        StartPeriodAlertOverlay.IsVisible = true;
+    }
 
-    // --- LOGIC PARA SA RED DOT INDICATOR ---
+    private void OnCancelAlertClicked(object sender, EventArgs e)
+    {
+        // Undo button: I-hide ang popup
+        StartPeriodAlertOverlay.IsVisible = false;
+    }
+
+    private async void OnConfirmStartClicked(object sender, EventArgs e)
+    {
+        // Yes button: I-update ang date to TODAY
+        StartPeriodAlertOverlay.IsVisible = false;
+        int userId = Preferences.Get("UserId", 0);
+        if (userId == 0) return;
+
+        string todayFormatted = DateTime.Today.ToString("yyyy-MM-dd");
+
+        await _databaseService.UpdateLastPeriodDateAsync(userId, todayFormatted);
+        Preferences.Set("LastDateOfPeriod", todayFormatted);
+        Preferences.Set("NotificationBellClicked", false); // Refresh the dot
+
+        // Refresh ang tibuok dashboard UI
+        OnAppearing();
+    }
+
+    // --- NOTIFICATIONS & NAVIGATION ---
+
     private async Task CheckForNotifications(int userId, string lastDate, int cycleLength)
     {
-        // 1. I-check kung naka-log na ba karon nga adlaw
         var logs = await _databaseService.GetDailyLogsByUserAsync(userId);
         string today = DateTime.Now.ToString("yyyy-MM-dd");
         bool hasLoggedToday = logs.Any(l => l.Date == today);
 
-        // 2. I-check kung hapit na ang period (within 3 days)
         bool isPeriodComing = false;
         if (DateTime.TryParse(lastDate, out DateTime lastPeriod))
         {
@@ -155,120 +182,53 @@ public partial class HomePage : ContentPage
             while (daysSince < 0) daysSince += cycleLength;
             int currentDay = (daysSince % cycleLength) + 1;
             int daysUntilNext = cycleLength - currentDay + 1;
-
             if (daysUntilNext <= 3) isPeriodComing = true;
         }
 
-        // 3. I-show ang pula nga dot kung naay pending nga action
         bool wasClicked = Preferences.Get("NotificationBellClicked", false);
-
-        if (!hasLoggedToday || isPeriodComing)
-        {
-            NotificationDot.IsVisible = !wasClicked;
-        }
-        else
-        {
-            NotificationDot.IsVisible = false;
-            Preferences.Set("NotificationBellClicked", false);
-        }
-    }
-
-    private async void OnStartPeriodTapped(object sender, TappedEventArgs e)
-    {
-        int userId = Preferences.Get("UserId", 0);
-
-        if (userId == 0)
-        {
-            await DisplayAlert("Error", "No user found.", "OK");
-            return;
-        }
-
-        string result = await DisplayPromptAsync(
-            "Start Period",
-            "Enter the date your period started.\nFormat: yyyy-MM-dd",
-            "Save",
-            "Cancel",
-            DateTime.Today.ToString("yyyy-MM-dd"),
-            keyboard: Keyboard.Text);
-
-        if (string.IsNullOrWhiteSpace(result))
-            return;
-
-        if (!DateTime.TryParse(result, out DateTime newPeriodDate))
-        {
-            await DisplayAlert("Invalid Date", "Please enter a valid date like 2026-05-06.", "OK");
-            return;
-        }
-
-        string formattedDate = newPeriodDate.ToString("yyyy-MM-dd");
-        await _databaseService.UpdateLastPeriodDateAsync(userId, formattedDate);
-        Preferences.Set("LastDateOfPeriod", formattedDate);
-
-        await DisplayAlert("Saved", "Your new period start date has been updated.", "OK");
-        OnAppearing();
+        NotificationDot.IsVisible = (!hasLoggedToday || isPeriodComing) && !wasClicked;
     }
 
     private async void OnBellClicked(object sender, EventArgs e)
     {
-        // Ig tuplok, mawala ang red dot
         NotificationDot.IsVisible = false;
         Preferences.Set("NotificationBellClicked", true);
-
         await Navigation.PushAsync(new NotificationsPage());
     }
 
-    private async void OnCycleLengthTapped(object sender, EventArgs e)
+    private async void OnLogTodayTapped(object sender, EventArgs e) => await Navigation.PushAsync(new DailyPulseHistoryPage());
+    private async void OnInsightsTapped(object sender, EventArgs e) => await Navigation.PushAsync(new InsightPage());
+    private async void OnJournalTapped(object sender, EventArgs e) => await Navigation.PushAsync(new JournalPage());
+    private async void OnLearnTapped(object sender, EventArgs e) => await Navigation.PushAsync(new LearnPage());
+
+    // Bottom Nav
+    private void OnHomeTapped(object sender, EventArgs e) { /* Current Page */ }
+    private async void OnDailyTapped(object sender, EventArgs e) => await Navigation.PushAsync(new DailyLogPage());
+    private async void OnInsightNavTapped(object sender, EventArgs e) => await Navigation.PushAsync(new InsightPage());
+    private async void OnLearnNavTapped(object sender, EventArgs e) => await Navigation.PushAsync(new LearnPage());
+    private async void OnSettingsTapped(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+
+    // Stat Alerts
+    // --- CUSTOM STAT ALERTS (CONSISTENT STYLE) ---
+
+    private void OnCycleLengthTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Cycle Length", $"Your cycle length is {CycleLengthValueLabel.Text} days.", "OK");
+        StatAlertEmoji.Text = "?";
+        StatAlertTitle.Text = "Cycle Length";
+        StatAlertMessage.Text = $"Your average cycle length is {CycleLengthValueLabel.Text} days. This is the time from the first day of one period to the first day of the next.";
+        StatInfoAlertOverlay.IsVisible = true;
     }
 
-    private async void OnPeriodDaysTapped(object sender, EventArgs e)
+    private void OnPeriodDaysTapped(object sender, EventArgs e)
     {
-        await DisplayAlert("Period Days", $"Your period lasts {PeriodDaysValueLabel.Text} days.", "OK");
+        StatAlertEmoji.Text = "?";
+        StatAlertTitle.Text = "Period Days";
+        StatAlertMessage.Text = $"Your average period duration is {PeriodDaysValueLabel.Text} days. This tracks how long your bleeding typically lasts each month.";
+        StatInfoAlertOverlay.IsVisible = true;
     }
 
-    private async void OnLogTodayTapped(object sender, EventArgs e)
+    private void OnCloseStatAlertClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new DailyPulseHistoryPage());
-    }
-
-    private async void OnInsightsTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new InsightPage());
-    }
-
-    private async void OnJournalTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new JournalPage());
-    }
-
-    private async void OnLearnTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new LearnPage());
-    }
-
-    private void OnHomeTapped(object sender, EventArgs e)
-    {
-        // Already on Home page
-    }
-
-    private async void OnDailyTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new DailyLogPage());
-    }
-
-    private async void OnInsightNavTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new InsightPage());
-    }
-
-    private async void OnLearnNavTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new LearnPage());
-    }
-
-    private async void OnSettingsTapped(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new SettingsPage());
+        StatInfoAlertOverlay.IsVisible = false;
     }
 }
