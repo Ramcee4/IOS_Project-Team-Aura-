@@ -154,6 +154,61 @@ VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Border>
 
+                <!-- CUSTOM LOGOUT CONFIRMATION OVERLAY -->
+                <Grid x:Name="AlertOverlay" 
+              Grid.RowSpan="2" 
+              IsVisible="False" 
+              BackgroundColor="#80000000" 
+              ZIndex="1000">
+
+                    <Border BackgroundColor="White" 
+                    StrokeThickness="0" 
+                    StrokeShape="RoundRectangle 28" 
+                    Padding="30" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                    WidthRequest="320">
+
+                        <VerticalStackLayout Spacing="20">
+                            <Label x:Name="AlertTitle" 
+                           Text="Logout" 
+                           FontSize="26" 
+                           FontAttributes="Bold" 
+                           TextColor="#E85B73" 
+                           HorizontalTextAlignment="Center" />
+
+                            <Label x:Name="AlertMessage" 
+                           Text="Are you sure you want to log out of your account?" 
+                           FontSize="15" 
+                           TextColor="#444444" 
+                           HorizontalTextAlignment="Center" 
+                           LineBreakMode="WordWrap" />
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                                <Button Grid.Column="0" 
+                                Text="No" 
+                                Clicked="OnCancelAlertClicked" 
+                                BackgroundColor="#F4EDEF" 
+                                TextColor="#6F6A6C" 
+                                CornerRadius="16" 
+                                HeightRequest="55" 
+                                FontAttributes="Bold" 
+                                FontSize="15"/>
+
+                                <Button Grid.Column="1" 
+                                Text="Yes" 
+                                Clicked="OnConfirmLogoutClicked" 
+                                BackgroundColor="#E85B73" 
+                                TextColor="White" 
+                                CornerRadius="16" 
+                                HeightRequest="55" 
+                                FontAttributes="Bold" 
+                                FontSize="15"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
             </VerticalStackLayout>
         </ScrollView>
 

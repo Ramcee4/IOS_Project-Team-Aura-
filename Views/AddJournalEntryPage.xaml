@@ -196,6 +196,48 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- CUSTOM ALERT OVERLAY (Consistent Styling) -->
+                <Grid x:Name="CustomAlertOverlay"
+              Grid.RowSpan="2"
+              IsVisible="False"
+              BackgroundColor="#80000000"
+              ZIndex="999">
+
+                    <Border BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="30"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="320">
+
+                        <VerticalStackLayout Spacing="20">
+                            <Label x:Name="AlertTitleLabel"
+                           Text="Success"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#E85B73"
+                           HorizontalTextAlignment="Center" />
+
+                            <Label x:Name="AlertMessageLabel"
+                           Text="Message goes here."
+                           FontSize="15"
+                           TextColor="#444444"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+
+                            <Button Text="OK"
+                            Clicked="OnCustomAlertOkClicked"
+                            BackgroundColor="#E85B73"
+                            TextColor="White"
+                            CornerRadius="16"
+                            HeightRequest="55"
+                            FontAttributes="Bold"
+                            FontSize="15"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
             </VerticalStackLayout>
         </ScrollView>
 

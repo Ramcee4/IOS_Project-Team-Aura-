@@ -68,6 +68,29 @@ public partial class AddJournalEntryPage : ContentPage
         await Navigation.PopAsync();
     }
 
+    // --- CUSTOM ALERT LOGIC ---
+    private async void ShowCustomAlert(string title, string message)
+    {
+        AlertTitleLabel.Text = title;
+        AlertMessageLabel.Text = message;
+        CustomAlertOverlay.IsVisible = true;
+        CustomAlertOverlay.Opacity = 0;
+        await CustomAlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e)
+    {
+        await CustomAlertOverlay.FadeTo(0, 150);
+        CustomAlertOverlay.IsVisible = false;
+
+        // Kung malampuson ang pag-save o update, balik sa history page
+        if (AlertTitleLabel.Text == "Saved" || AlertTitleLabel.Text == "Updated")
+        {
+            await Navigation.PopAsync();
+        }
+    }
+
+    // --- SAVE LOGIC ---
     private async void OnSaveClicked(object sender, EventArgs e)
     {
         int userId = Preferences.Get("UserId", 0);
@@ -75,7 +98,7 @@ public partial class AddJournalEntryPage : ContentPage
 
         if (userId == 0 || string.IsNullOrWhiteSpace(username))
         {
-            await DisplayAlert("Error", "No signed in user found.", "OK");
+            ShowCustomAlert("Error", "No signed in user found.");
             return;
         }
 
@@ -89,7 +112,7 @@ public partial class AddJournalEntryPage : ContentPage
 
         if (string.IsNullOrWhiteSpace(title))
         {
-            await DisplayAlert("Error", "Please enter a title.", "OK");
+            ShowCustomAlert("Error", "Please enter a title.");
             return;
         }
 
@@ -106,8 +129,7 @@ public partial class AddJournalEntryPage : ContentPage
 
             await _databaseService.UpdateHealthJournalAsync(_editingJournal);
 
-            await DisplayAlert("Updated", "Journal entry updated successfully.", "OK");
-            await Navigation.PopAsync();
+            ShowCustomAlert("Updated", "Journal entry updated successfully.");
             return;
         }
 
@@ -127,7 +149,6 @@ public partial class AddJournalEntryPage : ContentPage
 
         await _databaseService.SaveHealthJournalAsync(journal);
 
-        await DisplayAlert("Saved", "Journal entry saved successfully.", "OK");
-        await Navigation.PopAsync();
+        ShowCustomAlert("Saved", "Journal entry saved successfully.");
     }
 }

@@ -20,8 +20,6 @@ public partial class SettingsPage : ContentPage
         await Navigation.PushAsync(new ProfilePage());
     }
 
-    
-
     private async void OnReportsTapped(object sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new ReportsPage());
@@ -32,13 +30,38 @@ public partial class SettingsPage : ContentPage
         await Navigation.PushAsync(new SettingsNotificationPage());
     }
 
-    private async void OnLogoutTapped(object sender, TappedEventArgs e)
-    {
-        bool confirm = await DisplayAlert("Logout", "Are you sure?", "Yes", "No");
+    // --- CUSTOM LOGOUT ALERT LOGIC ---
 
-        if (confirm)
-        {
-            Application.Current.MainPage = new NavigationPage(new SignInPage());
-        }
+    private void OnLogoutTapped(object sender, TappedEventArgs e)
+    {
+        ShowOverlay();
+    }
+
+    private void OnConfirmLogoutClicked(object sender, EventArgs e)
+    {
+        HideOverlay();
+        // Clear session if needed (optional)
+        // Preferences.Clear(); 
+
+        Application.Current.MainPage = new NavigationPage(new SignInPage());
+    }
+
+    private void OnCancelAlertClicked(object sender, EventArgs e)
+    {
+        HideOverlay();
+    }
+
+    // Helper Methods para sa Animation sa Overlay
+    private async void ShowOverlay()
+    {
+        AlertOverlay.Opacity = 0;
+        AlertOverlay.IsVisible = true;
+        await AlertOverlay.FadeTo(1, 150);
+    }
+
+    private async void HideOverlay()
+    {
+        await AlertOverlay.FadeTo(0, 150);
+        AlertOverlay.IsVisible = false;
     }
 }

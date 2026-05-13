@@ -4,6 +4,7 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Storage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Team_Aura_Period_Tracker_;
@@ -12,6 +13,7 @@ public partial class DailyPulseHistoryPage : ContentPage
 {
     private readonly DatabaseService _databaseService = new();
     private List<DailyLog> _entries = new();
+    private DailyLog _logToDelete;
 
     public DailyPulseHistoryPage()
     {
@@ -38,13 +40,14 @@ public partial class DailyPulseHistoryPage : ContentPage
 
         _entries = await _databaseService.GetDailyLogsByUserAsync(userId);
 
-        if (_entries.Count == 0)
+        if (_entries == null || _entries.Count == 0)
         {
             DailyPulseContainer.Children.Add(CreateEmptyState());
             return;
         }
 
-        foreach (var entry in _entries)
+        // Sort by date descending para ang pinaka-latest ang naa sa babaw
+        foreach (var entry in _entries.OrderByDescending(e => e.Date))
         {
             DailyPulseContainer.Children.Add(CreateDailyPulseCard(entry));
         }
@@ -89,10 +92,10 @@ public partial class DailyPulseHistoryPage : ContentPage
         var header = new Grid
         {
             ColumnDefinitions =
-            {
-                new ColumnDefinition(GridLength.Star),
-                new ColumnDefinition(GridLength.Auto)
-            },
+             {
+                 new ColumnDefinition(GridLength.Star),
+                 new ColumnDefinition(GridLength.Auto)
+             },
             ColumnSpacing = 12
         };
 
@@ -100,21 +103,21 @@ public partial class DailyPulseHistoryPage : ContentPage
         {
             Spacing = 2,
             Children =
-            {
-                new Label
-                {
-                    Text = "Daily Pulse Entry",
-                    FontSize = 16,
-                    FontAttributes = FontAttributes.Bold,
-                    TextColor = Color.FromArgb("#333333")
-                },
-                new Label
-                {
-                    Text = entry.Date,
-                    FontSize = 13,
-                    TextColor = Color.FromArgb("#8A8A8A")
-                }
-            }
+             {
+                 new Label
+                 {
+                     Text = "Daily Pulse Entry",
+                     FontSize = 16,
+                     FontAttributes = FontAttributes.Bold,
+                     TextColor = Color.FromArgb("#333333")
+                 },
+                 new Label
+                 {
+                     Text = entry.Date,
+                     FontSize = 13,
+                     TextColor = Color.FromArgb("#8A8A8A")
+                 }
+             }
         };
 
         var deleteButton = new ImageButton
@@ -126,24 +129,21 @@ public partial class DailyPulseHistoryPage : ContentPage
             Padding = 4
         };
 
-        deleteButton.Clicked += async (s, e) =>
+        // Event handler para sa delete
+        deleteButton.Clicked += (s, e) =>
         {
-            await DeleteEntryAsync(entry);
+            _logToDelete = entry;
+            ShowDeleteConfirmation();
         };
 
         Grid.SetColumn(titleStack, 0);
         Grid.SetColumn(deleteButton, 1);
-
         header.Children.Add(titleStack);
         header.Children.Add(deleteButton);
 
         var infoGrid = new Grid
         {
-            ColumnDefinitions =
-            {
-                new ColumnDefinition(GridLength.Star),
-                new ColumnDefinition(GridLength.Star)
-            },
+            ColumnDefinitions = { new ColumnDefinition(GridLength.Star), new ColumnDefinition(GridLength.Star) },
             ColumnSpacing = 28
         };
 
@@ -151,25 +151,24 @@ public partial class DailyPulseHistoryPage : ContentPage
         {
             Spacing = 16,
             Children =
-            {
-                MakeField("Flow", string.IsNullOrWhiteSpace(entry.Flow) ? "—" : entry.Flow),
-                MakeField("Mood", string.IsNullOrWhiteSpace(entry.Mood) ? "—" : entry.Mood)
-            }
+             {
+                 MakeField("Flow", string.IsNullOrWhiteSpace(entry.Flow) ? "—" : entry.Flow),
+                 MakeField("Mood", string.IsNullOrWhiteSpace(entry.Mood) ? "—" : entry.Mood)
+             }
         };
 
         var rightColumn = new VerticalStackLayout
         {
             Spacing = 16,
             Children =
-            {
-                MakeField("Energy", $"{Math.Round(entry.EnergyLevel)}/10"),
-                MakeField("Symptoms", string.IsNullOrWhiteSpace(entry.Symptoms) ? "—" : entry.Symptoms)
-            }
+             {
+                 MakeField("Energy", $"{Math.Round(entry.EnergyLevel)}/10"),
+                 MakeField("Symptoms", string.IsNullOrWhiteSpace(entry.Symptoms) ? "—" : entry.Symptoms)
+             }
         };
 
         Grid.SetColumn(leftColumn, 0);
         Grid.SetColumn(rightColumn, 1);
-
         infoGrid.Children.Add(leftColumn);
         infoGrid.Children.Add(rightColumn);
 
@@ -184,16 +183,12 @@ public partial class DailyPulseHistoryPage : ContentPage
             {
                 Spacing = 14,
                 Children =
-                {
-                    header,
-                    infoGrid,
-                    new BoxView
-                    {
-                        HeightRequest = 3,
-                        Color = Color.FromArgb("#EBDCF5")
-                    },
-                    MakeField("Notes", string.IsNullOrWhiteSpace(entry.Notes) ? "—" : entry.Notes)
-                }
+                 {
+                     header,
+                     infoGrid,
+                     new BoxView { HeightRequest = 1, Color = Color.FromArgb("#EBDCF5") },
+                     MakeField("Notes", string.IsNullOrWhiteSpace(entry.Notes) ? "—" : entry.Notes)
+                 }
             }
         };
     }
@@ -202,255 +197,65 @@ public partial class DailyPulseHistoryPage : ContentPage
     {
         return new VerticalStackLayout
         {
-            Spacing = 0,
             Children =
-            {
-                new Label
-                {
-                    Text = label,
-                    FontSize = 13,
-                    TextColor = Color.FromArgb("#8A8A8A")
-                },
-                new Label
-                {
-                    Text = value,
-                    FontSize = 14,
-                    TextColor = Color.FromArgb("#555555"),
-                    LineBreakMode = LineBreakMode.WordWrap
-                }
-            }
+             {
+                 new Label { Text = label, FontSize = 12, TextColor = Color.FromArgb("#8A8A8A") },
+                 new Label { Text = value, FontSize = 14, TextColor = Color.FromArgb("#555555"), LineBreakMode = LineBreakMode.WordWrap }
+             }
         };
     }
 
-    private async Task DeleteEntryAsync(DailyLog entry)
+    // --- RE-DESIGNED CUSTOM ALERT LOGIC ---
+
+    private void ShowDeleteConfirmation()
     {
-        bool confirm = await ShowCustomConfirmAlertAsync(
-            "Delete",
-            "Delete this daily pulse entry?",
-            "Yes",
-            "No");
-
-        if (!confirm)
-            return;
-
-        await _databaseService.DeleteDailyLogAsync(entry);
-
-        await ShowCustomAlertAsync(
-            "Success",
-            "Daily pulse entry deleted successfully.");
-
-        await LoadEntriesAsync();
+        AlertTitle.Text = "Delete";
+        AlertMessage.Text = "Delete this daily pulse entry?";
+        OkButton.IsVisible = false;
+        ConfirmButtons.IsVisible = true;
+        ShowOverlay();
     }
 
-    private async Task ShowCustomAlertAsync(string title, string message)
+    private async void OnConfirmDeleteClicked(object sender, EventArgs e)
     {
-        var overlay = new Grid
+        HideOverlay();
+        if (_logToDelete != null)
         {
-            BackgroundColor = Color.FromRgba(0, 0, 0, 0.55),
-            HorizontalOptions = LayoutOptions.Fill,
-            VerticalOptions = LayoutOptions.Fill
-        };
+            await _databaseService.DeleteDailyLogAsync(_logToDelete);
 
-        var okButton = new Button
-        {
-            Text = "OK",
-            FontSize = 18,
-            FontAttributes = FontAttributes.Bold,
-            TextColor = Colors.White,
-            BackgroundColor = Color.FromArgb("#E85472"),
-            CornerRadius = 14,
-            HeightRequest = 56
-        };
+            AlertTitle.Text = "Success";
+            AlertMessage.Text = "Daily pulse entry deleted successfully.";
+            OkButton.IsVisible = true;
+            ConfirmButtons.IsVisible = false;
 
-        var popup = new Border
-        {
-            BackgroundColor = Colors.White,
-            StrokeThickness = 0,
-            Padding = new Thickness(28, 26),
-            WidthRequest = 320,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            StrokeShape = new RoundRectangle
-            {
-                CornerRadius = new CornerRadius(24)
-            },
-            Content = new VerticalStackLayout
-            {
-                Spacing = 22,
-                Children =
-                {
-                    new Label
-                    {
-                        Text = title,
-                        FontSize = 28,
-                        FontAttributes = FontAttributes.Bold,
-                        TextColor = Color.FromArgb("#E85472"),
-                        HorizontalTextAlignment = TextAlignment.Center
-                    },
-                    new Label
-                    {
-                        Text = message,
-                        FontSize = 18,
-                        TextColor = Color.FromArgb("#333333"),
-                        HorizontalTextAlignment = TextAlignment.Center
-                    },
-                    okButton
-                }
-            }
-        };
-
-        overlay.Children.Add(popup);
-
-        var tcs = new TaskCompletionSource();
-
-        okButton.Clicked += async (s, e) =>
-        {
-            await overlay.FadeTo(0, 150);
-            ((Grid)Content).Children.Remove(overlay);
-            tcs.SetResult();
-        };
-
-        ((Grid)Content).Children.Add(overlay);
-
-        overlay.Opacity = 0;
-        await overlay.FadeTo(1, 150);
-
-        await tcs.Task;
+            ShowOverlay();
+            await LoadEntriesAsync(); // I-reload ang listahan
+        }
     }
 
-    private async Task<bool> ShowCustomConfirmAlertAsync(
-        string title,
-        string message,
-        string accept,
-        string cancel)
+    private void OnCancelAlertClicked(object sender, EventArgs e) => HideOverlay();
+    private void OnOkClicked(object sender, EventArgs e) => HideOverlay();
+
+    private async void ShowOverlay()
     {
-        var overlay = new Grid
-        {
-            BackgroundColor = Color.FromRgba(0, 0, 0, 0.55),
-            HorizontalOptions = LayoutOptions.Fill,
-            VerticalOptions = LayoutOptions.Fill
-        };
-
-        var yesButton = new Button
-        {
-            Text = accept,
-            FontSize = 18,
-            FontAttributes = FontAttributes.Bold,
-            TextColor = Colors.White,
-            BackgroundColor = Color.FromArgb("#E85472"),
-            CornerRadius = 14,
-            HeightRequest = 56
-        };
-
-        var noButton = new Button
-        {
-            Text = cancel,
-            FontSize = 18,
-            FontAttributes = FontAttributes.Bold,
-            TextColor = Color.FromArgb("#E85472"),
-            BackgroundColor = Colors.White,
-            BorderColor = Color.FromArgb("#E85472"),
-            BorderWidth = 1,
-            CornerRadius = 14,
-            HeightRequest = 56
-        };
-
-        var popup = new Border
-        {
-            BackgroundColor = Colors.White,
-            StrokeThickness = 0,
-            Padding = new Thickness(28, 26),
-            WidthRequest = 320,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            StrokeShape = new RoundRectangle
-            {
-                CornerRadius = new CornerRadius(24)
-            },
-            Content = new VerticalStackLayout
-            {
-                Spacing = 20,
-                Children =
-                {
-                    new Label
-                    {
-                        Text = title,
-                        FontSize = 28,
-                        FontAttributes = FontAttributes.Bold,
-                        TextColor = Color.FromArgb("#E85472"),
-                        HorizontalTextAlignment = TextAlignment.Center
-                    },
-                    new Label
-                    {
-                        Text = message,
-                        FontSize = 18,
-                        TextColor = Color.FromArgb("#333333"),
-                        HorizontalTextAlignment = TextAlignment.Center
-                    },
-                    yesButton,
-                    noButton
-                }
-            }
-        };
-
-        overlay.Children.Add(popup);
-
-        var tcs = new TaskCompletionSource<bool>();
-
-        yesButton.Clicked += async (s, e) =>
-        {
-            await overlay.FadeTo(0, 150);
-            ((Grid)Content).Children.Remove(overlay);
-            tcs.SetResult(true);
-        };
-
-        noButton.Clicked += async (s, e) =>
-        {
-            await overlay.FadeTo(0, 150);
-            ((Grid)Content).Children.Remove(overlay);
-            tcs.SetResult(false);
-        };
-
-        ((Grid)Content).Children.Add(overlay);
-
-        overlay.Opacity = 0;
-        await overlay.FadeTo(1, 150);
-
-        return await tcs.Task;
+        AlertOverlay.IsVisible = true;
+        AlertOverlay.Opacity = 0;
+        await AlertOverlay.FadeTo(1, 150);
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
+    private async void HideOverlay()
     {
-        await Navigation.PopAsync();
+        await AlertOverlay.FadeTo(0, 150);
+        AlertOverlay.IsVisible = false;
     }
 
-    private async void OnAddTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new DailyLogPage());
-    }
+    // --- NAVIGATION ---
 
-    private async void OnHomeTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new HomePage());
-    }
-
-    private void OnDailyTapped(object sender, TappedEventArgs e)
-    {
-        // Already on Daily Pulse history page
-    }
-
-    private async void OnInsightTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new InsightPage());
-    }
-
-    private async void OnLearnTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new LearnPage());
-    }
-
-    private async void OnSettingsTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new SettingsPage());
-    }
+    private async void OnBackClicked(object sender, EventArgs e) => await Navigation.PopAsync();
+    private async void OnAddTapped(object sender, TappedEventArgs e) => await Navigation.PushAsync(new DailyLogPage());
+    private async void OnHomeTapped(object sender, TappedEventArgs e) => await Navigation.PushAsync(new HomePage());
+    private void OnDailyTapped(object sender, TappedEventArgs e) { /* Current Page */ }
+    private async void OnInsightTapped(object sender, TappedEventArgs e) => await Navigation.PushAsync(new InsightPage());
+    private async void OnLearnTapped(object sender, TappedEventArgs e) => await Navigation.PushAsync(new LearnPage());
+    private async void OnSettingsTapped(object sender, TappedEventArgs e) => await Navigation.PushAsync(new SettingsPage());
 }

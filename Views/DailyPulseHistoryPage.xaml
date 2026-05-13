@@ -13,7 +13,6 @@
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-
                     <ImageButton
                         Grid.Column="0"
                         Source="back_icon.png"
@@ -32,7 +31,6 @@
                             FontSize="28"
                             FontAttributes="Bold"
                             TextColor="#E85B73" />
-
                         <Label
                             Text="View your saved daily entries"
                             FontSize="14"
@@ -48,7 +46,6 @@
                             <TapGestureRecognizer Tapped="OnAddTapped" />
                         </Label.GestureRecognizers>
                     </Label>
-
                 </Grid>
 
                 <VerticalStackLayout
@@ -65,7 +62,6 @@
             </Border.StrokeShape>
 
             <Grid ColumnDefinitions="*,*,*,*,*">
-
                 <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnHomeTapped" />
@@ -79,7 +75,7 @@
                         <TapGestureRecognizer Tapped="OnDailyTapped" />
                     </VerticalStackLayout.GestureRecognizers>
                     <Image Source="daily_icon.png" WidthRequest="26" HeightRequest="26" />
-                    <Label Text="Daily"  FontSize="12" TextColor="#111111" />
+                    <Label Text="Daily" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">
@@ -105,9 +101,61 @@
                     <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
                     <Label Text="Settings" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
-
             </Grid>
         </Border>
 
+        <!-- CUSTOM ALERT OVERLAYS -->
+        <Grid x:Name="AlertOverlay" 
+              Grid.RowSpan="2" 
+              IsVisible="False" 
+              BackgroundColor="#80000000" 
+              ZIndex="1000">
+            <Border BackgroundColor="White" 
+                    StrokeThickness="0" 
+                    StrokeShape="RoundRectangle 28" 
+                    Padding="30" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                    WidthRequest="320">
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="AlertTitle" 
+                           FontSize="26" 
+                           FontAttributes="Bold" 
+                           TextColor="#E85B73" 
+                           HorizontalTextAlignment="Center" />
+                    <Label x:Name="AlertMessage" 
+                           FontSize="15" 
+                           TextColor="#444444" 
+                           HorizontalTextAlignment="Center" 
+                           LineBreakMode="WordWrap" />
+                    <Button x:Name="OkButton" 
+                            Text="OK" 
+                            Clicked="OnOkClicked" 
+                            BackgroundColor="#E85B73" 
+                            TextColor="White" 
+                            CornerRadius="16" 
+                            HeightRequest="55" 
+                            FontAttributes="Bold" />
+                    <Grid x:Name="ConfirmButtons" 
+                          ColumnDefinitions="*,*" 
+                          ColumnSpacing="12">
+                        <Button Grid.Column="0" 
+                                Text="No" 
+                                Clicked="OnCancelAlertClicked" 
+                                BackgroundColor="#F4EDEF" 
+                                TextColor="#6F6A6C" 
+                                CornerRadius="16" 
+                                HeightRequest="55" />
+                        <Button Grid.Column="1" 
+                                Text="Yes" 
+                                Clicked="OnConfirmDeleteClicked" 
+                                BackgroundColor="#E85B73" 
+                                TextColor="White" 
+                                CornerRadius="16" 
+                                HeightRequest="55" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 </ContentPage>
