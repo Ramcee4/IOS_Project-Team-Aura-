@@ -16,31 +16,24 @@ public partial class SignInPage : ContentPage
         _databaseService = new DatabaseService();
     }
 
-    // 1. PASSWORD VISIBILITY TOGGLE
     private void OnTogglePasswordClicked(object sender, EventArgs e)
     {
         PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
-
-        // Siguroha nga 'TogglePasswordBtn' ang x:Name sa imong ImageButton sa XAML
         TogglePasswordBtn.Source = PasswordEntry.IsPassword ? "eye_closed.png" : "eye_open.png";
     }
 
-    // 2. SIGN IN WITH USER INPUT VALIDATION
     private async void OnSignInClicked(object sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim() ?? "";
         string password = PasswordEntry.Text ?? "";
 
-        // --- START VALIDATION ---
-
-        // A. Check if empty fields
+        // VALIDATION
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
             ShowCustomAlert("Error", "Please fill in all fields.");
             return;
         }
 
-        // B. Email Format Validation (Dapat naay @ ug domain)
         var emailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         if (!Regex.IsMatch(email, emailRegex))
         {
@@ -48,16 +41,7 @@ public partial class SignInPage : ContentPage
             return;
         }
 
-        // C. Password Length Validation (Minimum 6 characters)
-        if (password.Length < 6)
-        {
-            ShowCustomAlert("Invalid Password", "Password must be at least 6 characters.");
-            return;
-        }
-
-        // --- END VALIDATION ---
-
-        // 3. DATABASE VERIFICATION
+        // DATABASE CHECK (Using your User model)
         var user = await _databaseService.GetUserByEmailAsync(email);
 
         if (user != null && user.Password == password)
@@ -66,14 +50,19 @@ public partial class SignInPage : ContentPage
             Preferences.Set("UserId", user.Id);
             Preferences.Set("UserName", user.Name);
             Preferences.Set("UserEmail", user.Email);
-            Preferences.Set("UserPassword", user.Password);
 
             ShowCustomAlert("Success", "Sign in successful.");
 
-            await Task.Delay(1000);
+         
 
-            // Reset navigation stack to Home
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            // THE STABLE FIX:
+            // I-reset ang MainPage ngadto sa bag-ong AppShell instance
+            // Kini makatangtang sa Login page sa navigation stack para dili na kabalik ang user
+            var shell = new AppShell();
+            Application.Current.MainPage = shell;
+
+            // Siguroha nga ang Route="HomePage" naa sa imong AppShell.xaml
+            await shell.GoToAsync("//HomePage");
         }
         else
         {
@@ -81,24 +70,24 @@ public partial class SignInPage : ContentPage
         }
     }
 
-    // 4. NAVIGATION
     private async void OnSignUpClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(Up));
+        // Siguroha nga SignUpPage ang ngalan sa imong XAML file
+        await Navigation.PushAsync(new Up());
     }
 
     private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
+        await Navigation.PushAsync(new ForgotPasswordPage());
     }
 
-    // 5. CUSTOM ALERT LOGIC (Stylish Popup)
+    // CUSTOM ALERT LOGIC (Consistent Styling)
     private async void ShowCustomAlert(string title, string message)
     {
         CustomAlertTitle.Text = title;
         CustomAlertMessage.Text = message;
-        CustomAlertOverlay.Opacity = 0;
         CustomAlertOverlay.IsVisible = true;
+        CustomAlertOverlay.Opacity = 0;
         await CustomAlertOverlay.FadeTo(1, 150);
     }
 

@@ -3,249 +3,144 @@ using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Storage;
 using System;
+using System.Collections.Generic;
 
-namespace Team_Aura_Period_Tracker_
+namespace Team_Aura_Period_Tracker_;
+
+public partial class Step3_1Page : ContentPage
 {
-    public partial class Step3_1Page : ContentPage
+    private int _currentMonth = DateTime.Now.Month;
+    private int _currentYear = DateTime.Now.Year;
+    private DateTime? _selectedDate;
+    private readonly string[] _monthNames = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+    public Step3_1Page()
     {
-        private int _currentMonth;
-        private int _currentYear;
-        private DateTime? _selectedDate;
+        InitializeComponent();
+        UpdateCalendarHeader();
+        UpdateCalendar();
+    }
 
-        public Step3_1Page()
+    private void UpdateCalendarHeader()
+    {
+        MonthLabel.Text = _monthNames[_currentMonth - 1];
+        YearLabel.Text = _currentYear.ToString();
+    }
+
+    private void UpdateCalendar()
+    {
+        CalendarGrid.Children.Clear();
+        DateTime firstDay = new DateTime(_currentYear, _currentMonth, 1);
+        int daysInMonth = DateTime.DaysInMonth(_currentYear, _currentMonth);
+        int startDay = (int)firstDay.DayOfWeek;
+
+        DateTime prevMonth = firstDay.AddMonths(-1);
+        int daysInPrev = DateTime.DaysInMonth(prevMonth.Year, prevMonth.Month);
+
+        int row = 0; int col = 0;
+        for (int i = 0; i < startDay; i++)
         {
-            InitializeComponent();
-
-            _currentMonth = DateTime.Now.Month;
-            _currentYear = DateTime.Now.Year;
-
-            LoadMonthYearPickers();
-            UpdateCalendar();
+            AddDateCell(new DateTime(prevMonth.Year, prevMonth.Month, daysInPrev - startDay + i + 1), row, col, true);
+            col++;
         }
 
-        private void LoadMonthYearPickers()
+        for (int day = 1; day <= daysInMonth; day++)
         {
-            MonthPicker.Items.Clear();
-            YearPicker.Items.Clear();
-
-            string[] monthNames =
-            {
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            };
-
-            foreach (string month in monthNames)
-            {
-                MonthPicker.Items.Add(month);
-            }
-
-            for (int year = DateTime.Now.Year - 50; year <= DateTime.Now.Year + 10; year++)
-            {
-                YearPicker.Items.Add(year.ToString());
-            }
-
-            MonthPicker.SelectedIndex = _currentMonth - 1;
-
-            int yearIndex = YearPicker.Items.IndexOf(_currentYear.ToString());
-            if (yearIndex >= 0)
-                YearPicker.SelectedIndex = yearIndex;
+            AddDateCell(new DateTime(_currentYear, _currentMonth, day), row, col, false);
+            col++;
+            if (col > 6) { col = 0; row++; }
         }
 
-        private void UpdateCalendar()
+        int nextDay = 1;
+        while (row < 6)
         {
-            CalendarGrid.Children.Clear();
-
-            DateTime firstDayOfMonth = new DateTime(_currentYear, _currentMonth, 1);
-            int daysInMonth = DateTime.DaysInMonth(_currentYear, _currentMonth);
-            int startDay = (int)firstDayOfMonth.DayOfWeek;
-
-            DateTime previousMonth = firstDayOfMonth.AddMonths(-1);
-            int daysInPreviousMonth = DateTime.DaysInMonth(previousMonth.Year, previousMonth.Month);
-
-            int row = 0;
-            int col = 0;
-
-            for (int i = 0; i < startDay; i++)
-            {
-                int day = daysInPreviousMonth - startDay + i + 1;
-                DateTime date = new DateTime(previousMonth.Year, previousMonth.Month, day);
-
-                AddDateCell(date, row, col, true);
-                col++;
-            }
-
-            for (int day = 1; day <= daysInMonth; day++)
-            {
-                DateTime date = new DateTime(_currentYear, _currentMonth, day);
-
-                AddDateCell(date, row, col, false);
-
-                col++;
-
-                if (col > 6)
-                {
-                    col = 0;
-                    row++;
-                }
-            }
-
-            DateTime nextMonth = firstDayOfMonth.AddMonths(1);
-            int nextMonthDay = 1;
-
-            while (row < 6)
-            {
-                DateTime date = new DateTime(nextMonth.Year, nextMonth.Month, nextMonthDay);
-
-                AddDateCell(date, row, col, true);
-
-                nextMonthDay++;
-                col++;
-
-                if (col > 6)
-                {
-                    col = 0;
-                    row++;
-                }
-            }
+            AddDateCell(new DateTime(firstDay.AddMonths(1).Year, firstDay.AddMonths(1).Month, nextDay++), row, col, true);
+            col++; if (col > 6) { col = 0; row++; }
         }
+    }
 
-        private void AddDateCell(DateTime date, int row, int col, bool isOtherMonth)
+    private void AddDateCell(DateTime date, int row, int col, bool isOtherMonth)
+    {
+        bool isSelected = _selectedDate.HasValue && date.Date == _selectedDate.Value.Date;
+        var border = new Border
         {
-            bool isSelected = _selectedDate.HasValue &&
-                              date.Date == _selectedDate.Value.Date;
-
-            Color backgroundColor = Colors.Transparent;
-            Color textColor = isOtherMonth
-                ? Color.FromArgb("#B9B9B9")
-                : Color.FromArgb("#2B2B2B");
-
-            if (isSelected)
-            {
-                backgroundColor = Color.FromArgb("#E85B73");
-                textColor = Colors.White;
-            }
-
-            var label = new Label
+            HeightRequest = 40,
+            WidthRequest = 40,
+            StrokeThickness = 0,
+            BackgroundColor = isSelected ? Color.FromArgb("#E85B73") : Colors.Transparent,
+            StrokeShape = new RoundRectangle { CornerRadius = 20 },
+            Content = new Label
             {
                 Text = date.Day.ToString(),
-                FontSize = 16,
+                FontSize = 15,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
-                TextColor = textColor,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
-            };
+                TextColor = isSelected ? Colors.White : (isOtherMonth ? Color.FromArgb("#B9B9B9") : Color.FromArgb("#2B2B2B"))
+            }
+        };
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += (s, e) => { _selectedDate = date; UpdateCalendar(); };
+        border.GestureRecognizers.Add(tap);
+        CalendarGrid.Add(border, col, row);
+    }
 
-            var border = new Border
-            {
-                HeightRequest = 40,
-                WidthRequest = 40,
-                StrokeThickness = 0,
-                BackgroundColor = backgroundColor,
-                StrokeShape = new RoundRectangle
-                {
-                    CornerRadius = 20
-                },
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-                Content = label
-            };
-
-            var tap = new TapGestureRecognizer();
-            tap.Tapped += (s, e) =>
-            {
-                _selectedDate = date;
+    // --- CUSTOM SELECTION OVERLAY LOGIC ---
+    private void OnMonthLabelTapped(object sender, EventArgs e)
+    {
+        SelectionTitle.Text = "Select Month";
+        SelectionContainer.Children.Clear();
+        for (int i = 0; i < _monthNames.Length; i++)
+        {
+            int index = i + 1;
+            SelectionContainer.Children.Add(CreateSelectionItem(_monthNames[i], () => {
+                _currentMonth = index;
+                UpdateCalendarHeader();
                 UpdateCalendar();
-            };
-
-            border.GestureRecognizers.Add(tap);
-
-            CalendarGrid.Add(border, col, row);
+                HideSelection();
+            }));
         }
+        ShowSelection();
+    }
 
-        private void OnMonthOrYearChanged(object sender, EventArgs e)
+    private void OnYearLabelTapped(object sender, EventArgs e)
+    {
+        SelectionTitle.Text = "Select Year";
+        SelectionContainer.Children.Clear();
+        for (int y = DateTime.Now.Year - 10; y <= DateTime.Now.Year + 2; y++)
         {
-            if (MonthPicker.SelectedIndex < 0 || YearPicker.SelectedIndex < 0)
-                return;
-
-            _currentMonth = MonthPicker.SelectedIndex + 1;
-            _currentYear = int.Parse(YearPicker.Items[YearPicker.SelectedIndex]);
-
-            UpdateCalendar();
+            int yearVal = y;
+            SelectionContainer.Children.Add(CreateSelectionItem(y.ToString(), () => {
+                _currentYear = yearVal;
+                UpdateCalendarHeader();
+                UpdateCalendar();
+                HideSelection();
+            }));
         }
+        ShowSelection();
+    }
 
-        private void OnPreviousMonthClicked(object sender, EventArgs e)
-        {
-            _currentMonth--;
+    private Button CreateSelectionItem(string text, Action onSelect)
+    {
+        var btn = new Button { Text = text, BackgroundColor = Colors.Transparent, TextColor = Color.FromArgb("#444444"), FontSize = 17, HeightRequest = 50 };
+        btn.Clicked += (s, e) => onSelect();
+        return btn;
+    }
 
-            if (_currentMonth < 1)
-            {
-                _currentMonth = 12;
-                _currentYear--;
-            }
+    private async void ShowSelection() { SelectionOverlay.IsVisible = true; SelectionOverlay.Opacity = 0; await SelectionOverlay.FadeTo(1, 150); }
+    private async void HideSelection() { await SelectionOverlay.FadeTo(0, 150); SelectionOverlay.IsVisible = false; }
+    private void OnCancelSelectionClicked(object sender, EventArgs e) => HideSelection();
 
-            MonthPicker.SelectedIndex = _currentMonth - 1;
+    // --- ALERTS & NAVIGATION ---
+    private void OnPreviousMonthClicked(object sender, EventArgs e) { _currentMonth--; if (_currentMonth < 1) { _currentMonth = 12; _currentYear--; } UpdateCalendarHeader(); UpdateCalendar(); }
+    private void OnNextMonthClicked(object sender, EventArgs e) { _currentMonth++; if (_currentMonth > 12) { _currentMonth = 1; _currentYear++; } UpdateCalendarHeader(); UpdateCalendar(); }
 
-            int yearIndex = YearPicker.Items.IndexOf(_currentYear.ToString());
-            if (yearIndex >= 0)
-                YearPicker.SelectedIndex = yearIndex;
-
-            UpdateCalendar();
-        }
-
-        private void OnNextMonthClicked(object sender, EventArgs e)
-        {
-            _currentMonth++;
-
-            if (_currentMonth > 12)
-            {
-                _currentMonth = 1;
-                _currentYear++;
-            }
-
-            MonthPicker.SelectedIndex = _currentMonth - 1;
-
-            int yearIndex = YearPicker.Items.IndexOf(_currentYear.ToString());
-            if (yearIndex >= 0)
-                YearPicker.SelectedIndex = yearIndex;
-
-            UpdateCalendar();
-        }
-
-        private async void ShowCustomAlert(string title, string message)
-        {
-            CustomAlertTitle.Text = title;
-            CustomAlertMessage.Text = message;
-            CustomAlertOverlay.Opacity = 0;
-            CustomAlertOverlay.IsVisible = true;
-
-            await CustomAlertOverlay.FadeTo(1, 150);
-        }
-
-        private async void OnCustomAlertOkClicked(object sender, EventArgs e)
-        {
-            await CustomAlertOverlay.FadeTo(0, 150);
-            CustomAlertOverlay.IsVisible = false;
-        }
-
-        private async void OnBackClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("..");
-        }
-
-        private async void OnNextClicked(object sender, EventArgs e)
-        {
-            if (!_selectedDate.HasValue)
-            {
-                ShowCustomAlert("Required", "Please select your last period date.");
-                return;
-            }
-
-            string selectedDate = _selectedDate.Value.ToString("yyyy-MM-dd");
-
-            Preferences.Set("LastDateOfPeriod", selectedDate);
-
-            await Shell.Current.GoToAsync("..");
-        }
+    private async void ShowCustomAlert(string title, string message) { CustomAlertTitle.Text = title; CustomAlertMessage.Text = message; CustomAlertOverlay.IsVisible = true; CustomAlertOverlay.Opacity = 0; await CustomAlertOverlay.FadeTo(1, 150); }
+    private async void OnCustomAlertOkClicked(object sender, EventArgs e) { await CustomAlertOverlay.FadeTo(0, 150); CustomAlertOverlay.IsVisible = false; }
+    private async void OnBackClicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("..");
+    private async void OnNextClicked(object sender, EventArgs e)
+    {
+        if (!_selectedDate.HasValue) { ShowCustomAlert("Required", "Please select your last period date."); return; }
+        Preferences.Set("LastDateOfPeriod", _selectedDate.Value.ToString("yyyy-MM-dd"));
+        await Shell.Current.GoToAsync("..");
     }
 }

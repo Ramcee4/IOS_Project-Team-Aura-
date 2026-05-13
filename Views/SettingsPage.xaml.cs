@@ -40,9 +40,10 @@ public partial class SettingsPage : ContentPage
     private void OnConfirmLogoutClicked(object sender, EventArgs e)
     {
         HideOverlay();
-        // Clear session if needed (optional)
+        // Mahimo nimong e-clear ang Preferences diri kon gusto nimo
         // Preferences.Clear(); 
 
+        // Reset the App to the SignInPage
         Application.Current.MainPage = new NavigationPage(new SignInPage());
     }
 
@@ -51,11 +52,11 @@ public partial class SettingsPage : ContentPage
         HideOverlay();
     }
 
-    // Helper Methods para sa Animation sa Overlay
+    // Methods for Overlay Animation
     private async void ShowOverlay()
     {
-        AlertOverlay.Opacity = 0;
         AlertOverlay.IsVisible = true;
+        AlertOverlay.Opacity = 0;
         await AlertOverlay.FadeTo(1, 150);
     }
 

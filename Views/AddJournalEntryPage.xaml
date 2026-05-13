@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Team_Aura_Period_Tracker_.AddJournalEntryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Team_Aura_Period_Tracker_.AddJournalEntryPage"
     Shell.NavBarIsVisible="False"
     BackgroundColor="#F4EDEF">
 
@@ -15,18 +15,17 @@
 
                 <!-- HEADER -->
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-
                     <ImageButton
                         Grid.Column="0"
- Source="back_icon.png"
- Clicked="OnBackClicked"
- BackgroundColor="Transparent"
- Margin="0,20,5,20"
- WidthRequest="16"
- HeightRequest="16"
- Padding="0"
- HorizontalOptions="Start"
- VerticalOptions="Center" />
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,5,20"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center" />
 
                     <VerticalStackLayout Grid.Column="1">
                         <Label
@@ -34,13 +33,11 @@
                             FontSize="28"
                             FontAttributes="Bold"
                             TextColor="#E85B73" />
-
                         <Label
                             Text="Track your health pattern"
                             FontSize="14"
                             TextColor="#6F6A6C" />
                     </VerticalStackLayout>
-
                 </Grid>
 
                 <!-- FORM CARD -->
@@ -52,7 +49,6 @@
                     StrokeShape="RoundRectangle 18">
 
                     <VerticalStackLayout Spacing="16">
-
                         <Label
                             Text="New Entry"
                             FontSize="16"
@@ -62,7 +58,6 @@
                         <!-- TITLE -->
                         <VerticalStackLayout>
                             <Label Text="Title" FontSize="12" TextColor="#8A8A8A" />
-
                             <Border Stroke="#222" StrokeShape="RoundRectangle 14" Padding="12,0">
                                 <Entry
                                     x:Name="TitleEntry"
@@ -75,10 +70,8 @@
 
                         <!-- MOOD + ENERGY -->
                         <Grid ColumnDefinitions="*,16,*">
-
                             <VerticalStackLayout>
                                 <Label Text="Mood" FontSize="12" TextColor="#8A8A8A" />
-
                                 <Border Stroke="#222" StrokeShape="RoundRectangle 14" Padding="12,0">
                                     <Entry
                                         x:Name="MoodEntry"
@@ -95,7 +88,6 @@
                                     Text="Energy (5/10)"
                                     FontSize="12"
                                     TextColor="#8A8A8A" />
-
                                 <Slider
                                     x:Name="EnergySlider"
                                     Minimum="0"
@@ -106,15 +98,12 @@
                                     MaximumTrackColor="#D8CCE8"
                                     ThumbColor="#6C52A7" />
                             </VerticalStackLayout>
-
                         </Grid>
 
                         <!-- SLEEP + EXERCISE -->
                         <Grid ColumnDefinitions="*,16,*">
-
                             <VerticalStackLayout>
                                 <Label Text="Sleep hours" FontSize="12" TextColor="#8A8A8A" />
-
                                 <Border Stroke="#222" StrokeShape="RoundRectangle 14" Padding="12,0">
                                     <Entry
                                         x:Name="SleepEntry"
@@ -128,7 +117,6 @@
 
                             <VerticalStackLayout Grid.Column="2">
                                 <Label Text="Exercise" FontSize="12" TextColor="#8A8A8A" />
-
                                 <Border Stroke="#222" StrokeShape="RoundRectangle 14" Padding="12,0">
                                     <Entry
                                         x:Name="ExerciseEntry"
@@ -138,13 +126,11 @@
                                         BackgroundColor="Transparent" />
                                 </Border>
                             </VerticalStackLayout>
-
                         </Grid>
 
                         <!-- MEDICATION -->
                         <VerticalStackLayout>
                             <Label Text="Medication / Supplements" FontSize="12" TextColor="#8A8A8A" />
-
                             <Border Stroke="#222" StrokeShape="RoundRectangle 14" Padding="12,0">
                                 <Entry
                                     x:Name="MedicationEntry"
@@ -158,7 +144,6 @@
                         <!-- NOTES -->
                         <VerticalStackLayout>
                             <Label Text="Notes" FontSize="12" TextColor="#8A8A8A" />
-
                             <Border Stroke="#222" StrokeShape="RoundRectangle 18" Padding="12">
                                 <Editor
                                     x:Name="NotesEditor"
@@ -172,7 +157,6 @@
 
                         <!-- BUTTONS -->
                         <Grid ColumnDefinitions="*,20,*">
-
                             <Button
                                 Grid.Column="0"
                                 Text="Cancel"
@@ -181,7 +165,6 @@
                                 TextColor="White"
                                 CornerRadius="10"
                                 HeightRequest="50" />
-
                             <Button
                                 Grid.Column="2"
                                 Text="Save"
@@ -190,20 +173,20 @@
                                 TextColor="White"
                                 CornerRadius="10"
                                 HeightRequest="50" />
-
                         </Grid>
-
                     </VerticalStackLayout>
                 </Border>
+            </VerticalStackLayout>
+        </ScrollView>
 
-                <!-- CUSTOM ALERT OVERLAY (Consistent Styling) -->
-                <Grid x:Name="CustomAlertOverlay"
+        <!-- CUSTOM ALERT OVERLAY (CONSISTENT DESIGN UPDATE) -->
+        <Grid x:Name="CustomAlertOverlay"
               Grid.RowSpan="2"
               IsVisible="False"
               BackgroundColor="#80000000"
               ZIndex="999">
 
-                    <Border BackgroundColor="White"
+            <Border BackgroundColor="White"
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 28"
                     Padding="30"
@@ -211,35 +194,31 @@
                     HorizontalOptions="Center"
                     WidthRequest="320">
 
-                        <VerticalStackLayout Spacing="20">
-                            <Label x:Name="AlertTitleLabel"
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="AlertTitleLabel"
                            Text="Success"
                            FontSize="26"
                            FontAttributes="Bold"
                            TextColor="#E85B73"
                            HorizontalTextAlignment="Center" />
 
-                            <Label x:Name="AlertMessageLabel"
-                           Text="Message goes here."
+                    <Label x:Name="AlertMessageLabel"
+                           Text="Message here."
                            FontSize="15"
                            TextColor="#444444"
                            HorizontalTextAlignment="Center"
                            LineBreakMode="WordWrap" />
 
-                            <Button Text="OK"
+                    <Button Text="OK"
                             Clicked="OnCustomAlertOkClicked"
                             BackgroundColor="#E85B73"
                             TextColor="White"
                             CornerRadius="16"
                             HeightRequest="55"
                             FontAttributes="Bold"
-                            FontSize="15"/>
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
-
-            </VerticalStackLayout>
-        </ScrollView>
-
+                            FontSize="17"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 </ContentPage>

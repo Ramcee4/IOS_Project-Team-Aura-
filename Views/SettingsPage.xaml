@@ -15,15 +15,15 @@
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                     <ImageButton
                         Grid.Column="0"
-Source="back_icon.png"
-Clicked="OnBackClicked"
-BackgroundColor="Transparent"
-Margin="0,20,5,20"
-WidthRequest="16"
-HeightRequest="16"
-Padding="0"
-HorizontalOptions="Start"
-VerticalOptions="Center" />
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,5,20"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center" />
 
                     <VerticalStackLayout Grid.Column="1">
                         <Label
@@ -31,137 +31,82 @@ VerticalOptions="Center" />
                             FontSize="28"
                             FontAttributes="Bold"
                             TextColor="#E85B73" />
-
                         <Label
                             Text="Manage your preferences"
-                            Margin="0,0,0,0"
                             FontSize="14"
                             TextColor="#6F6A6C" />
                     </VerticalStackLayout>
                 </Grid>
 
                 <!-- Profile -->
-                <Border
-                    Padding="18,14"
-                    BackgroundColor="#F8F8F8"
-                    Stroke="#DDD6D8"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16">
+                <Border Padding="18,14" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnProfileTapped" />
                     </Border.GestureRecognizers>
-
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                         <Image Source="profile_icon.png" WidthRequest="26" HeightRequest="26" />
-                        <Label
-                            Grid.Column="1"
-                            Text="Profile"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="#333333"
-                            VerticalOptions="Center" />
-                        <Label Grid.Column="2" Text="" FontSize="26" TextColor="#666666" />
+                        <Label Grid.Column="1" Text="Profile" FontSize="18" FontAttributes="Bold" TextColor="#333333" VerticalOptions="Center" />
                     </Grid>
                 </Border>
 
-               
-
                 <!-- Reports -->
-                <Border
-                    Padding="18,14"
-                    BackgroundColor="#F8F8F8"
-                    Stroke="#DDD6D8"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16">
+                <Border Padding="18,14" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnReportsTapped" />
                     </Border.GestureRecognizers>
-
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                         <Image Source="reports_icon.png" WidthRequest="28" HeightRequest="28" />
-                        <Label
-                            Grid.Column="1"
-                            Text="Reports and History"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="#333333" />
-                        <Label Grid.Column="2" Text="" FontSize="26" TextColor="#666666" />
+                        <Label Grid.Column="1" Text="Reports and History" FontSize="18" FontAttributes="Bold" TextColor="#333333" />
                     </Grid>
                 </Border>
 
                 <!-- Notifications -->
-                <Border
-                    Padding="16,14"
-                    BackgroundColor="#F8F8F8"
-                    Stroke="#DDD6D8"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16">
+                <Border Padding="16,14" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnNotificationsTapped" />
                     </Border.GestureRecognizers>
-
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border
-                            WidthRequest="48"
-                            HeightRequest="48"
-                            BackgroundColor="#D5F2EC"
-                            StrokeThickness="0"
-                            StrokeShape="RoundRectangle 24">
+                        <Border WidthRequest="48" HeightRequest="48" BackgroundColor="#D5F2EC" StrokeThickness="0" StrokeShape="RoundRectangle 24">
                             <Image Source="notification_icon.png" WidthRequest="24" HeightRequest="24" />
                         </Border>
-
                         <VerticalStackLayout Grid.Column="1">
-                            <Label Text="Notifications"  FontSize="15" FontAttributes="Bold" TextColor="#333333" />
+                            <Label Text="Notifications" FontSize="15" FontAttributes="Bold" TextColor="#333333" />
                             <Label Text="Manage your reminders" FontSize="13" TextColor="#8A8A8A" />
                         </VerticalStackLayout>
-
-                        <Label Grid.Column="2" Text="›" FontSize="28" TextColor="#666666" />
                     </Grid>
                 </Border>
 
                 <!-- About -->
-                <Border
-                    Padding="18,16"
-                    BackgroundColor="#F8F8F8"
-                    Stroke="#DDD6D8"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16">
-
+                <Border Padding="18,16" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <VerticalStackLayout Spacing="10">
                         <Label Text="About Aura Period Tracker" TextColor="#333333" FontSize="15" FontAttributes="Bold" />
-                        <Label
-                            Text="Track your menstrual cycle, predict periods, ovulation, and fertile windows with ease."
-                            FontSize="13"
-                            TextColor="#8A8A8A" />
+                        <Label Text="Track your menstrual cycle, predict periods, ovulation, and fertile windows with ease." FontSize="13" TextColor="#8A8A8A" />
                         <Label Text="Version 1.0.0" FontSize="12" TextColor="#C0B8BB" />
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Logout -->
-                <Border
-                    Padding="18,16"
-                    BackgroundColor="#F8F8F8"
-                    Stroke="#DDD6D8"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16">
+                <Border Padding="18,16" BackgroundColor="#F8F8F8" Stroke="#DDD6D8" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLogoutTapped" />
                     </Border.GestureRecognizers>
-
                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
                         <Label Text="↪" FontSize="18" TextColor="#E85B73" />
                         <Label Text="Logout" FontSize="15" FontAttributes="Bold" TextColor="#E85B73" />
                     </HorizontalStackLayout>
                 </Border>
 
-                <!-- CUSTOM LOGOUT CONFIRMATION OVERLAY -->
-                <Grid x:Name="AlertOverlay" 
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- CUSTOM LOGOUT CONFIRMATION OVERLAY (CONSISTENT DESIGN) -->
+        <Grid x:Name="AlertOverlay" 
               Grid.RowSpan="2" 
               IsVisible="False" 
               BackgroundColor="#80000000" 
               ZIndex="1000">
-
-                    <Border BackgroundColor="White" 
+            
+            <Border BackgroundColor="White" 
                     StrokeThickness="0" 
                     StrokeShape="RoundRectangle 28" 
                     Padding="30" 
@@ -169,23 +114,23 @@ VerticalOptions="Center" />
                     HorizontalOptions="Center" 
                     WidthRequest="320">
 
-                        <VerticalStackLayout Spacing="20">
-                            <Label x:Name="AlertTitle" 
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="AlertTitle" 
                            Text="Logout" 
                            FontSize="26" 
                            FontAttributes="Bold" 
                            TextColor="#E85B73" 
                            HorizontalTextAlignment="Center" />
-
-                            <Label x:Name="AlertMessage" 
+                    
+                    <Label x:Name="AlertMessage" 
                            Text="Are you sure you want to log out of your account?" 
                            FontSize="15" 
                            TextColor="#444444" 
                            HorizontalTextAlignment="Center" 
                            LineBreakMode="WordWrap" />
-
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                                <Button Grid.Column="0" 
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Grid.Column="0" 
                                 Text="No" 
                                 Clicked="OnCancelAlertClicked" 
                                 BackgroundColor="#F4EDEF" 
@@ -194,8 +139,8 @@ VerticalOptions="Center" />
                                 HeightRequest="55" 
                                 FontAttributes="Bold" 
                                 FontSize="15"/>
-
-                                <Button Grid.Column="1" 
+                        
+                        <Button Grid.Column="1" 
                                 Text="Yes" 
                                 Clicked="OnConfirmLogoutClicked" 
                                 BackgroundColor="#E85B73" 
@@ -204,13 +149,10 @@ VerticalOptions="Center" />
                                 HeightRequest="55" 
                                 FontAttributes="Bold" 
                                 FontSize="15"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
-
-            </VerticalStackLayout>
-        </ScrollView>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
 
     </Grid>
 </ContentPage>

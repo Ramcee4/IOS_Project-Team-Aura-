@@ -1,59 +1,76 @@
 ﻿using SQLite;
 using Microsoft.Maui.Storage;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace Team_Aura_Period_Tracker_;
 
 public class DatabaseService
 {
-    private readonly SQLiteAsyncConnection _database;
+    private SQLiteAsyncConnection _database;
 
     public DatabaseService()
     {
+        // I-set up lang ang connection diri, ayaw paghimo og tables diri
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "team_aura.db");
         _database = new SQLiteAsyncConnection(dbPath);
-
-        _database.CreateTableAsync<User>().Wait();
-        _database.CreateTableAsync<UserPreferences>().Wait();
-        _database.CreateTableAsync<UserCycleInfo>().Wait();
-        _database.CreateTableAsync<DailyLog>().Wait();
-        _database.CreateTableAsync<HealthJournal>().Wait();
-        _database.CreateTableAsync<PasswordChangeHistory>().Wait();
     }
 
-    public Task<int> AddUserAsync(User user)
+    // Kini nga method maoy mo-siguro nga initialized ang tables sa dili pa gamiton
+    private async Task Init()
     {
-        return _database.InsertAsync(user);
+        try
+        {
+            // Kini mo-create ra sa tables kon wala pa sila mag-exist
+            await _database.CreateTableAsync<User>();
+            await _database.CreateTableAsync<UserPreferences>();
+            await _database.CreateTableAsync<UserCycleInfo>();
+            await _database.CreateTableAsync<DailyLog>();
+            await _database.CreateTableAsync<HealthJournal>();
+            await _database.CreateTableAsync<PasswordChangeHistory>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Database Init Error: {ex.Message}");
+        }
     }
 
-    public Task<User?> GetUserByEmailAsync(string email)
+    // --- USER METHODS ---
+
+    public async Task<int> AddUserAsync(User user)
     {
-        return _database.Table<User>()
+        await Init();
+        return await _database.InsertAsync(user);
+    }
+
+    public async Task<User?> GetUserByEmailAsync(string email)
+    {
+        await Init();
+        return await _database.Table<User>()
             .Where(u => u.Email == email)
             .FirstOrDefaultAsync();
     }
 
-    public Task<User?> GetUserByIdAsync(int userId)
+    public async Task<User?> GetUserByIdAsync(int userId)
     {
-        return _database.Table<User>()
+        await Init();
+        return await _database.Table<User>()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
     }
 
-    public Task<int> UpdateUserAsync(User user)
+    public async Task<int> UpdateUserAsync(User user)
     {
-        return _database.UpdateAsync(user);
+        await Init();
+        return await _database.UpdateAsync(user);
     }
 
-    public async Task<bool> ChangePasswordByEmailAsync(
-        string email,
-        string newPassword,
-        string confirmPassword)
+    public async Task<bool> ChangePasswordByEmailAsync(string email, string newPassword, string confirmPassword)
     {
+        await Init();
         var user = await GetUserByEmailAsync(email);
 
-        if (user == null)
-            return false;
+        if (user == null) return false;
 
         user.Password = newPassword;
         await _database.UpdateAsync(user);
@@ -78,16 +95,20 @@ public class DatabaseService
         return true;
     }
 
-    public Task<List<PasswordChangeHistory>> GetPasswordChangeHistoryAsync(int userId)
+    public async Task<List<PasswordChangeHistory>> GetPasswordChangeHistoryAsync(int userId)
     {
-        return _database.Table<PasswordChangeHistory>()
+        await Init();
+        return await _database.Table<PasswordChangeHistory>()
             .Where(p => p.UserId == userId)
             .OrderByDescending(p => p.ChangedAt)
             .ToListAsync();
     }
 
+    // --- PREFERENCES & CYCLE INFO ---
+
     public async Task SaveUserPreferencesAsync(int userId, string username, string selectedOptions)
     {
+        await Init();
         var existingPreference = await _database.Table<UserPreferences>()
             .Where(p => p.UserId == userId)
             .FirstOrDefaultAsync();
@@ -96,7 +117,6 @@ public class DatabaseService
         {
             existingPreference.Username = username;
             existingPreference.WhatBringsYouHere = selectedOptions;
-
             await _database.UpdateAsync(existingPreference);
         }
         else
@@ -107,26 +127,21 @@ public class DatabaseService
                 Username = username,
                 WhatBringsYouHere = selectedOptions
             };
-
             await _database.InsertAsync(preference);
         }
     }
 
-    public Task<UserPreferences?> GetUserPreferencesAsync(int userId)
+    public async Task<UserPreferences?> GetUserPreferencesAsync(int userId)
     {
-        return _database.Table<UserPreferences>()
+        await Init();
+        return await _database.Table<UserPreferences>()
             .Where(p => p.UserId == userId)
             .FirstOrDefaultAsync();
     }
 
-    public async Task SaveUserCycleInfoAsync(
-        int userId,
-        string username,
-        string lastDateOfPeriod,
-        int cycleLengthDays,
-        int periodDays,
-        string cycleType)
+    public async Task SaveUserCycleInfoAsync(int userId, string username, string lastDateOfPeriod, int cycleLengthDays, int periodDays, string cycleType)
     {
+        await Init();
         var existingCycleInfo = await _database.Table<UserCycleInfo>()
             .Where(c => c.UserId == userId)
             .FirstOrDefaultAsync();
@@ -138,7 +153,6 @@ public class DatabaseService
             existingCycleInfo.CycleLengthDays = cycleLengthDays;
             existingCycleInfo.PeriodDays = periodDays;
             existingCycleInfo.CycleType = cycleType;
-
             await _database.UpdateAsync(existingCycleInfo);
         }
         else
@@ -152,20 +166,21 @@ public class DatabaseService
                 PeriodDays = periodDays,
                 CycleType = cycleType
             };
-
             await _database.InsertAsync(cycleInfo);
         }
     }
 
-    public Task<UserCycleInfo?> GetUserCycleInfoAsync(int userId)
+    public async Task<UserCycleInfo?> GetUserCycleInfoAsync(int userId)
     {
-        return _database.Table<UserCycleInfo>()
+        await Init();
+        return await _database.Table<UserCycleInfo>()
             .Where(c => c.UserId == userId)
             .FirstOrDefaultAsync();
     }
 
     public async Task SaveUserAgeRangeAsync(int userId, string username, string ageRange)
     {
+        await Init();
         var existingCycleInfo = await _database.Table<UserCycleInfo>()
             .Where(c => c.UserId == userId)
             .FirstOrDefaultAsync();
@@ -174,7 +189,6 @@ public class DatabaseService
         {
             existingCycleInfo.Username = username;
             existingCycleInfo.AgeRange = ageRange;
-
             await _database.UpdateAsync(existingCycleInfo);
         }
         else
@@ -185,33 +199,38 @@ public class DatabaseService
                 Username = username,
                 AgeRange = ageRange
             };
-
             await _database.InsertAsync(cycleInfo);
         }
     }
 
+    // --- DAILY LOG METHODS ---
+
     public async Task SaveDailyLogAsync(DailyLog log)
     {
+        await Init();
         await _database.InsertAsync(log);
     }
 
-    public Task<List<DailyLog>> GetDailyLogsByUserAsync(int userId)
+    public async Task<List<DailyLog>> GetDailyLogsByUserAsync(int userId)
     {
-        return _database.Table<DailyLog>()
+        await Init();
+        return await _database.Table<DailyLog>()
             .Where(l => l.UserId == userId)
             .OrderByDescending(l => l.Date)
             .ToListAsync();
     }
 
-    public Task<DailyLog?> GetDailyLogByDateAsync(int userId, string date)
+    public async Task<DailyLog?> GetDailyLogByDateAsync(int userId, string date)
     {
-        return _database.Table<DailyLog>()
+        await Init();
+        return await _database.Table<DailyLog>()
             .Where(l => l.UserId == userId && l.Date == date)
             .FirstOrDefaultAsync();
     }
 
     public async Task SaveOrUpdateDailyLogAsync(DailyLog log)
     {
+        await Init();
         var existingLog = await _database.Table<DailyLog>()
             .Where(l => l.UserId == log.UserId && l.Date == log.Date)
             .FirstOrDefaultAsync();
@@ -224,7 +243,6 @@ public class DatabaseService
             existingLog.EnergyLevel = log.EnergyLevel;
             existingLog.Symptoms = log.Symptoms;
             existingLog.Notes = log.Notes;
-
             await _database.UpdateAsync(existingLog);
         }
         else
@@ -233,43 +251,54 @@ public class DatabaseService
         }
     }
 
+    public async Task DeleteDailyLogAsync(DailyLog log)
+    {
+        await Init();
+        await _database.DeleteAsync(log);
+    }
+
+    // --- HEALTH JOURNAL METHODS ---
+
     public async Task SaveHealthJournalAsync(HealthJournal journal)
     {
+        await Init();
         await _database.InsertAsync(journal);
     }
 
-    public Task<List<HealthJournal>> GetHealthJournalsByUserAsync(int userId)
+    public async Task<List<HealthJournal>> GetHealthJournalsByUserAsync(int userId)
     {
-        return _database.Table<HealthJournal>()
+        await Init();
+        return await _database.Table<HealthJournal>()
             .Where(j => j.UserId == userId)
             .OrderByDescending(j => j.Date)
             .ToListAsync();
     }
 
-    public Task<HealthJournal?> GetHealthJournalByIdAsync(int id)
+    public async Task<HealthJournal?> GetHealthJournalByIdAsync(int id)
     {
-        return _database.Table<HealthJournal>()
+        await Init();
+        return await _database.Table<HealthJournal>()
             .Where(j => j.Id == id)
             .FirstOrDefaultAsync();
     }
 
     public async Task UpdateHealthJournalAsync(HealthJournal journal)
     {
+        await Init();
         await _database.UpdateAsync(journal);
     }
 
     public async Task DeleteHealthJournalAsync(HealthJournal journal)
     {
+        await Init();
         await _database.DeleteAsync(journal);
     }
 
-    public async Task DeleteDailyLogAsync(DailyLog log)
-    {
-        await _database.DeleteAsync(log);
-    }
+    // --- UTILITY METHODS ---
 
     public async Task UpdateLastPeriodDateAsync(int userId, string newLastPeriodDate)
     {
+        await Init();
         var existingCycleInfo = await _database.Table<UserCycleInfo>()
             .Where(c => c.UserId == userId)
             .FirstOrDefaultAsync();
@@ -283,6 +312,7 @@ public class DatabaseService
 
     public async Task<string> ExportAllDataAsJsonAsync(int userId)
     {
+        await Init();
         var user = await GetUserByIdAsync(userId);
         var preferences = await GetUserPreferencesAsync(userId);
         var cycleInfo = await GetUserCycleInfoAsync(userId);
@@ -301,46 +331,35 @@ public class DatabaseService
             ExportedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         };
 
-        string json = JsonSerializer.Serialize(exportData, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-
+        string json = JsonSerializer.Serialize(exportData, new JsonSerializerOptions { WriteIndented = true });
         string fileName = $"team_aura_export_{DateTime.Now:yyyyMMdd_HHmmss}.json";
         string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
 
         await File.WriteAllTextAsync(filePath, json);
-
         return filePath;
     }
 
     public async Task DeleteAllUserDataAsync(int userId)
     {
-        var user = await GetUserByIdAsync(userId);
-
+        await Init();
         var preferences = await GetUserPreferencesAsync(userId);
-        if (preferences != null)
-            await _database.DeleteAsync(preferences);
+        if (preferences != null) await _database.DeleteAsync(preferences);
 
         var cycleInfo = await GetUserCycleInfoAsync(userId);
-        if (cycleInfo != null)
-            await _database.DeleteAsync(cycleInfo);
+        if (cycleInfo != null) await _database.DeleteAsync(cycleInfo);
 
         var dailyLogs = await GetDailyLogsByUserAsync(userId);
-        foreach (var log in dailyLogs)
-            await _database.DeleteAsync(log);
+        foreach (var log in dailyLogs) await _database.DeleteAsync(log);
 
         var journals = await GetHealthJournalsByUserAsync(userId);
-        foreach (var journal in journals)
-            await _database.DeleteAsync(journal);
+        foreach (var journal in journals) await _database.DeleteAsync(journal);
 
         var passwordHistory = await GetPasswordChangeHistoryAsync(userId);
-        foreach (var history in passwordHistory)
-            await _database.DeleteAsync(history);
+        foreach (var history in passwordHistory) await _database.DeleteAsync(history);
 
-        if (user != null)
-            await _database.DeleteAsync(user);
+        var user = await GetUserByIdAsync(userId);
+        if (user != null) await _database.DeleteAsync(user);
 
         Preferences.Clear();
-    }   
+    }
 }

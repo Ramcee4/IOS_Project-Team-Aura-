@@ -166,7 +166,7 @@ public partial class DailyLogPage : ContentPage
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        await Navigation.PushAsync(new HomePage());
     }
 
     private async void OnHomeTapped(object sender, TappedEventArgs e)

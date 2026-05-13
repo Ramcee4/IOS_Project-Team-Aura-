@@ -6,6 +6,16 @@
     xmlns:local="clr-namespace:Team_Aura_Period_Tracker_"
     Shell.NavBarIsVisible="False">
 
+    <!-- Mao kini ang mo-load inig abli sa App (SignIn) -->
     <ShellContent
-        ContentTemplate="{DataTemplate local:SignInPage}" />
+        Title="SignIn"
+        ContentTemplate="{DataTemplate local:SignInPage}"
+        Route="SignInPage" />
+
+    <!-- Kinahanglan i-define ang HomePage diri para makit-an sa GoToAsync -->
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:HomePage}"
+        Route="HomePage" />
+
 </Shell>

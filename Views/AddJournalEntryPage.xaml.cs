@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using Microsoft.Maui.ApplicationModel;
+using System.Diagnostics;
 
 namespace Team_Aura_Period_Tracker_;
 
@@ -25,130 +27,134 @@ public partial class AddJournalEntryPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        if (_journalId == 0) return;
 
-        if (_journalId == 0)
-            return;
-
-        _editingJournal = await _databaseService.GetHealthJournalByIdAsync(_journalId);
-
-        if (_editingJournal == null)
-            return;
-
-        TitleEntry.Text = _editingJournal.Title;
-        MoodEntry.Text = _editingJournal.Mood;
-        SleepEntry.Text = _editingJournal.Sleep.Replace(" hrs", "");
-        ExerciseEntry.Text = _editingJournal.Exercise;
-        MedicationEntry.Text = _editingJournal.Medication;
-        NotesEditor.Text = _editingJournal.Notes;
-
-        if (_editingJournal.Energy.Contains("/"))
+        try
         {
-            string energyValue = _editingJournal.Energy.Split('/')[0];
-
-            if (double.TryParse(energyValue, out double energy))
+            _editingJournal = await _databaseService.GetHealthJournalByIdAsync(_journalId);
+            if (_editingJournal != null)
             {
-                EnergySlider.Value = energy;
-                EnergyLabel.Text = $"Energy ({Math.Round(energy)}/10)";
+                TitleEntry.Text = _editingJournal.Title ?? "";
+                MoodEntry.Text = _editingJournal.Mood ?? "";
+                SleepEntry.Text = _editingJournal.Sleep?.Replace(" hrs", "") ?? "";
+                ExerciseEntry.Text = _editingJournal.Exercise ?? "";
+                MedicationEntry.Text = _editingJournal.Medication ?? "";
+                NotesEditor.Text = _editingJournal.Notes ?? "";
             }
         }
+        catch (Exception ex) { Debug.WriteLine($"Load Error: {ex.Message}"); }
     }
 
     private void OnEnergyChanged(object sender, ValueChangedEventArgs e)
     {
-        EnergyLabel.Text = $"Energy ({Math.Round(e.NewValue)}/10)";
+        if (EnergyLabel != null)
+            EnergyLabel.Text = $"Energy ({Math.Round(e.NewValue)}/10)";
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
+    private async void OnBackClicked(object sender, EventArgs e) => await GoBackSafe();
+    private async void OnCancelClicked(object sender, EventArgs e) => await GoBackSafe();
+
+    // --- NAVIGATION LOGIC (HYBRID FIX) ---
+    private async Task GoBackSafe()
     {
-        await Navigation.PopAsync();
+        try
+        {
+            // Sulayan ang Shell Navigation (Standard)
+            await Shell.Current.GoToAsync("..");
+        }
+        catch
+        {
+            // Kon mo-fail ang Shell (pananglitan wala gi-register ang route), gamit ang PopAsync
+            if (Navigation.NavigationStack.Count > 0)
+            {
+                await Navigation.PopAsync();
+            }
+        }
     }
 
-    private async void OnCancelClicked(object sender, EventArgs e)
+    private void ShowCustomAlert(string title, string message)
     {
-        await Navigation.PopAsync();
-    }
-
-    // --- CUSTOM ALERT LOGIC ---
-    private async void ShowCustomAlert(string title, string message)
-    {
-        AlertTitleLabel.Text = title;
-        AlertMessageLabel.Text = message;
-        CustomAlertOverlay.IsVisible = true;
-        CustomAlertOverlay.Opacity = 0;
-        await CustomAlertOverlay.FadeTo(1, 150);
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            // Siguroha nga dili NULL ang labels aron dili mo crashout
+            if (AlertTitleLabel != null && AlertMessageLabel != null)
+            {
+                AlertTitleLabel.Text = title;
+                AlertMessageLabel.Text = message;
+                CustomAlertOverlay.IsVisible = true;
+                CustomAlertOverlay.Opacity = 0;
+                await CustomAlertOverlay.FadeTo(1, 150);
+            }
+        });
     }
 
     private async void OnCustomAlertOkClicked(object sender, EventArgs e)
     {
-        await CustomAlertOverlay.FadeTo(0, 150);
+        await CustomAlertOverlay.FadeTo(0, 100);
         CustomAlertOverlay.IsVisible = false;
 
-        // Kung malampuson ang pag-save o update, balik sa history page
+        // Mobalik ra kon malampuson ang Save/Update
         if (AlertTitleLabel.Text == "Saved" || AlertTitleLabel.Text == "Updated")
         {
-            await Navigation.PopAsync();
+            await GoBackSafe();
         }
     }
 
-    // --- SAVE LOGIC ---
     private async void OnSaveClicked(object sender, EventArgs e)
     {
-        int userId = Preferences.Get("UserId", 0);
-        string username = Preferences.Get("UserName", "");
-
-        if (userId == 0 || string.IsNullOrWhiteSpace(username))
+        try
         {
-            ShowCustomAlert("Error", "No signed in user found.");
-            return;
+            int userId = Preferences.Get("UserId", 0);
+            string username = Preferences.Get("UserName", "User");
+
+            string title = TitleEntry.Text?.Trim() ?? "";
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ShowCustomAlert("Error", "Please enter a title.");
+                return;
+            }
+
+            // Data Preparation
+            string energyStr = $"{Math.Round(EnergySlider.Value)}/10";
+            string sleepStr = string.IsNullOrWhiteSpace(SleepEntry.Text) ? "" : $"{SleepEntry.Text} hrs";
+
+            if (_editingJournal != null)
+            {
+                _editingJournal.Title = title;
+                _editingJournal.Mood = MoodEntry.Text ?? "";
+                _editingJournal.Energy = energyStr;
+                _editingJournal.Sleep = sleepStr;
+                _editingJournal.Exercise = ExerciseEntry.Text ?? "";
+                _editingJournal.Medication = MedicationEntry.Text ?? "";
+                _editingJournal.Notes = NotesEditor.Text ?? "";
+
+                await _databaseService.UpdateHealthJournalAsync(_editingJournal);
+                ShowCustomAlert("Updated", "Journal entry updated successfully.");
+            }
+            else
+            {
+                var journal = new HealthJournal
+                {
+                    UserId = userId,
+                    Username = username,
+                    Title = title,
+                    Date = DateTime.Now.ToString("yyyy-MM-dd"),
+                    Mood = MoodEntry.Text ?? "",
+                    Energy = energyStr,
+                    Sleep = sleepStr,
+                    Exercise = ExerciseEntry.Text ?? "",
+                    Medication = MedicationEntry.Text ?? "",
+                    Notes = NotesEditor.Text ?? ""
+                };
+
+                await _databaseService.SaveHealthJournalAsync(journal);
+                ShowCustomAlert("Saved", "Journal entry saved successfully.");
+            }
         }
-
-        string title = TitleEntry.Text?.Trim() ?? "";
-        string mood = MoodEntry.Text?.Trim() ?? "";
-        string sleep = SleepEntry.Text?.Trim() ?? "";
-        string exercise = ExerciseEntry.Text?.Trim() ?? "";
-        string medication = MedicationEntry.Text?.Trim() ?? "";
-        string notes = NotesEditor.Text?.Trim() ?? "";
-        string energy = $"{Math.Round(EnergySlider.Value)}/10";
-
-        if (string.IsNullOrWhiteSpace(title))
+        catch (Exception ex)
         {
-            ShowCustomAlert("Error", "Please enter a title.");
-            return;
+            Debug.WriteLine($"CRASH LOG: {ex.Message}");
+            ShowCustomAlert("Database Error", "Check database. Details: " + ex.Message);
         }
-
-        if (_editingJournal != null)
-        {
-            _editingJournal.Username = username;
-            _editingJournal.Title = title;
-            _editingJournal.Mood = mood;
-            _editingJournal.Energy = energy;
-            _editingJournal.Sleep = string.IsNullOrWhiteSpace(sleep) ? "" : $"{sleep} hrs";
-            _editingJournal.Exercise = exercise;
-            _editingJournal.Medication = medication;
-            _editingJournal.Notes = notes;
-
-            await _databaseService.UpdateHealthJournalAsync(_editingJournal);
-
-            ShowCustomAlert("Updated", "Journal entry updated successfully.");
-            return;
-        }
-
-        var journal = new HealthJournal
-        {
-            UserId = userId,
-            Username = username,
-            Title = title,
-            Date = DateTime.Now.ToString("yyyy-MM-dd"),
-            Mood = mood,
-            Energy = energy,
-            Sleep = string.IsNullOrWhiteSpace(sleep) ? "" : $"{sleep} hrs",
-            Exercise = exercise,
-            Medication = medication,
-            Notes = notes
-        };
-
-        await _databaseService.SaveHealthJournalAsync(journal);
-
-        ShowCustomAlert("Saved", "Journal entry saved successfully.");
     }
 }

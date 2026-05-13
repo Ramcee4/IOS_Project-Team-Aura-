@@ -46,7 +46,6 @@
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
                     <BoxView WidthRequest="38" HeightRequest="4" CornerRadius="2" Color="#CFCBEE" />
                 </HorizontalStackLayout>
-
                 <Label Text="Step 3 of 6" HorizontalOptions="Center" FontSize="12" TextColor="#8F8A93" />
             </VerticalStackLayout>
 
@@ -67,15 +66,23 @@
                         StrokeShape="RoundRectangle 18">
 
                         <VerticalStackLayout Spacing="10">
+                            <!-- Header Calendar with Custom Selectors -->
+                            <Grid ColumnDefinitions="40,*,*,40" VerticalOptions="Center">
+                                <Button Grid.Column="0" Text="‹" Clicked="OnPreviousMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="26" />
 
-                            <Grid ColumnDefinitions="28,1.2*,1*,28" ColumnSpacing="10" VerticalOptions="Center">
-                                <Button Grid.Column="0" Text="‹" Clicked="OnPreviousMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="24" Padding="0" HeightRequest="28" WidthRequest="28" />
+                                <Label Grid.Column="1" x:Name="MonthLabel" Text="Jan" FontSize="16" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnMonthLabelTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
 
-                                <Picker Grid.Column="1" x:Name="MonthPicker" SelectedIndexChanged="OnMonthOrYearChanged" FontSize="14" TextColor="#2B2B2B" TitleColor="#2B2B2B" BackgroundColor="#F8F8F8" HeightRequest="38" HorizontalOptions="Fill" VerticalOptions="Center" />
+                                <Label Grid.Column="2" x:Name="YearLabel" Text="2026" FontSize="16" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnYearLabelTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
 
-                                <Picker Grid.Column="2" x:Name="YearPicker" SelectedIndexChanged="OnMonthOrYearChanged" FontSize="14" TextColor="#2B2B2B" TitleColor="#2B2B2B" BackgroundColor="#F8F8F8" HeightRequest="38" HorizontalOptions="Fill" VerticalOptions="Center" />
-
-                                <Button Grid.Column="3" Text="›" Clicked="OnNextMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="24" Padding="0" HeightRequest="28" WidthRequest="28" />
+                                <Button Grid.Column="3" Text="›" Clicked="OnNextMonthClicked" BackgroundColor="Transparent" TextColor="#222222" FontSize="26" />
                             </Grid>
 
                             <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="4">
@@ -88,97 +95,38 @@
                                 <Label Grid.Column="6" Text="Sa" HorizontalTextAlignment="Center" FontSize="12" TextColor="#8A8A8A" />
                             </Grid>
 
-                            <Grid
-                                x:Name="CalendarGrid"
-                                ColumnDefinitions="*,*,*,*,*,*,*"
-                                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                                ColumnSpacing="4"
-                                RowSpacing="10"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Start" />
-
+                            <Grid x:Name="CalendarGrid" ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="4" RowSpacing="10" />
                         </VerticalStackLayout>
                     </Border>
                 </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
 
-        <Grid
-            Grid.Row="1"
-            Margin="0,18,0,0"
-            ColumnDefinitions="*,14,*"
-            Padding="28,10,28,20"
-            ColumnSpacing="0"
-            BackgroundColor="#F4EDEF">
-
-            <Button
-                Grid.Column="0"
-                Text="Back"
-                Clicked="OnBackClicked"
-                HeightRequest="50"
-                CornerRadius="10"
-                BackgroundColor="#C24E63"
-                TextColor="White"
-                FontSize="17"
-                FontAttributes="Bold" />
-
-            <Button
-                Grid.Column="2"
-                Text="save"
-                Clicked="OnNextClicked"
-                HeightRequest="50"
-                CornerRadius="10"
-                BackgroundColor="#E85B73"
-                TextColor="White"
-                FontSize="17"
-                FontAttributes="Bold" />
+        <Grid Grid.Row="1" Margin="0,18,0,0" ColumnDefinitions="*,14,*" Padding="28,10,28,20" BackgroundColor="#F4EDEF">
+            <Button Grid.Column="0" Text="Back" Clicked="OnBackClicked" HeightRequest="50" CornerRadius="10" BackgroundColor="#C24E63" TextColor="White" FontSize="17" FontAttributes="Bold" />
+            <Button Grid.Column="2" Text="Save" Clicked="OnNextClicked" HeightRequest="50" CornerRadius="10" BackgroundColor="#E85B73" TextColor="White" FontSize="17" FontAttributes="Bold" />
         </Grid>
 
-        <!-- CUSTOM ALERT -->
-        <Grid
-            x:Name="CustomAlertOverlay"
-            Grid.RowSpan="2"
-            IsVisible="False"
-            BackgroundColor="#80000000"
-            Padding="30"
-            ZIndex="99">
+        <!-- CUSTOM SELECTION ALERT (Consistent Pink Design) -->
+        <Grid x:Name="SelectionOverlay" Grid.RowSpan="2" IsVisible="False" BackgroundColor="#80000000" ZIndex="1000">
+            <Border BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 28" Padding="24" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="320" HeightRequest="450">
+                <Grid RowDefinitions="Auto,*,Auto" RowSpacing="15">
+                    <Label Grid.Row="0" x:Name="SelectionTitle" Text="Select Month" FontSize="24" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
+                    <ScrollView Grid.Row="1">
+                        <VerticalStackLayout x:Name="SelectionContainer" Spacing="2" />
+                    </ScrollView>
+                    <Button Grid.Row="2" Text="Cancel" Clicked="OnCancelSelectionClicked" BackgroundColor="#F4EDEF" TextColor="#6F6A6C" CornerRadius="16" HeightRequest="50" FontAttributes="Bold" FontSize="15"/>
+                </Grid>
+            </Border>
+        </Grid>
 
-            <Border
-                BackgroundColor="White"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 22"
-                Padding="24"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="310">
-
-                <VerticalStackLayout Spacing="18">
-                    <Label
-                        x:Name="CustomAlertTitle"
-                        Text="Required"
-                        FontSize="24"
-                        FontAttributes="Bold"
-                        TextColor="#E85B73"
-                        HorizontalTextAlignment="Center" />
-
-                    <Label
-                        x:Name="CustomAlertMessage"
-                        Text="Message here"
-                        FontSize="16"
-                        TextColor="#4A4A4A"
-                        HorizontalTextAlignment="Center"
-                        LineBreakMode="WordWrap" />
-
-                    <Button
-                        Text="OK"
-                        Clicked="OnCustomAlertOkClicked"
-                        Margin="0,8,0,0"
-                        HeightRequest="48"
-                        CornerRadius="12"
-                        BackgroundColor="#E85B73"
-                        TextColor="White"
-                        FontSize="15"
-                        FontAttributes="Bold" />
+        <!-- REQUIRED/ERROR ALERT -->
+        <Grid x:Name="CustomAlertOverlay" Grid.RowSpan="2" IsVisible="False" BackgroundColor="#80000000" ZIndex="1100">
+            <Border BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 28" Padding="30" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="320">
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="CustomAlertTitle" FontSize="24" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
+                    <Label x:Name="CustomAlertMessage" FontSize="16" TextColor="#4A4A4A" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
+                    <Button Text="OK" Clicked="OnCustomAlertOkClicked" HeightRequest="55" CornerRadius="16" BackgroundColor="#E85B73" TextColor="White" FontSize="15" FontAttributes="Bold" />
                 </VerticalStackLayout>
             </Border>
         </Grid>

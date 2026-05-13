@@ -11,19 +11,19 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="24,20,24,20" Spacing="18">
 
+                <!-- Header Section -->
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-
                     <ImageButton
                         Grid.Column="0"
- Source="back_icon.png"
- Clicked="OnBackClicked"
- BackgroundColor="Transparent"
- Margin="0,20,5,20"
- WidthRequest="16"
- HeightRequest="16"
- Padding="0"
- HorizontalOptions="Start"
- VerticalOptions="Center" />
+                        Source="back_icon.png"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,5,20"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center" />
 
                     <VerticalStackLayout Grid.Column="1">
                         <Label
@@ -34,7 +34,6 @@
 
                         <Label
                             Text="Track your health pattern"
-                            Margin="0,0,0,0"
                             FontSize="14"
                             TextColor="#6F6A6C" />
                     </VerticalStackLayout>
@@ -48,9 +47,9 @@
                             <TapGestureRecognizer Tapped="OnAddTapped" />
                         </Label.GestureRecognizers>
                     </Label>
-
                 </Grid>
 
+                <!-- Dynamic Journal Cards Container -->
                 <VerticalStackLayout
                     x:Name="JournalContainer"
                     Spacing="18" />
@@ -58,13 +57,13 @@
             </VerticalStackLayout>
         </ScrollView>
 
+        <!-- Bottom Navigation -->
         <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="18,12,18,10">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="24,24,0,0" />
             </Border.StrokeShape>
 
             <Grid ColumnDefinitions="*,*,*,*,*">
-
                 <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnHomeTapped" />
@@ -104,9 +103,30 @@
                     <Image Source="settings_icon.png" WidthRequest="26" HeightRequest="26" />
                     <Label Text="Settings" FontSize="12" TextColor="#111111" />
                 </VerticalStackLayout>
-
             </Grid>
         </Border>
 
+        <!-- Custom Confirmation Overlay -->
+        <Grid x:Name="AlertOverlay" 
+              Grid.RowSpan="2" 
+              IsVisible="False" 
+              BackgroundColor="#80000000" 
+              ZIndex="1000">
+            <Border BackgroundColor="White" 
+                    StrokeShape="RoundRectangle 28" 
+                    Padding="30" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                    WidthRequest="320">
+                <VerticalStackLayout Spacing="20">
+                    <Label x:Name="AlertTitle" Text="Delete" FontSize="26" FontAttributes="Bold" TextColor="#E85B73" HorizontalTextAlignment="Center" />
+                    <Label x:Name="AlertMessage" Text="Delete this entry?" FontSize="15" TextColor="#444444" HorizontalTextAlignment="Center" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Grid.Column="0" Text="No" Clicked="OnCancelAlertClicked" BackgroundColor="#F4EDEF" TextColor="#6F6A6C" CornerRadius="16" HeightRequest="55" />
+                        <Button Grid.Column="1" Text="Yes" Clicked="OnConfirmDeleteClicked" BackgroundColor="#E85B73" TextColor="White" CornerRadius="16" HeightRequest="55" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 </ContentPage>
